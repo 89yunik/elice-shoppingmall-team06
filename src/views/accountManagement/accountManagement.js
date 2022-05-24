@@ -11,10 +11,16 @@ const logoutBtn = document.querySelector('.logout-btn');
 logoutBtn.addEventListener('click', logout);
 
 const exampleMenuList = [
-  { name: '주문조회' },
-  { name: '회원정보관리' },
-  { name: '제품판매' },
-  { name: '회원탈퇴' },
+  { title: '주문조회', subtitle: '지난 주문 내역을 확인, 취소할 수 있습니다.' },
+  { title: '회원정보관리', subtitle: '회원 정보를 확인, 수정할 수 있습니다.' },
+  {
+    title: '제품판매',
+    subtitle: '제품 정보를 등록하여, 판매를 시작할 수 있습니다.',
+  },
+  {
+    title: '회원탈퇴',
+    subtitle: '모든 정보를 안전하게 삭제한 후 탈퇴할 수 있습니다.',
+  },
 ];
 export default function accountManagement() {
   const $app = document.querySelector('.div-container');
