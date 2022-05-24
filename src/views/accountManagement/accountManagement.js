@@ -4,59 +4,42 @@
 
 import * as Api from '/api.js';
 import { randomId, logout } from '/useful-functions.js';
-
+import Menu from './component/Menu.js';
 // 요소(element), input 혹은 상수
-const landingDiv = document.querySelector('#landingDiv');
-const greetingDiv = document.querySelector('#greetingDiv');
+
 const logoutBtn = document.querySelector('.logout-btn');
+logoutBtn.addEventListener('click', logout);
 
-addAllElements();
-addAllEvents();
+const exampleMenuList = [
+  { name: '주문조회' },
+  { name: '회원정보관리' },
+  { name: '제품판매' },
+  { name: '회원탈퇴' },
+];
+export default function accountManagement() {
+  const $app = document.querySelector('.div-container');
+  this.state = {
+    menuList: exampleMenuList,
+  };
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {
-  insertTextToLanding();
-  insertTextToGreeting();
+  this.setState = (nextState) => {
+    this.state = nextState;
+    menu.setState(this.state.menuList);
+  };
+
+  const menu = new Menu({
+    $app,
+    initialState: this.state.menuList,
+  });
+
+  const init_app = () => {
+    this.setState({
+      ...this.state,
+      menuList: exampleMenuList,
+    });
+  };
+
+  init_app();
 }
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  landingDiv.addEventListener('click', alertLandingText);
-  greetingDiv.addEventListener('click', alertGreetingText);
-  logoutBtn.addEventListener('click', logout);
-}
-
-function insertTextToLanding() {
-  landingDiv.insertAdjacentHTML(
-    'beforeend',
-    `
-      <h2>회원정보관리화면입니다.</h2>
-    `,
-  );
-}
-
-function insertTextToGreeting() {
-  greetingDiv.insertAdjacentHTML(
-    'beforeend',
-    `
-      <h1>반갑습니다! 자바스크립트 파일에서 삽입되었습니다.</h1>
-    `,
-  );
-}
-
-function alertLandingText() {
-  alert('n팀 쇼핑몰입니다. 안녕하세요.');
-}
-
-function alertGreetingText() {
-  alert('n팀 쇼핑몰에 오신 것을 환영합니다');
-}
-
-async function getDataFromApi() {
-  // 예시 URI입니다. 현재 주어진 프로젝트 코드에는 없는 URI입니다.
-  const data = await Api.get('/api/user/data');
-  const random = randomId();
-
-  console.log({ data });
-  console.log({ random });
-}
+new accountManagement();
