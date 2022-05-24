@@ -30,7 +30,7 @@ function insertTextToLanding() {
   landingDiv.insertAdjacentHTML(
     'beforeend',
     `
-      <h2>n팀 쇼핑몰의 랜딩 페이지입니다. 자바스크립트 파일에서 삽입되었습니다.</h2>
+      <h2>회원정보관리화면입니다.</h2>
     `,
   );
 }
