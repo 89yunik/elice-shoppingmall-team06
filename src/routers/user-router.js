@@ -5,7 +5,7 @@ import { loginRequired } from '../middlewares';
 import { userService } from '../services';
 import jwt from 'jsonwebtoken';
 const userRouter = Router();
-
+// 요청이 들어오면 로그인이 되어있는지 미들웨어로 확인후 '단일'유저 정보를 json으로 보내줌
 userRouter.get('/user', loginRequired, async (req, res, next) => {
   const userToken = req.headers['authorization']?.split(' ')[1];
 
