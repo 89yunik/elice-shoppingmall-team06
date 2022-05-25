@@ -24,14 +24,14 @@ const ProductSchema = new Schema(
     },
     category: {
       type: Schema.Types.ObjectId,
-      ref:'categories',
-      required: true,
-    }
+      ref: 'categories',
+      required: false,
+    },
   },
   {
     collection: 'products',
     timestamps: true,
-  }
+  },
 );
 
 export { ProductSchema };
