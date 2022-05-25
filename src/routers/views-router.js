@@ -9,6 +9,16 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
+viewsRouter.use('/account', serveStatic('account'));
+viewsRouter.use('/cart', serveStatic('cart'));
+viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/order/complete', serveStatic('complete'));
+viewsRouter.use('/account/orders', serveStatic('orders'));
+viewsRouter.use('/account/security', serveStatic('security'));
+viewsRouter.use('/account/add', serveStatic('add'));
+viewsRouter.use('/account/signout', serveStatic('signout'));
+viewsRouter.use('/product/list', serveStatic('list'));
+viewsRouter.use('/product/detail', serveStatic('detail'));
 
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));

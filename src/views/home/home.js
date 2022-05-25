@@ -3,11 +3,12 @@
 // 코드 예시를 남겨 두었습니다.
 
 import * as Api from '/api.js';
-import { randomId } from '/useful-functions.js';
+import { randomId, logout } from '/useful-functions.js';
 
 // 요소(element), input 혹은 상수
 const landingDiv = document.querySelector('#landingDiv');
 const greetingDiv = document.querySelector('#greetingDiv');
+const logoutBtn = document.querySelector('.logout-btn');
 
 addAllElements();
 addAllEvents();
@@ -22,6 +23,7 @@ async function addAllElements() {
 function addAllEvents() {
   landingDiv.addEventListener('click', alertLandingText);
   greetingDiv.addEventListener('click', alertGreetingText);
+  logoutBtn.addEventListener('click', logout);
 }
 
 function insertTextToLanding() {
@@ -29,7 +31,7 @@ function insertTextToLanding() {
     'beforeend',
     `
       <h2>n팀 쇼핑몰의 랜딩 페이지입니다. 자바스크립트 파일에서 삽입되었습니다.</h2>
-    `
+    `,
   );
 }
 
@@ -38,7 +40,7 @@ function insertTextToGreeting() {
     'beforeend',
     `
       <h1>반갑습니다! 자바스크립트 파일에서 삽입되었습니다.</h1>
-    `
+    `,
   );
 }
 

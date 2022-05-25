@@ -23,27 +23,35 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="account.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
-        $("#header").load("/header.html");
+        $('#header').load('/header.html');
       });
     </script>
+    <script src="account.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
     <div id="header"></div>
-    <div class="lists-btn" style="border:1px solid green; display: inline-block; padding:10px;"><a href="/lists">상품목록</a></div>
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
-      </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
-      </div>
-    </div>
-    
 
+    <section class="section">
+      <div class="container">
+        <div class="block account-header">
+          <h1 class="subtitle is-4">주문조회</h1>
+        </div>
+        <div class="container orders-container" id="ordersContainer">
+          <div
+            class="columns notification is-info is-light is-mobile orders-top"
+          >
+            <div class="column is-2">날짜</div>
+            <div class="column is-6">주문정보</div>
+            <div class="column is-2">상태</div>
+            <div class="column is-2">신청</div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
