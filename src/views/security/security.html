@@ -23,14 +23,14 @@
       crossorigin="anonymous"
     ></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="account.css" />
+    <link rel="stylesheet" href="security.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
         $('#header').load('/header.html');
       });
     </script>
-    <script src="account.js" type="module" defer></script>
+    <script src="security.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -39,9 +39,7 @@
     <section class="section">
       <div class="container">
         <div class="block account-header">
-          <h1 class="subtitle is-4" id="securityTitle">
-            회원정보 관리 (abc@asdf.com)
-          </h1>
+          <h1 class="subtitle is-4" id="securityTitle"></h1>
         </div>
         <div class="menu-container">
           <div class="form-container">
@@ -78,7 +76,7 @@
                   <label class="switch">
                     <input type="checkbox" id="passwordToggle" />
                     <span class="slider round"></span>
-                    <span class="info-text" style="opacity: 0">
+                    <span class="info-text" style="opacity: 0" hidden>
                       소셜 로그인의 경우는 비밀번호 설정이 불가합니다.
                     </span>
                   </label>
