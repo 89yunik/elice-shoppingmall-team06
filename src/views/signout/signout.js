@@ -1,9 +1,12 @@
 import * as Api from '/api.js';
+import { logout } from '/useful-functions.js';
 
 const submitButton = document.getElementById('submitButton');
 const modal = document.getElementById('modal');
 const deleteCompleteButton = document.getElementById('deleteCompleteButton');
 const deleteCancelButton = document.getElementById('deleteCancelButton');
+
+const passwordInput = document.getElementById('passwordInput');
 
 addAllElements();
 addAllEvents();
@@ -19,8 +22,17 @@ function addAllEvents() {
 function deleteCompleteButtonEvent(e) {
   e.preventDefault();
   //something logic ex) api;
+  const data = {
+    currentPassword: passwordInput.value,
+  };
+  try {
+    Api.post('/api/user', data);
 
-  location.href = '/';
+    logout();
+    location.href = '/';
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function submitButtonEvent(e) {
