@@ -19,6 +19,8 @@ function addAllEvents() {
 function deleteCompleteButtonEvent(e) {
   e.preventDefault();
   //something logic ex) api;
+
+  location.href = '/';
 }
 
 function submitButtonEvent(e) {
