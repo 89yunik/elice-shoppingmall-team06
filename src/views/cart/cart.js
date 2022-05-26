@@ -1,6 +1,9 @@
+let storageItems = [];
+
 function makeCartList(data, sameProductCount) {
   const id = data._id;
-  const cartItem = `<div class="cart-product-item" id="productItem-">
+  const cartProducts = document.querySelector('#cartProductsContainer');
+  const cartItem = `<div class="cart-product-item" id="productItem-${data._id}">
   <label class="checkbox">
     <input type="checkbox" id="checkbox-${id}" checked="" />
   </label>
@@ -59,17 +62,36 @@ function makeCartList(data, sameProductCount) {
     <p id="total-${id}">${data.price * sameProductCount}원</p>
   </div>
 </div>`
-const cartProducts = document.querySelector('#cartProductsContainer');
 cartProducts.insertAdjacentHTML('beforeend', cartItem);
+
 }
 
+document.querySelector('.cart-products-container').addEventListener('click', (e) => {
+  if(e.target.classList.contains('fa-trash-can')) {
+    const deleteItemTarget = e.target.parentElement.parentElement.parentElement;
+    // console.log(deleteItemTarget.id);
+    const id = deleteItemTarget.id.substring(12);
+    console.log(id);
+    storageItems = storageItems.filter(item => item._id !== id);
+    sessionStorage.setItem('cart', JSON.stringify(storageItems));
+    deleteItemTarget.remove();
+    
+  }
+})
+
+// 왜 
+// if(e.target.classList.contains('delete-button')) {
+//   console.log('delete');
+// }
+// 하면 작동하지 않지?
 
 const savedCartItems = sessionStorage.getItem('cart');
 
 if(savedCartItems !== null) {
   const parsedCartItems = JSON.parse(savedCartItems);
+  storageItems = parsedCartItems;
+  console.log(storageItems);
   parsedCartItems.forEach(element => {
     makeCartList(element, 1);
   });
 }
-
