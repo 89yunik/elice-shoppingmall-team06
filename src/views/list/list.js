@@ -2,8 +2,6 @@ let itemList = [];
 
 //fetch 받아오기
 async function getItems(){
-	// return fetch('./list.json')
-	// .then(res=>res.json());
 	return fetch('/api/productlist')
 		.then(res=>res.json())
 }
@@ -22,7 +20,7 @@ function displayItems(items, type){
 function parseToHTML(item){
 	return `
 		<li class="item" id="${item._id}">
-			<a href="/productlist/:productId" class="item-wrap">
+			<a href="/product/detail/${item._id}" class="item-wrap">
 				<div class="item-img">
 					<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/happy-and-cheerful-dog-playing-fetch-with-toy-bone-royalty-free-image-1590068781.jpg?crop=0.668xw:1.00xh;0,0&resize=640:*" alt="">
 				</div>
