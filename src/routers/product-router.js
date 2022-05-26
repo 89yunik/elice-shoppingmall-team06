@@ -1,5 +1,5 @@
 import { Router } from 'express';
-// import is from '@sindresorhus/is';
+import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { productService } from '../services';
 
@@ -17,15 +17,10 @@ productRouter.post('/productregister', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { name, price, description, company } = req.body;
+    const newProductData = req.body;
 
     // 위 데이터를 제품 db에 추가하기
-    const newProduct = await productService.addProduct({
-      name,
-      price,
-      description,
-      company,
-    });
+    const newProduct = await productService.addProduct(newProductData);
 
     // 추가된 제품의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
@@ -35,6 +30,7 @@ productRouter.post('/productregister', async (req, res, next) => {
   }
 });
 
+// 제품 목록 api
 // 전체 제품 목록을 가져옴 (배열 형태임)
 productRouter.get('/productlist', async function (req, res, next) {
   try {
@@ -63,7 +59,7 @@ productRouter.get('/productlist/:productId', async function (req, res, next) {
   }
 });
 
-// 제품 정보 수정
+// 제품 정보 수정 api
 // (예를 들어 /api/products/abc12345 로 요청하면 req.params.productId는 'abc12345' 문자열로 됨)
 productRouter.patch('/products/:productId', async function (req, res, next) {
   try {
@@ -79,19 +75,9 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
     const productId = req.params.productId;
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const { name, price, description, company, imageUrl, category } = req.body;
-
     // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
     // 보내주었다면, 업데이트용 객체에 삽입함.
-    const toUpdate = {
-      ...(name && { name }),
-      ...(price && { price }),
-      ...(description && { description }),
-      ...(company && { company }),
-      ...(imageUrl && { imageUrl }),
-      // ...(category && { category })
-    };
-
+    const toUpdate = req.body || {};
     // 제품 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(
       productId,
@@ -105,7 +91,20 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
   }
 });
 
-// 제품 삭제
-// 추가 예정
+// 제품 삭제 api
+productRouter.delete(
+  '/productlist/:productId',
+  async function (req, res, next) {
+    try {
+      const { productId } = req.params;
+      // 삭제할 제품 id를 얻음
+      const product = await productService.deleteProduct(productId);
+      // 제품 정보를 JSON 형태로 프론트에 보냄
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
 export { productRouter };
