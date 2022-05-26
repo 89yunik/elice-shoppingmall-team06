@@ -14,6 +14,7 @@ const postalCodeInput = document.getElementById('postalCodeInput');
 const address1Input = document.getElementById('address1Input');
 const address2Input = document.getElementById('address2Input');
 const phoneNumberInput = document.getElementById('phoneNumberInput');
+const currentPasswordInput = document.getElementById('currentPasswordInput');
 
 const saveButton = document.getElementById('saveButton');
 const modal = document.getElementById('modal');
@@ -38,20 +39,20 @@ function addAllEvents() {
   modalCloseButton.addEventListener('click', modalCloseButtonEvent);
   saveCompleteButton.addEventListener('click', saveCompleteButtonEvent);
 }
-
+let userData = {};
 async function getUserData() {
-  const data = await Api.get('/api/user');
+  userData = await Api.get('/api/user');
 
-  securityTitle.innerHTML = `회원정보 관리 (${data.email})`;
-  fullNameInput.value = `${data.fullName}`;
+  securityTitle.innerHTML = `회원정보 관리 (${userData.email})`;
+  fullNameInput.value = `${userData.fullName}`;
 
-  if (data.address) {
-    postalCodeInput.value = `${data.address.postalCode}`;
-    address1Input.value = `${data.address.address1}`;
-    address2Input.value = `${data.address.address2}`;
+  if (userData.address) {
+    postalCodeInput.value = `${userData.address.postalCode}`;
+    address1Input.value = `${userData.address.address1}`;
+    address2Input.value = `${userData.address.address2}`;
   }
-  if (data.phoneNumber) {
-    phoneNumberInput.value = `${data.phoneNumber}`;
+  if (userData.phoneNumber) {
+    phoneNumberInput.value = `${userData.phoneNumber}`;
   }
 }
 
@@ -87,7 +88,7 @@ function modalCloseButtonEvent(e) {
   closeModal(modal);
 }
 
-function saveCompleteButtonEvent(e) {
+async function saveCompleteButtonEvent(e) {
   e.preventDefault();
   const isFullNameValid = fullNameInput.value.length >= 2;
   const isPasswordValid = passwordInput.value.length >= 4 || passwordInput.value.length === 0;
@@ -105,18 +106,24 @@ function saveCompleteButtonEvent(e) {
 
   const data = {
     fullName: fullNameInput.value,
-    postalCode: postalCodeInput.value,
-    address1: address1Input.value,
-    address2: address2Input.value,
+    address: {
+      postalCode: postalCodeInput.value,
+      address1: address1Input.value,
+      address2: address2Input.value,
+    },
     phoneNumber: phoneNumberInput.value,
+    currentPassword: currentPasswordInput.value,
   };
 
   if (passwordInput.value.length !== 0) {
     data['password'] = passwordInput.value;
   }
-
-  //todo: 수정 api 호출
-  console.log(data);
+  try {
+    const res = await Api.patch('/api/users', userData._id, data);
+    location.href = '/account/security/';
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 (
