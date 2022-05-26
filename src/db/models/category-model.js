@@ -32,8 +32,8 @@ export class CategoryModel {
     return updatedCategory;
   }
 
-  async delete(categoryId){
-    const category = await Product.deleteOne({_id:categoryId});
+  async delete(categoryId) {
+    const category = await Category.deleteOne({ _id: categoryId });
     return category;
   }
 }
