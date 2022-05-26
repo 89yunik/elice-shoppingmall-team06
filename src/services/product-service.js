@@ -7,20 +7,18 @@ class ProductService {
   }
 
   // 제품 등록
-  async addProduct(productInfo) {
+  async addProduct(newProductInfo) {
     // 객체 destructuring
-    const { name } = productInfo;
+    const { name } = newProductInfo;
 
     // 제품명 중복 확인
     const product = await this.productModel.findByName(name);
     if (product) {
-      throw new Error(
-        '이 제품명은 현재 사용중입니다. 다른 제품명을 입력해 주세요.',
-      );
+      throw new Error('이 제품명은 현재 사용중입니다. 다른 제품명을 입력해 주세요.');
     }
 
     // db에 저장
-    const createdNewProduct = await this.productModel.create(productInfo);
+    const createdNewProduct = await this.productModel.create(newProductInfo);
 
     return createdNewProduct;
   }
@@ -41,7 +39,7 @@ class ProductService {
 
   // 제품정보 수정
   async setProduct(productId, toUpdate) {
-    // 우선 해당 id의 유저가 db에 있는지 확인
+    // 우선 해당 id의 제품이 db에 있는지 확인
     let product = await this.productModel.findById(productId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환

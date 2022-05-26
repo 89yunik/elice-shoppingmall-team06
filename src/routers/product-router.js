@@ -5,15 +5,13 @@ import { productService } from '../services';
 
 const productRouter = Router();
 
-// 제품 등록 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
+// 제품 등록 api (아래는 /productregister이지만, 실제로는 /api/productregister로 요청해야 함.)
 productRouter.post('/productregister', async (req, res, next) => {
   try {
     // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
     // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요',
-      );
+      throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
     // req (request)의 body 에서 데이터 가져오기
@@ -66,9 +64,7 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요',
-      );
+      throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
     // params로부터 id를 가져옴
@@ -79,10 +75,7 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
     // 보내주었다면, 업데이트용 객체에 삽입함.
     const toUpdate = req.body || {};
     // 제품 정보를 업데이트함.
-    const updatedProductInfo = await productService.setProduct(
-      productId,
-      toUpdate,
-    );
+    const updatedProductInfo = await productService.setProduct(productId, toUpdate);
 
     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
     res.status(200).json(updatedProductInfo);
@@ -92,19 +85,16 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
 });
 
 // 제품 삭제 api
-productRouter.delete(
-  '/productlist/:productId',
-  async function (req, res, next) {
-    try {
-      const { productId } = req.params;
-      // 삭제할 제품 id를 얻음
-      const product = await productService.deleteProduct(productId);
-      // 제품 정보를 JSON 형태로 프론트에 보냄
-      res.status(200).json(product);
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+productRouter.delete('/productlist/:productId', async function (req, res, next) {
+  try {
+    const { productId } = req.params;
+    // 삭제할 제품 id를 얻음
+    const product = await productService.deleteProduct(productId);
+    // 제품 정보를 JSON 형태로 프론트에 보냄
+    res.status(200).json(product);
+  } catch (error) {
+    next(error);
+  }
+});
 
 export { productRouter };
