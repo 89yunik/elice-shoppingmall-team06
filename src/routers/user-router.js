@@ -5,6 +5,32 @@ import { loginRequired } from '../middlewares';
 import { userService } from '../services';
 import jwt from 'jsonwebtoken';
 const userRouter = Router();
+// 회원 유저 아이디값으로 탈퇴를 진행함.
+userRouter.post('/user', loginRequired, async (req, res, next) => {
+  try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const userId = jwtDecoded.userId;
+    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
+    const currentPassword = req.body.currentPassword;
+    // currentPassword 없을 시, 진행 불가
+    if (!currentPassword) {
+      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
+    }
+
+    const userInfoRequired = { userId, currentPassword };
+    const deleteUserInfo = await userService.delUser(userInfoRequired);
+    res.status(200).json(deleteUserInfo);
+  } catch (error) {
+    // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
+    // 403 코드로 JSON 형태로 프론트에 전달함.
+    res.status(403).json({
+      result: 'forbidden-approach',
+      reason: '정상적인 토큰이 아닙니다.',
+    });
+  }
+});
 // 요청이 들어오면 로그인이 되어있는지 미들웨어로 확인후 '단일'유저 정보를 json으로 보내줌
 userRouter.get('/user', loginRequired, async (req, res, next) => {
   const userToken = req.headers['authorization']?.split(' ')[1];
