@@ -1,11 +1,56 @@
-// 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
-// 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
-// 코드 예시를 남겨 두었습니다.
-
 import * as Api from '/api.js';
-import { randomId, logout } from '/useful-functions.js';
-import Menu from './component/Menu.js';
-// 요소(element), input 혹은 상수
 
-const logoutBtn = document.querySelector('.logout-btn');
-logoutBtn.addEventListener('click', logout);
+const submitButton = document.getElementById('submitButton');
+const modal = document.getElementById('modal');
+const deleteCompleteButton = document.getElementById('deleteCompleteButton');
+const deleteCancelButton = document.getElementById('deleteCancelButton');
+
+addAllElements();
+addAllEvents();
+
+async function addAllElements() {}
+
+function addAllEvents() {
+  submitButton.addEventListener('click', submitButtonEvent);
+  deleteCancelButton.addEventListener('click', deleteCancelButtonEvent);
+  deleteCompleteButton.addEventListener('click', deleteCompleteButtonEvent);
+}
+
+function deleteCompleteButtonEvent(e) {
+  e.preventDefault();
+  //something logic ex) api;
+}
+
+function submitButtonEvent(e) {
+  e.preventDefault();
+  openModal(modal);
+}
+function deleteCancelButtonEvent(e) {
+  e.preventDefault();
+  closeModal(modal);
+}
+
+(
+  document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []
+).forEach(($close) => {
+  const $target = $close.closest('.modal');
+
+  $close.addEventListener('click', () => {
+    closeModal($target);
+  });
+});
+
+document.onkeydown = function (evt) {
+  evt = evt || window.event;
+  if (evt.keyCode == 27) {
+    closeModal(modal);
+  }
+};
+
+function openModal($el) {
+  $el.classList.add('is-active');
+}
+
+function closeModal($el) {
+  $el.classList.remove('is-active');
+}
