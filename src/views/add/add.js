@@ -21,7 +21,7 @@ function addAllEvents() {
   submitButton.addEventListener('click', submitButtonEvent);
 }
 
-function submitButtonEvent(e) {
+async function submitButtonEvent(e) {
   e.preventDefault();
   if (!titleInput.value) {
     titleInput.focus();
@@ -53,4 +53,22 @@ function submitButtonEvent(e) {
     return;
   }
   alert(priceInput.value);
+  const data = {
+    name: titleInput.value,
+    company: manufacturerInput.value,
+    descriptionSummary: shortDescriptionInput.value,
+    descriptionDetail: detailDescriptionInput.value,
+    imageUrl: 'https://test.com/', // 수정예정
+    stock: inventoryInput.value,
+    price: priceInput.value,
+    keywords: ['test1', 'test2'],
+  };
+
+  try {
+    const res = await Api.post('/api/productregister', data);
+    alert('성공적으로 등록되었습니다.');
+    location.href = '/account/add/';
+  } catch (error) {
+    console.log(error);
+  }
 }
