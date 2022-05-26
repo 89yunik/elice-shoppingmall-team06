@@ -33,3 +33,13 @@
 .label {
   text-align: left;
 }
+.modal-content button.delete {
+  background: transparent;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+.modal-content button.delete:after,
+.modal-content button.delete:before {
+  background-color: #000;
+}
