@@ -6,10 +6,10 @@ class ProductService {
     this.productModel = productModel;
   }
 
-  // 제품 등록(판매자만 가능)
+  // 제품 등록
   async addProduct(productInfo) {
     // 객체 destructuring
-    const { name, price, description, company } = productInfo;
+    const { name } = productInfo;
 
     // 제품명 중복 확인
     const product = await this.productModel.findByName(name);
@@ -19,10 +19,8 @@ class ProductService {
       );
     }
 
-    const newProductInfo = { name, price, description, company };
-
     // db에 저장
-    const createdNewProduct = await this.productModel.create(newProductInfo);
+    const createdNewProduct = await this.productModel.create(productInfo);
 
     return createdNewProduct;
   }
@@ -41,7 +39,7 @@ class ProductService {
     return product;
   }
 
-  // 제품정보 수정(판매자만 가능)
+  // 제품정보 수정
   async setProduct(productId, toUpdate) {
     // 우선 해당 id의 유저가 db에 있는지 확인
     let product = await this.productModel.findById(productId);
@@ -60,11 +58,11 @@ class ProductService {
     return product;
   }
 
-  //제품 삭제(판매자만 가능)
-  // async deleteProduct(productId) {
-  //   const product = await this.productModel.delete(productId);
-  //   return product;
-  // }
+  //제품 삭제
+  async deleteProduct(productId) {
+    const product = await this.productModel.delete(productId);
+    return product;
+  }
 }
 
 const productService = new ProductService(productModel);
