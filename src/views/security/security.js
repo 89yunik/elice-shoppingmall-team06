@@ -59,21 +59,25 @@ function fullNameToggleEvent(e) {
   fullNameInput.disabled = !e.target.checked;
   fullNameInput.focus();
 }
+
 function passwordToggleEvent(e) {
   passwordInput.disabled = !e.target.checked;
   passwordConfirmInput.disabled = !e.target.checked;
   passwordInput.focus();
 }
+
 function addressToggleEvent(e) {
   postalCodeInput.disabled = !e.target.checked;
   address1Input.disabled = !e.target.checked;
   address2Input.disabled = !e.target.checked;
-  address1Input.focus();
+  postalCodeInput.focus();
 }
+
 function phoneNumberToggleEvent(e) {
   phoneNumberInput.disabled = !e.target.checked;
   phoneNumberInput.focus();
 }
+
 function saveButtonEvent(e) {
   e.preventDefault();
   openModal(modal);
@@ -85,13 +89,38 @@ function modalCloseButtonEvent(e) {
 
 function saveCompleteButtonEvent(e) {
   e.preventDefault();
+  const isFullNameValid = fullNameInput.value.length >= 2;
+  const isPasswordValid = passwordInput.value.length >= 4 || passwordInput.value.length === 0;
+  const isPasswordSame = passwordInput.value === passwordConfirmInput.value;
+
+  if (!isFullNameValid || !isPasswordValid) {
+    closeModal(modal);
+    return alert('이름은 2글자 이상, 비밀번호는 4글자 이상이어야 합니다.');
+  }
+
+  if (!isPasswordSame) {
+    closeModal(modal);
+    return alert('비밀번호가 일치하지 않습니다.');
+  }
+
+  const data = {
+    fullName: fullNameInput.value,
+    postalCode: postalCodeInput.value,
+    address1: address1Input.value,
+    address2: address2Input.value,
+    phoneNumber: phoneNumberInput.value,
+  };
+
+  if (passwordInput.value.length !== 0) {
+    data['password'] = passwordInput.value;
+  }
+
+  //todo: 수정 api 호출
+  console.log(data);
 }
 
-// Add a click event on various child elements to close the parent modal
 (
-  document.querySelectorAll(
-    '.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button',
-  ) || []
+  document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []
 ).forEach(($close) => {
   const $target = $close.closest('.modal');
 
