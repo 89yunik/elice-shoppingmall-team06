@@ -1,8 +1,3 @@
-//order, cart 크기 비교해서 전체선택 버튼 조건
-//1. 처음 렌더링할때 storage에서 order를 가져와서 빈배열이면 다 넣어주고, 아니면 그에 맞게...
-
-let itemStorage = [];
-
 function makeCartList(data, sameProductCount) {
   const id = data._id;
   const cartProducts = document.querySelector('#cartProductsContainer');
@@ -69,8 +64,12 @@ function makeCartList(data, sameProductCount) {
 }
 
 document.querySelector('#allSelectCheckbox').checked = true;
+
+//개별 삭제, plus 버튼
 document.querySelector('.cart-products-container').addEventListener('click', (e) => {
   //개별 삭제
+  let itemStorage = [];
+
   if(e.target.classList.contains('fa-trash-can')) {
     // const deleteItemTarget = e.target.parentElement.parentElement.parentElement;
     const deleteItemTarget = e.target.closest('.cart-product-item');
@@ -129,16 +128,12 @@ document.querySelector('.cart-products-container').addEventListener('click', (e)
   }
 });
 
-
-
-
-
 const savedCartItems = sessionStorage.getItem('cart');
 const totalPriceExceptDelivery = document.querySelector('#productsTotal');
 const totalPrice = document.querySelector('.total-price')
 
 
-  
+
 
 const parsedCartItems = JSON.parse(savedCartItems);
 
@@ -154,9 +149,10 @@ function newLoading() {
   });
 }
 
+//맨 처음에 화면 구현
 if(savedCartItems !== null) {
   let orderStorage = []
-  itemStorage = parsedCartItems;
+  // itemStorage = parsedCartItems;
   parsedCartItems.forEach(item => {
     orderStorage.push(item._id);
   })
@@ -174,6 +170,7 @@ if(savedCartItems !== null) {
   totalPrice.innerHTML = parseInt(totalPriceExceptDelivery.innerText) + 3000;
   // console.log
   
+
   function handleOrderSessionStorage(event) {
     let mainOrderStorage = JSON.parse(sessionStorage.getItem('order'));
     let test;
@@ -185,7 +182,12 @@ if(savedCartItems !== null) {
         mainOrderStorage = mainOrderStorage.filter(item => item !== id);
       }
       sessionStorage.setItem('order', JSON.stringify(mainOrderStorage))
-
+      console.log(mainOrderStorage.length, JSON.parse(sessionStorage.getItem('cart')).length)
+      if(mainOrderStorage.length === JSON.parse(sessionStorage.getItem('cart')).length) {
+        document.querySelector('#allSelectCheckbox').checked = true;
+      } else {
+        document.querySelector('#allSelectCheckbox').checked = false;
+      }
       
     }
   //전체 선택
@@ -207,6 +209,7 @@ if(savedCartItems !== null) {
 
   })
 
+  //선택요소 sessionStorage에 저장
   checkItems.forEach(element => {
     element.addEventListener('click', (event) => {
       handleOrderSessionStorage(event)
@@ -214,4 +217,37 @@ if(savedCartItems !== null) {
     })
   })
 
+//체크박스 선택 삭제
+document.querySelector('#partialDeleteLabel .help').addEventListener('click', event => checkedItemDelete(event))
+
+document.querySelector('#purchaseButton').addEventListener('click', moveToOrder)
+
+function moveToOrder() {
+  location.href = `/order`;
+
+}
+
+function checkedItemDelete(event) {
+  const checkedList = JSON.parse(sessionStorage.getItem('order'));
+  let mainOrderStorage = JSON.parse(sessionStorage.getItem('cart'));
+
+  checkedList.forEach(item => {
+    document.querySelector(`#productItem-${item}`).remove();
+    mainOrderStorage = mainOrderStorage.filter(element => element._id !== item);
+  })
+  sessionStorage.setItem('cart', JSON.stringify(mainOrderStorage))
+
+  updateProductsTotal();
+}
+
+//부분 삭제에 따른 금액 계산
+function updateProductsTotal() {
+  const checkedList = JSON.parse(sessionStorage.getItem('cart'));
+  let productsTotalAmount = 0;
+  checkedList.forEach(item => {
+    productsTotalAmount += item.price*item.quantity;
+  })
+  document.querySelector('#productsTotal').innerHTML = productsTotalAmount;
+  document.querySelector('#orderTotal').innerHTML = productPriceSum + 3000;
+}
 
