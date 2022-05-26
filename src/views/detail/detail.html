@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/elice-rabbit-favicon.png"
+    />
+    
+    <!-- bulma css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/7630448495.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="./detail.css" />
+    <script defer src="./detail.js" type="text/javascript"></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#header").load("/header.html");
+      });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section id="section">
+			<div class="section-wrap">
+        
+				<div class="product-detail">
+					<div class="detail-image">
+						<div class="wrap">
+							<img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/happy-and-cheerful-dog-playing-fetch-with-toy-bone-royalty-free-image-1590068781.jpg?crop=0.668xw:1.00xh;0,0&resize=640:*" alt="">
+						</div>
+					</div>
+					<div class="detail-text">
+						<div class="detail-details">
+							<div class="tabs">
+								<p class="category"></p>
+							</div>
+							<div class="content">
+								<p class="title"></p>
+								<p class="price"></p>
+								<p class="description"></p>
+							</div>
+						</div>
+						<div class="detail-btns">
+							<a href="" class="add-to-cart">장바구니 추가하기</a>
+							<a href="" class="quick-buy">바로 구매하기</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+  </body>
+</html>
