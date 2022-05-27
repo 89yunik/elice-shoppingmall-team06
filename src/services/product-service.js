@@ -30,6 +30,10 @@ class ProductService {
   }
 
   // 매개변수인 category가 존재하면 category에 해당하는 제품 목록을 받음.
+  async getProductsByCategory(category) {
+    const products = await this.productModel.findByCategory(category);
+    return products;
+  }
 
   // id에 해당하는 제품을 받음.
   async getProductById(productId) {

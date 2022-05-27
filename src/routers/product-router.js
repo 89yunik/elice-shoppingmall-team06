@@ -41,11 +41,23 @@ productRouter.get('/productlist', async function (req, res, next) {
   }
 });
 
+//카테고리별 제품 목록 api
 //category에 해당하는 제품 목록을 가져옴
-//추가 예정
+productRouter.get('/productlist/:category', async function (req, res, next) {
+  try {
+    // category에 해당하는 제품 목록을 얻음
+    const { category } = req.params;
+    const products = await productService.getProductsByCategory(category);
+    // 제품 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(products);
+  } catch (error) {
+    next(error);
+  }
+});
 
+//제품 상세 api
 //productId에 해당하는 제품 정보를 가져옴
-productRouter.get('/productlist/:productId', async function (req, res, next) {
+productRouter.get('/products/:productId', async function (req, res, next) {
   try {
     const { productId } = req.params;
     // id에 해당하는 제품 정보를 얻음
@@ -57,7 +69,7 @@ productRouter.get('/productlist/:productId', async function (req, res, next) {
   }
 });
 
-// 제품 정보 수정 api
+// 제품 수정 api
 // (예를 들어 /api/products/abc12345 로 요청하면 req.params.productId는 'abc12345' 문자열로 됨)
 productRouter.patch('/products/:productId', async function (req, res, next) {
   try {
@@ -85,7 +97,7 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
 });
 
 // 제품 삭제 api
-productRouter.delete('/productlist/:productId', async function (req, res, next) {
+productRouter.delete('/products/:productId', async function (req, res, next) {
   try {
     const { productId } = req.params;
     // 삭제할 제품 id를 얻음

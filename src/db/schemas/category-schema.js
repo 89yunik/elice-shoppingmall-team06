@@ -8,15 +8,21 @@ const CategorySchema = new Schema(
     },
   },
   {
+    description: {
+      type: String,
+      required: true,
+    },
+  },
+  {
     imageUrl: {
       type: String,
       required: false,
-    }
+    },
   },
   {
     collection: 'categories',
     timestamps: true,
-  }
+  },
 );
 
 export { CategorySchema };
