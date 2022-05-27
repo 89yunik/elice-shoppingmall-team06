@@ -2,33 +2,6 @@ import * as Api from '/api.js';
 
 const tableInfo = document.querySelector('.table-info');
 
-const sampleData = [
-  {
-    id: 14387916237,
-    date: '2022 - 05 - 23',
-    productName: '아이보리 니트',
-    count: 1,
-    price: 22000,
-    status: 1,
-  },
-  {
-    id: 324743743,
-    date: '2022 - 05 - 24',
-    productName: '보라색 니트',
-    count: 3,
-    price: 53000,
-    status: 0,
-  },
-  {
-    id: 8239238,
-    date: '2022 - 05 - 01',
-    productName: '검정 니트',
-    count: 1,
-    price: 50000,
-    status: 2,
-  },
-];
-
 render();
 addAllEvents();
 
@@ -69,9 +42,8 @@ function render() {
 }
 
 async function getData() {
-  //todo: fetch data
   const userData = await Api.get('/api/userlist');
-  console.log(userData);
+
   tableInfo.innerHTML = userData.map((item) => template(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
   document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
