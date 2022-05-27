@@ -79,6 +79,8 @@ function handleCheckoutButton() {
     if(!(document.querySelector('#address2').value)) {
         return alert('상세주소를 입력해주세요.');
     }
+    makeApiOderRegisterData();    
+
     clearSessionStorage();
 
     window.location.href = '/order/complete';
@@ -129,7 +131,7 @@ function callUserApi() {
 
 
 
-function makeApiOderRegisterData() {
+async function makeApiOderRegisterData() {
     const whatIBuy = checkWhatIBuy();
     const productList = []
     whatIBuy.forEach(item => {
@@ -143,7 +145,7 @@ function makeApiOderRegisterData() {
     const userId = Api.get('http://localhost:5070/api/user')
     
     let userApi = await Api.get('http://localhost:5070/api/user').then(result => {
-        userID = result.email;
+        userID = result._id;
     })
     const data =  {
         userId : userID,
@@ -166,7 +168,9 @@ function makeApiOderRegisterData() {
 }
 
 window.onload = () => {
-    loadName(result.fullName);
+    Api.get('http://localhost:5070/api/user').then(result => {
+        loadName(result.fullName);
+    
+    })
     makeListOfProductTitle();
-    makeApiOderRegisterData();    
 }
