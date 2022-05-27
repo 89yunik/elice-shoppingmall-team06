@@ -78,14 +78,16 @@ function getOrderData() {
   tableInfo.addEventListener('click', orderClickEvent);
   document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
 }
+
 function onChangeEvent(e) {
   if (e.target.closest('.statusSelectBox')) {
     console.log(e.target.closest('.statusSelectBox').value);
     console.log(e.target.closest('.statusSelectBox').dataset.id);
 
-    // something fetch api
+    // todo: something fetch api
   }
 }
+
 function orderClickEvent(e) {
   // todo : fetch post delete data
   if (e.target.closest('.order-cancel')) {
