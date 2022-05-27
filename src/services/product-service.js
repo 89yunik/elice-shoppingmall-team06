@@ -7,9 +7,9 @@ class ProductService {
   }
 
   // 제품 등록
-  async addProduct(newProductInfo) {
+  async addProduct(productInfo) {
     // 객체 destructuring
-    const { name } = newProductInfo;
+    const { name } = productInfo;
 
     // 제품명 중복 확인
     const product = await this.productModel.findByName(name);
@@ -18,7 +18,7 @@ class ProductService {
     }
 
     // db에 저장
-    const createdNewProduct = await this.productModel.create(newProductInfo);
+    const createdNewProduct = await this.productModel.create(productInfo);
 
     return createdNewProduct;
   }

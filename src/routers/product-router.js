@@ -89,7 +89,7 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
     // 제품 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(productId, toUpdate);
 
-    // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+    // 업데이트 이후의 제품 데이터를 프론트에 보내 줌
     res.status(200).json(updatedProductInfo);
   } catch (error) {
     next(error);

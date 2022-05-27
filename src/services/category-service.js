@@ -7,18 +7,18 @@ class CategoryService {
   }
 
   // 카테고리 추가(관리자만 가능)
-  async addCategory(newCategoryInfo) {
+  async addCategory(categoryInfo) {
     // 객체 destructuring
-    const { name } = newCategoryInfo;
-
+    const { name } = categoryInfo;
+    console.log(categoryInfo);
     // 카테고리명 중복 확인
     const category = await this.categoryModel.findByName(name);
     if (category) {
       throw new Error('이 카테고리는 현재 사용중입니다. 다른 카테고리를 입력해 주세요.');
     }
     // db에 저장
-    const createdNewCategory = await this.categoryModel.create(newCategoryInfo);
-
+    const createdNewCategory = await this.categoryModel.create(categoryInfo);
+    console.log(createdNewCategory);
     return createdNewCategory;
   }
 
