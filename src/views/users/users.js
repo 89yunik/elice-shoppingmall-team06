@@ -57,20 +57,17 @@ async function onChangeEvent(e) {
     const data = {
       role,
     };
-
-    // something api
-
-    // const res = await Api.patch(`/api/users`, id, data);
-    // console.log(res);
+    const res = await Api.patch('/api/admin', `${id}/${role}`);
 
     render();
   }
 }
 
-function orderClickEvent(e) {
+async function orderClickEvent(e) {
   if (e.target.closest('.button')) {
-    console.log(e.target.closest('.button').dataset.id);
+    const targetId = e.target.closest('.button').dataset.id;
     // todo : fetch post delete data
+    const res = await Api.delete('/api/admin', targetId);
 
     render();
   }

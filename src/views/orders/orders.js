@@ -1,13 +1,17 @@
 import * as Api from '/api.js';
 
-function template() {
+const tableInfo = document.querySelector('.table-info');
+
+function template(data) {
+  const arr = data.orderInfo.product;
+  const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
   return `
-    <div class="columns orders-item" id="order-628f15c7ae629ef7dc9d8ab6">
-      <div class="column is-2">2022-05-26</div>
-      <div class="column is-6 order-summary">아이보리 니트 / 1개</div>
-      <div class="column is-2">상품 준비중</div>
+    <div class="columns orders-item">
+      <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
+      <div class="column is-6 order-summary">${orderInfo.join('<br>')}</div>
+      <div class="column is-2">${data.orderState}</div>
       <div class="column is-2">
-        <button class="button" id="deleteButton-628f15c7ae629ef7dc9d8ab6">주문 취소</button>
+        <button class="button" data-id="${data._id}">주문 취소</button>
       </div>
     </div>
   `;
@@ -17,8 +21,20 @@ function render() {
   getOrderData();
 }
 async function getOrderData() {
-  // const res = await Api.get('/api/order');
-  // console.log(res);
+  const res = await Api.get('/api/order');
+  const html = res.map((item) => template(item)).join('');
+  tableInfo.innerHTML = html;
+
+  tableInfo.addEventListener('click', cancelClickEvent);
+}
+
+async function cancelClickEvent(e) {
+  if (e.target.closest('.button')) {
+    const targetId = e.target.closest('.button').dataset.id;
+    const res = await Api.delete('/api/order', targetId);
+
+    render();
+  }
 }
 
 render();
