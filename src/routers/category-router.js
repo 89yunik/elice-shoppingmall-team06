@@ -17,10 +17,10 @@ categoryRouter.post('/categoryregister', async (req, res, next) => {
     // req (request)의 body 에서 데이터 가져오기
     const newCategoryData = req.body;
 
-    // 위 데이터를 제품 db에 추가하기
+    // 위 데이터를 카테고리 db에 추가하기
     const newCategory = await categoryService.addCategory(newCategoryData);
 
-    // 추가된 제품의 db 데이터를 프론트에 다시 보내줌
+    // 추가된 카테고리의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     res.status(201).json(newCategory);
   } catch (error) {
@@ -59,7 +59,7 @@ categoryRouter.patch('/categories/:categoryId', async function (req, res, next) 
     // 보내주었다면, 업데이트용 객체에 삽입함.
     const toUpdate = req.body || {};
 
-    // 제품 정보를 업데이트함.
+    // 카테고리 정보를 업데이트함.
     const updatedCategoryInfo = await categoryService.setCategory(categoryId, toUpdate);
 
     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
