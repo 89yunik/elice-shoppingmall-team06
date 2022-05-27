@@ -1,6 +1,7 @@
 import * as Api from '/api.js';
 
 const ordersContainer = document.getElementById('ordersContainer');
+const tableInfo = document.querySelector('.table-info');
 
 const sampleData = [
   {
@@ -72,8 +73,8 @@ function render() {
 
 function getOrderData() {
   //todo: fetch data
-  ordersContainer.insertAdjacentHTML('beforeend', sampleData.map((item) => template(item)).join(''));
-  ordersContainer.addEventListener('click', orderClickEvent);
+  tableInfo.innerHTML = sampleData.map((item) => template(item)).join('');
+  tableInfo.addEventListener('click', orderClickEvent);
 }
 
 function orderClickEvent(e) {
