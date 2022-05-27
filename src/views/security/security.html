@@ -5,25 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>쇼핑-n팀</title>
     <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="/elice-rabbit-favicon.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
     <!-- bulma css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
     <!-- 폰트 어썸: 아이콘 -->
-    <script
-      defer
-      src="https://kit.fontawesome.com/7630448495.js"
-      crossorigin="anonymous"
-    ></script>
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="security.css" />
+    <!-- Daum 주소 API 사용하기 위한 파일 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
@@ -47,13 +38,7 @@
               <div class="field">
                 <label class="label" for="fullNameInput">이름</label>
                 <div class="control">
-                  <input
-                    class="input"
-                    id="fullNameInput"
-                    type="text"
-                    autocomplete="off"
-                    disabled=""
-                  />
+                  <input class="input" id="fullNameInput" type="text" autocomplete="off" disabled="" />
                   <!-- 토클 스위치 -->
                   <label class="switch">
                     <input type="checkbox" id="fullNameToggle" />
@@ -65,13 +50,7 @@
               <div class="field">
                 <label class="label" for="passwordInput">비밀번호</label>
                 <div class="control">
-                  <input
-                    class="input"
-                    id="passwordInput"
-                    type="password"
-                    autocomplete="off"
-                    disabled=""
-                  />
+                  <input class="input" id="passwordInput" type="password" autocomplete="off" disabled="" />
                   <!-- 토클 스위치 -->
                   <label class="switch">
                     <input type="checkbox" id="passwordToggle" />
@@ -84,17 +63,9 @@
               </div>
 
               <div class="field">
-                <label class="label" for="passwordConfirmInput"
-                  >비밀번호 확인</label
-                >
+                <label class="label" for="passwordConfirmInput">비밀번호 확인</label>
                 <div class="control">
-                  <input
-                    class="input"
-                    id="passwordConfirmInput"
-                    type="password"
-                    autocomplete="off"
-                    disabled=""
-                  />
+                  <input class="input" id="passwordConfirmInput" type="password" autocomplete="off" disabled="" />
                 </div>
               </div>
 
@@ -116,13 +87,7 @@
                     </p>
                   </div>
                   <div>
-                    <button
-                      class="button is-light is-hovered"
-                      id="searchAddressButton"
-                      disabled=""
-                    >
-                      주소찾기
-                    </button>
+                    <button class="button is-light is-hovered" id="searchAddressButton" disabled="">주소찾기</button>
                   </div>
                   <!-- 토클 스위치 -->
                   <label class="switch switch-address">
@@ -200,16 +165,10 @@
               <div id="modal" class="modal">
                 <div class="modal-background" id="modalBackground"></div>
                 <div class="modal-content">
-                  <button
-                    class="delete is-large"
-                    id="modalCloseButton"
-                    aria-label="close"
-                  ></button>
+                  <button class="delete is-large" id="modalCloseButton" aria-label="close"></button>
                   <div class="box">
                     <p class="mb-3">현재 비밀번호를 입력해 주세요.</p>
-                    <p class="mb-3">
-                      카카오 로그인인 경우, 'kakao'를 입력해 주세요.
-                    </p>
+                    <p class="mb-3">카카오 로그인인 경우, 'kakao'를 입력해 주세요.</p>
 
                     <input
                       class="input is-link mb-3"
@@ -218,11 +177,7 @@
                       placeholder=""
                       autocomplete="on"
                     />
-                    <button
-                      class="button is-link mt-5"
-                      id="saveCompleteButton"
-                      aria-label="close"
-                    >
+                    <button class="button is-link mt-5" id="saveCompleteButton" aria-label="close">
                       저장 완료하기
                     </button>
                   </div>
