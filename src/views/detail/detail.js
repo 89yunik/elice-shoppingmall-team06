@@ -31,18 +31,6 @@ if(fa !== null){
 	}
 }
 
-// for(let i=0; i<sessionArr.length; i++){
-// 	const SSname = fa[i]._id;
-// 	const SSprice = fa[i].price;
-// 	const SSquantity = fa[i].quantity;
-// }
-
-// const productInfo = [{
-// 	"name":SSname,
-// 	"price":SSprice
-// }]
-
-
 //데이터 -> HTML 변환 
 function parseToHTML(item){
 	const category = document.querySelector('.category');
@@ -64,19 +52,11 @@ function parseToHTML(item){
 		e.preventDefault();
 		
 		const productInfo = {
+			"_id":`${item._id}`,
 			"name":`${item.name}`,
 			"price":`${item.price}`,
 			"quantity":1
 		}
-		// console.log(JSON.stringify(productInfo.name))
-			// if(sessionArr[i].name === `${item.name}`){
-			// 	alert("해당 제품이 장바구니에 있습니다.")
-			// }
-			
-
-		// if(bbbb.indexOf(JSON.stringify(productInfo)) >= 0 ){
-		// 	alert("해당 제품이 장바구니에 있습니다.")
-		// }
 		if(testArr.indexOf(productInfo.name) >= 0 ){
 			alert("해당 제품이 장바구니에 있습니다.")
 		}
@@ -86,13 +66,11 @@ function parseToHTML(item){
 			alert("장바구니에 추가되었습니다.")
 		}
 		
-
 		sessionStorage.setItem("cart", JSON.stringify(sessionArr))
 		sessionStorage.setItem("productName", JSON.stringify(testArr))
 	}
 	cart.addEventListener("click", addToCart)
 }
-
 
 // 페이지 로드시 목록 자동추가
 window.onload = ()=>{
