@@ -70,7 +70,7 @@ categoryRouter.patch('/categories/:categoryId', async function (req, res, next) 
 });
 
 // 카테고리 삭제 api
-categoryRouter.delete('/categorylist/:categoryId', async function (req, res, next) {
+categoryRouter.delete('/categories/:categoryId', async function (req, res, next) {
   try {
     const { categoryId } = req.params;
     // 삭제할 카테고리 id를 얻음

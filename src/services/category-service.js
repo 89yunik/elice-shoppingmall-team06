@@ -28,6 +28,11 @@ class CategoryService {
     return categories;
   }
 
+  async getCategoryByName(categoryName) {
+    const category = await this.categoryModel.findByName(categoryName);
+    return category;
+  }
+
   // 카테고리 수정(관리자만 가능)
   async setCategory(categoryId, toUpdate) {
     // 우선 해당 id의 유저가 db에 있는지 확인

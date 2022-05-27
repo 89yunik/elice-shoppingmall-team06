@@ -4,6 +4,11 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
+  async create(productInfo) {
+    const createdNewProduct = await Product.create(productInfo);
+    return createdNewProduct;
+  }
+
   async findByName(name) {
     const product = await Product.findOne({ name });
     return product;
@@ -14,9 +19,9 @@ export class ProductModel {
     return product;
   }
 
-  async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
-    return createdNewProduct;
+  async findByCategory(category) {
+    const products = await Product.find({ category });
+    return products;
   }
 
   async findAll() {
@@ -28,11 +33,7 @@ export class ProductModel {
     const filter = { _id: productId };
     const option = { returnOriginal: false };
 
-    const updatedProduct = await Product.findOneAndUpdate(
-      filter,
-      update,
-      option,
-    );
+    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
     return updatedProduct;
   }
 
