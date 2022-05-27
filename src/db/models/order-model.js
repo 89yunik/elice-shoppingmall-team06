@@ -5,7 +5,7 @@ const Order = model('orders', OrderSchema);
 
 export class OrderModel {
   async findById(userId) {
-    const order = await Order.findOne({ userId: userId });
+    const order = await Order.find({ userId: userId });
     return order;
   }
 
