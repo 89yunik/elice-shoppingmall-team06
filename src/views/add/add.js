@@ -15,7 +15,22 @@ const submitButton = document.getElementById('submitButton');
 addAllElements();
 addAllEvents();
 
-async function addAllElements() {}
+async function addAllElements() {
+  getCategoryData();
+}
+
+function categoaryTemplate(data) {
+  return `
+  <option value="${data._id}" class="notification is-primary is-light">
+    ${data.name}
+  </option>
+  `;
+}
+
+async function getCategoryData() {
+  const categoryData = await Api.get('/api/categorylist');
+  categorySelectBox.insertAdjacentHTML('beforeend', categoryData.map((item) => categoaryTemplate(item)).join(''));
+}
 
 function addAllEvents() {
   submitButton.addEventListener('click', submitButtonEvent);
@@ -52,10 +67,11 @@ async function submitButtonEvent(e) {
     priceInput.focus();
     return;
   }
-  alert(priceInput.value);
+
   const data = {
     name: titleInput.value,
     company: manufacturerInput.value,
+    category: categorySelectBox.value,
     descriptionSummary: shortDescriptionInput.value,
     descriptionDetail: detailDescriptionInput.value,
     imageUrl: 'https://test.com/', // 수정예정
