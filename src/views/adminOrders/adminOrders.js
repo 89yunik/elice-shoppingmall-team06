@@ -44,7 +44,8 @@ function template(data) {
       <div class="column is-2">
         <div class="select">
           <select
-            id="statusSelectBox-${data.id}"
+            class="statusSelectBox"
+            data-id="${data.id}"
           >
             <option class="has-background-danger-light has-text-danger" ${
               data.status === 0 ? `selected = ''` : ''
@@ -75,8 +76,16 @@ function getOrderData() {
   //todo: fetch data
   tableInfo.innerHTML = sampleData.map((item) => template(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
+  document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
 }
+function onChangeEvent(e) {
+  if (e.target.closest('.statusSelectBox')) {
+    console.log(e.target.closest('.statusSelectBox').value);
+    console.log(e.target.closest('.statusSelectBox').dataset.id);
 
+    // something fetch api
+  }
+}
 function orderClickEvent(e) {
   // todo : fetch post delete data
   if (e.target.closest('.order-cancel')) {
