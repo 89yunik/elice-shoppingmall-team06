@@ -1,0 +1,2422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="adminOrders.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#header').load('/header.html');
+      });
+    </script>
+    <script src="adminOrders.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <!-- 제목 -->
+        <div class="block account-header">
+          <h1 class="subtitle is-4">주문관리</h1>
+        </div>
+
+        <!-- 총 요약 -->
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">총주문수</p>
+              <p class="title" id="ordersCount">102</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">상품준비중</p>
+              <p class="title" id="prepareCount">98</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">상품배송중</p>
+              <p class="title" id="deliveryCount">2</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">배송완료</p>
+              <p class="title" id="completeCount">2</p>
+            </div>
+          </div>
+        </nav>
+
+        <div class="container orders-container" id="ordersContainer">
+          <div class="columns notification is-info is-light is-mobile orders-top">
+            <div class="column is-2">날짜</div>
+            <div class="column is-4">주문정보</div>
+            <div class="column is-2">주문총액</div>
+            <div class="column is-2">상태관리</div>
+            <div class="column is-2">취소</div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b2d64ae629ef7dc9d7525">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b2d64ae629ef7dc9d7525"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b2d64ae629ef7dc9d7525">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b2d73ae629ef7dc9d7535">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b2d73ae629ef7dc9d7535"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b2d73ae629ef7dc9d7535">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3112ae629ef7dc9d75b4">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3112ae629ef7dc9d75b4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3112ae629ef7dc9d75b4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3302ae629ef7dc9d75dc">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3302ae629ef7dc9d75dc"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3302ae629ef7dc9d75dc">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3623ae629ef7dc9d7665">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3623ae629ef7dc9d7665"
+                  class="has-background-primary-light has-text-primary"
+                >
+                  <option class="has-background-danger-light has-text-danger" value="상품 준비중">상품 준비중</option>
+                  <option class="has-background-primary-light has-text-primary" selected="" value="상품 배송중">
+                    상품 배송중
+                  </option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3623ae629ef7dc9d7665">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3699ae629ef7dc9d768c">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">봄, 가을 남자 느낌 물씬 코디 / 1개</div>
+            <div class="column is-2">31,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3699ae629ef7dc9d768c"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3699ae629ef7dc9d768c">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3dc9ae629ef7dc9d7762">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 4개</div>
+            <div class="column is-2">79,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3dc9ae629ef7dc9d7762"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3dc9ae629ef7dc9d7762">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b3ea9ae629ef7dc9d777e">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b3ea9ae629ef7dc9d777e"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3ea9ae629ef7dc9d777e">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b4a46ae629ef7dc9d7880">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b4a46ae629ef7dc9d7880"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b4a46ae629ef7dc9d7880">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b5346ae629ef7dc9d78bf">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b5346ae629ef7dc9d78bf"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b5346ae629ef7dc9d78bf">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b8c8dae629ef7dc9d79b4">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b8c8dae629ef7dc9d79b4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b8c8dae629ef7dc9d79b4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b9938ae629ef7dc9d79f1">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">
+              아이보리 니트 / 1개 남성 정장 / 1개 봄, 가을 남자 느낌 물씬 코디 / 1개
+            </div>
+            <div class="column is-2">239,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="statusSelectBox-628b9938ae629ef7dc9d79f1" class="has-background-grey-light">
+                  <option class="has-background-danger-light has-text-danger" value="상품 준비중">상품 준비중</option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" selected="" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b9938ae629ef7dc9d79f1">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b9ac9ae629ef7dc9d7a13">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b9ac9ae629ef7dc9d7a13"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b9ac9ae629ef7dc9d7a13">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628b9f46ae629ef7dc9d7a27">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">여성 운동복 / 1개</div>
+            <div class="column is-2">37,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628b9f46ae629ef7dc9d7a27"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b9f46ae629ef7dc9d7a27">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628ba036ae629ef7dc9d7a38">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628ba036ae629ef7dc9d7a38"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ba036ae629ef7dc9d7a38">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c6ca2ae629ef7dc9d7ce9">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">여행 코디 여성 / 1개</div>
+            <div class="column is-2">17,600</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c6ca2ae629ef7dc9d7ce9"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c6ca2ae629ef7dc9d7ce9">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c7d09ae629ef7dc9d7d84">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c7d09ae629ef7dc9d7d84"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c7d09ae629ef7dc9d7d84">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c7fe5ae629ef7dc9d7dbb">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">캐주얼 반팔 코디 남성 / 1개</div>
+            <div class="column is-2">16,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c7fe5ae629ef7dc9d7dbb"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c7fe5ae629ef7dc9d7dbb">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c8102ae629ef7dc9d7dc8">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c8102ae629ef7dc9d7dc8"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c8102ae629ef7dc9d7dc8">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c8389ae629ef7dc9d7dde">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c8389ae629ef7dc9d7dde"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c8389ae629ef7dc9d7dde">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c85a9ae629ef7dc9d7dfe">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c85a9ae629ef7dc9d7dfe"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c85a9ae629ef7dc9d7dfe">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628c8700ae629ef7dc9d7e16">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628c8700ae629ef7dc9d7e16"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c8700ae629ef7dc9d7e16">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628cbbc2ae629ef7dc9d7fa2">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개 아이보리 니트 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628cbbc2ae629ef7dc9d7fa2"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cbbc2ae629ef7dc9d7fa2">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628cd9f6ae629ef7dc9d8057">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628cd9f6ae629ef7dc9d8057"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cd9f6ae629ef7dc9d8057">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628cf37dae629ef7dc9d8118">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628cf37dae629ef7dc9d8118"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cf37dae629ef7dc9d8118">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d74ffae629ef7dc9d81be">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d74ffae629ef7dc9d81be"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d74ffae629ef7dc9d81be">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d7731ae629ef7dc9d81c4">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d7731ae629ef7dc9d81c4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d7731ae629ef7dc9d81c4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d8092ae629ef7dc9d81e7">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">
+              아이보리 니트 / 1개 여성 운동복 / 1개 여성 니트 / 1개 화사한 봄 코디 / 1개
+            </div>
+            <div class="column is-2">113,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d8092ae629ef7dc9d81e7"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d8092ae629ef7dc9d81e7">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d87acae629ef7dc9d8227">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d87acae629ef7dc9d8227"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d87acae629ef7dc9d8227">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d8811ae629ef7dc9d823d">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">캐주얼 반팔 코디 남성 / 1개</div>
+            <div class="column is-2">16,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d8811ae629ef7dc9d823d"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d8811ae629ef7dc9d823d">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628d95c9ae629ef7dc9d826a">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">여성 니트 / 3개 남성 정장 / 3개</div>
+            <div class="column is-2">642,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628d95c9ae629ef7dc9d826a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d95c9ae629ef7dc9d826a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628daef7ae629ef7dc9d82d2">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">캐주얼 반팔 코디 남성 / 1개 봄, 가을 남자 느낌 물씬 코디 / 3개</div>
+            <div class="column is-2">102,700</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="statusSelectBox-628daef7ae629ef7dc9d82d2" class="has-background-grey-light">
+                  <option class="has-background-danger-light has-text-danger" value="상품 준비중">상품 준비중</option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" selected="" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628daef7ae629ef7dc9d82d2">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628db98fae629ef7dc9d8332">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개 여성 운동복 / 1개</div>
+            <div class="column is-2">61,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628db98fae629ef7dc9d8332"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628db98fae629ef7dc9d8332">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628dc95bae629ef7dc9d83d8">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628dc95bae629ef7dc9d83d8"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dc95bae629ef7dc9d83d8">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628dd75aae629ef7dc9d84b3">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 4개 아이보리 니트 / 1개</div>
+            <div class="column is-2">778,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628dd75aae629ef7dc9d84b3"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dd75aae629ef7dc9d84b3">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628ddfb9ae629ef7dc9d8534">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 여성 니트 / 1개</div>
+            <div class="column is-2">46,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628ddfb9ae629ef7dc9d8534"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ddfb9ae629ef7dc9d8534">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628de008ae629ef7dc9d853c">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 2개</div>
+            <div class="column is-2">41,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628de008ae629ef7dc9d853c"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628de008ae629ef7dc9d853c">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628de34dae629ef7dc9d855a">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개 캐주얼 반팔 코디 남성 / 1개</div>
+            <div class="column is-2">205,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628de34dae629ef7dc9d855a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628de34dae629ef7dc9d855a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628de3afae629ef7dc9d8567">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628de3afae629ef7dc9d8567"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628de3afae629ef7dc9d8567">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628de91eae629ef7dc9d8594">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">화사한 봄 코디 / 1개</div>
+            <div class="column is-2">36,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628de91eae629ef7dc9d8594"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628de91eae629ef7dc9d8594">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628dece405e17f4f61b7a725">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">하늘하늘 셔츠 / 3개</div>
+            <div class="column is-2">103,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628dece405e17f4f61b7a725"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dece405e17f4f61b7a725">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df28dae629ef7dc9d85e4">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df28dae629ef7dc9d85e4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df28dae629ef7dc9d85e4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df2b6ae629ef7dc9d85ea">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">여성 운동복 / 1개</div>
+            <div class="column is-2">37,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df2b6ae629ef7dc9d85ea"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df2b6ae629ef7dc9d85ea">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8bdae629ef7dc9d8609">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8bdae629ef7dc9d8609"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8bdae629ef7dc9d8609">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8bdae629ef7dc9d860d">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8bdae629ef7dc9d860d"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8bdae629ef7dc9d860d">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8bdae629ef7dc9d860f">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8bdae629ef7dc9d860f"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8bdae629ef7dc9d860f">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8beae629ef7dc9d8615">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8beae629ef7dc9d8615"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8beae629ef7dc9d8615">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8beae629ef7dc9d8613">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8beae629ef7dc9d8613"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8beae629ef7dc9d8613">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628df8f7ae629ef7dc9d861f">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개 아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">400,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628df8f7ae629ef7dc9d861f"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628df8f7ae629ef7dc9d861f">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e13aeae629ef7dc9d8688">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">봄, 가을 남자 느낌 물씬 코디 / 1개</div>
+            <div class="column is-2">31,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e13aeae629ef7dc9d8688"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e13aeae629ef7dc9d8688">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e26faae629ef7dc9d86e1">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e26faae629ef7dc9d86e1"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e26faae629ef7dc9d86e1">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e3c35ae629ef7dc9d8769">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e3c35ae629ef7dc9d8769"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e3c35ae629ef7dc9d8769">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e3ff4ae629ef7dc9d878d">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e3ff4ae629ef7dc9d878d"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e3ff4ae629ef7dc9d878d">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e4015ae629ef7dc9d8795">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개 아이보리 니트 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e4015ae629ef7dc9d8795"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e4015ae629ef7dc9d8795">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e4c6fae629ef7dc9d87f5">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e4c6fae629ef7dc9d87f5"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e4c6fae629ef7dc9d87f5">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e4dc5ae629ef7dc9d8808">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e4dc5ae629ef7dc9d8808"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e4dc5ae629ef7dc9d8808">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e4dd7ae629ef7dc9d8813">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e4dd7ae629ef7dc9d8813"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e4dd7ae629ef7dc9d8813">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628e4e40ae629ef7dc9d8823">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 여성 니트 / 1개</div>
+            <div class="column is-2">46,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628e4e40ae629ef7dc9d8823"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e4e40ae629ef7dc9d8823">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628ee20dae629ef7dc9d88d4">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">-15,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628ee20dae629ef7dc9d88d4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ee20dae629ef7dc9d88d4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628ee942ae629ef7dc9d890a">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">
+              여행 코디 여성 / 5개 아이보리 니트 / 1개 봄, 가을 남자 느낌 물씬 코디 / 1개 캐주얼 반팔 코디 남성 / 1개
+            </div>
+            <div class="column is-2">136,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628ee942ae629ef7dc9d890a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ee942ae629ef7dc9d890a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628efc24ae629ef7dc9d898d">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628efc24ae629ef7dc9d898d"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628efc24ae629ef7dc9d898d">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628efc45ae629ef7dc9d8994">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628efc45ae629ef7dc9d8994"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628efc45ae629ef7dc9d8994">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628efd17ae629ef7dc9d89a4">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개 아이보리 니트 / 1개</div>
+            <div class="column is-2">46,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628efd17ae629ef7dc9d89a4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628efd17ae629ef7dc9d89a4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628eff9eae629ef7dc9d89b9">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628eff9eae629ef7dc9d89b9"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628eff9eae629ef7dc9d89b9">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f0107ae629ef7dc9d89cb">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f0107ae629ef7dc9d89cb"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f0107ae629ef7dc9d89cb">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f0925e1bab365728e6738">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">캐주얼 반팔 코디 남성 / 1개</div>
+            <div class="column is-2">16,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f0925e1bab365728e6738"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f0925e1bab365728e6738">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f12a7376e773bef29d71f">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f12a7376e773bef29d71f"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f12a7376e773bef29d71f">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f133eae629ef7dc9d8a67">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개 여성 운동복 / 1개</div>
+            <div class="column is-2">61,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f133eae629ef7dc9d8a67"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f133eae629ef7dc9d8a67">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f14b5ae629ef7dc9d8a7a">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f14b5ae629ef7dc9d8a7a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f14b5ae629ef7dc9d8a7a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f14b9ae629ef7dc9d8a80">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개 캐주얼 반팔 코디 남성 / 1개</div>
+            <div class="column is-2">205,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f14b9ae629ef7dc9d8a80"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f14b9ae629ef7dc9d8a80">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f2549eb5d1ed00c61e202">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">봄, 가을 남자 느낌 물씬 코디 / 3개</div>
+            <div class="column is-2">89,700</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f2549eb5d1ed00c61e202"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f2549eb5d1ed00c61e202">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f256deb5d1ed00c61e20f">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 2개</div>
+            <div class="column is-2">400,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f256deb5d1ed00c61e20f"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f256deb5d1ed00c61e20f">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f30a9eb5d1ed00c61e286">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f30a9eb5d1ed00c61e286"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f30a9eb5d1ed00c61e286">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f31b0eb5d1ed00c61e298">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">
+              남성 정장 / 89개 봄, 가을 남자 느낌 물씬 코디 / 89개 화사한 봄 코디 / 99개
+            </div>
+            <div class="column is-2">22,663,100</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f31b0eb5d1ed00c61e298"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f31b0eb5d1ed00c61e298">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f343ceb5d1ed00c61e2ad">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 88개</div>
+            <div class="column is-2">1,675,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f343ceb5d1ed00c61e2ad"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f343ceb5d1ed00c61e2ad">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3481eb5d1ed00c61e2b7">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">400,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3481eb5d1ed00c61e2b7"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3481eb5d1ed00c61e2b7">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f349ceb5d1ed00c61e2c4">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">211,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f349ceb5d1ed00c61e2c4"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f349ceb5d1ed00c61e2c4">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f35b8eb5d1ed00c61e2dd">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개 남성 정장 / 1개</div>
+            <div class="column is-2">400,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f35b8eb5d1ed00c61e2dd"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f35b8eb5d1ed00c61e2dd">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3723eb5d1ed00c61e311">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">-15,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3723eb5d1ed00c61e311"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3723eb5d1ed00c61e311">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3772eb5d1ed00c61e31b">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">-15,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3772eb5d1ed00c61e31b"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3772eb5d1ed00c61e31b">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3816eb5d1ed00c61e34a">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3816eb5d1ed00c61e34a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3816eb5d1ed00c61e34a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f389feb5d1ed00c61e363">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f389feb5d1ed00c61e363"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f389feb5d1ed00c61e363">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f39dfeb5d1ed00c61e390">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">캐주얼 반팔 코디 남성 / 1개 봄, 가을 남자 느낌 물씬 코디 / 1개</div>
+            <div class="column is-2">44,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f39dfeb5d1ed00c61e390"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f39dfeb5d1ed00c61e390">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3a80eb5d1ed00c61e3a8">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3a80eb5d1ed00c61e3a8"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3a80eb5d1ed00c61e3a8">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f3bb3eb5d1ed00c61e3b5">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f3bb3eb5d1ed00c61e3b5"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f3bb3eb5d1ed00c61e3b5">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f4202eb5d1ed00c61e3fd">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 5개</div>
+            <div class="column is-2">98,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f4202eb5d1ed00c61e3fd"
+                  class="has-background-primary-light has-text-primary"
+                >
+                  <option class="has-background-danger-light has-text-danger" value="상품 준비중">상품 준비중</option>
+                  <option class="has-background-primary-light has-text-primary" selected="" value="상품 배송중">
+                    상품 배송중
+                  </option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f4202eb5d1ed00c61e3fd">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f635deb5d1ed00c61e4ed">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 2개 아이보리 니트 / 1개</div>
+            <div class="column is-2">33,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f635deb5d1ed00c61e4ed"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f635deb5d1ed00c61e4ed">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f80aceb5d1ed00c61e586">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">-15,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f80aceb5d1ed00c61e586"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f80aceb5d1ed00c61e586">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f86b4eb5d1ed00c61e5ac">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">
+              아이보리 니트 / 3개 캐주얼 반팔 코디 남성 / 2개 남성 정장 / 1개 봄, 가을 남자 느낌 물씬 코디 / 1개
+            </div>
+            <div class="column is-2">303,900</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f86b4eb5d1ed00c61e5ac"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f86b4eb5d1ed00c61e5ac">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f94e9eb5d1ed00c61e5f5">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f94e9eb5d1ed00c61e5f5"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f94e9eb5d1ed00c61e5f5">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f99d5eb5d1ed00c61e62d">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f99d5eb5d1ed00c61e62d"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f99d5eb5d1ed00c61e62d">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628f99d5eb5d1ed00c61e631">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628f99d5eb5d1ed00c61e631"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f99d5eb5d1ed00c61e631">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628fa55beb5d1ed00c61e674">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">남성 정장 / 2개</div>
+            <div class="column is-2">381,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628fa55beb5d1ed00c61e674"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fa55beb5d1ed00c61e674">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628fb392eb5d1ed00c61e6c2">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 3개 봄, 가을 남자 느낌 물씬 코디 / 2개</div>
+            <div class="column is-2">117,800</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628fb392eb5d1ed00c61e6c2"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fb392eb5d1ed00c61e6c2">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628fb5fdeb5d1ed00c61e6ee">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">
+              아이보리 니트 / 99개 캐주얼 반팔 코디 남성 / 1개 남성 정장 / 1개
+            </div>
+            <div class="column is-2">2,086,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628fb5fdeb5d1ed00c61e6ee"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fb5fdeb5d1ed00c61e6ee">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628fb6e7eb5d1ed00c61e704">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">여성 니트 / 1개</div>
+            <div class="column is-2">27,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628fb6e7eb5d1ed00c61e704"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fb6e7eb5d1ed00c61e704">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-628fb779eb5d1ed00c61e717">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-628fb779eb5d1ed00c61e717"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fb779eb5d1ed00c61e717">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-62901581eb5d1ed00c61e77a">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-62901581eb5d1ed00c61e77a"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-62901581eb5d1ed00c61e77a">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-62902278eb5d1ed00c61e7b0">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-4 order-summary">아이보리 니트 / 1개</div>
+            <div class="column is-2">22,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-62902278eb5d1ed00c61e7b0"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-62902278eb5d1ed00c61e7b0">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-62902347eb5d1ed00c61e7c8">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-62902347eb5d1ed00c61e7c8"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-62902347eb5d1ed00c61e7c8">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-629023ebeb5d1ed00c61e7cf">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-629023ebeb5d1ed00c61e7cf"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-629023ebeb5d1ed00c61e7cf">주문 취소</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="order-629023eceb5d1ed00c61e7d2">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-4 order-summary">남성 정장 / 1개</div>
+            <div class="column is-2">192,000</div>
+            <div class="column is-2">
+              <div class="select">
+                <select
+                  id="statusSelectBox-629023eceb5d1ed00c61e7d2"
+                  class="has-background-danger-light has-text-danger"
+                >
+                  <option class="has-background-danger-light has-text-danger" selected="" value="상품 준비중">
+                    상품 준비중
+                  </option>
+                  <option class="has-background-primary-light has-text-primary" value="상품 배송중">상품 배송중</option>
+                  <option class="has-background-grey-light" value="배송완료">배송완료</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-629023eceb5d1ed00c61e7d2">주문 취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

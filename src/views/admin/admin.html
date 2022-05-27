@@ -11,14 +11,14 @@
     <!-- 폰트 어썸: 아이콘 -->
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="account.css" />
+    <link rel="stylesheet" href="admin.css" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function () {
         $('#header').load('/header.html');
       });
     </script>
-    <script src="account.js" type="module" defer></script>
+    <script src="admin.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -27,32 +27,45 @@
     <section class="section">
       <div class="container">
         <div class="block account-header">
-          <h1 class="title">계정관리</h1>
+          <h1 class="title">웹서비스 관리</h1>
         </div>
         <div class="menu-container">
-          <!-- 주문조회 -->
-          <a class="menu-card" href="/account/orders">
+          <!-- 주문관리 -->
+          <a class="menu-card" href="/admin/orders">
             <div class="menu-icon">
               <span class="icon has-text-info">
                 <i class="fa-solid fa-credit-card"></i>
               </span>
             </div>
             <div class="menu-body">
-              <p class="title is-3">주문조회</p>
-              <p class="subtitle is-5">지난 주문 내역을 확인, 취소할 수 있습니다.</p>
+              <p class="title is-3">주문관리</p>
+              <p class="subtitle is-5">모든 주문 내역을 확인 및 관리할 수 있습니다.</p>
             </div>
           </a>
 
-          <!-- 회원정보 관리 -->
-          <a class="menu-card" href="/account/security">
+          <!-- 회원관리 -->
+          <a class="menu-card" href="/admin/users">
             <div class="menu-icon">
               <span class="icon has-text-info">
-                <i class="fa-solid fa-user-gear"></i>
+                <i class="fa-solid fa-address-book"></i>
               </span>
             </div>
             <div class="menu-body">
-              <p class="title is-3">회원정보 관리</p>
-              <p class="subtitle is-5">회원 정보를 확인, 수정할 수 있습니다.</p>
+              <p class="title is-3">회원관리</p>
+              <p class="subtitle is-5">모든 회원 정보를 확인 및 관리할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 카테고리 추가하기 -->
+          <a class="menu-card" href="/category/add">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-table-list"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">카테고리 추가</p>
+              <p class="subtitle is-5">제품이 속할 수 있는, 카테고리 정보를 추가할 수 있습니다.</p>
             </div>
           </a>
 
@@ -60,25 +73,12 @@
           <a class="menu-card" href="/product/add">
             <div class="menu-icon">
               <span class="icon has-text-info">
-                <i class="fa-solid fa-won-sign"></i>
+                <i class="fa-solid fa-gift"></i>
               </span>
             </div>
             <div class="menu-body">
-              <p class="title is-3">제품판매</p>
-              <p class="subtitle is-5">제품 정보를 등록하여, 판매를 시작할 수 있습니다.</p>
-            </div>
-          </a>
-
-          <!-- 회원 탈퇴하기 -->
-          <a class="menu-card" href="/account/signout">
-            <div class="menu-icon">
-              <span class="icon has-text-info">
-                <i class="fa-solid fa-user-slash"></i>
-              </span>
-            </div>
-            <div class="menu-body">
-              <p class="title is-3">회원 탈퇴</p>
-              <p class="subtitle is-5">모든 정보를 안전하게 삭제한 후 탈퇴할 수 있습니다.</p>
+              <p class="title is-3">제품 추가</p>
+              <p class="subtitle is-5">제품 정보를 추가할 수 있습니다.</p>
             </div>
           </a>
         </div>

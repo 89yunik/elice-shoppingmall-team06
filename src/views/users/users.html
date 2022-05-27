@@ -1,0 +1,2788 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>쇼핑-n팀</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/elice-rabbit-favicon.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="users.css" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#header').load('/header.html');
+      });
+    </script>
+    <script src="users.js" type="module" defer></script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <!-- 제목 -->
+        <div class="block account-header">
+          <h1 class="subtitle is-4">회원관리</h1>
+        </div>
+
+        <!-- 총 요약 -->
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">총회원수</p>
+              <p class="title" id="usersCount">124</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">관리자수</p>
+              <p class="title" id="adminCount">5</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">OAuth가입자수</p>
+              <p class="title" id="OAuthCount">8</p>
+            </div>
+          </div>
+        </nav>
+
+        <!-- 회원 목록 -->
+        <div class="container orders-container" id="usersContainer">
+          <div class="columns notification is-info is-light is-mobile orders-top">
+            <div class="column is-2">가입날짜</div>
+            <div class="column is-2">이메일</div>
+            <div class="column is-2">가입유형</div>
+            <div class="column is-2">이름</div>
+            <div class="column is-2">권한</div>
+            <div class="column is-2">관리</div>
+          </div>
+
+          <div class="columns orders-item" id="user-627b5d298b705dc0fe3759d1">
+            <div class="column is-2">2022-05-11</div>
+            <div class="column is-2">tut**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">튜*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-627b5d298b705dc0fe3759d1" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-627b5d298b705dc0fe3759d1">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-627b5d998b705dc0fe3759d4">
+            <div class="column is-2">2022-05-11</div>
+            <div class="column is-2">tut*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">튜*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-627b5d998b705dc0fe3759d4" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-627b5d998b705dc0fe3759d4">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-627b5e748b705dc0fe3759d8">
+            <div class="column is-2">2022-05-11</div>
+            <div class="column is-2">tut****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">튜*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-627b5e748b705dc0fe3759d8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-627b5e748b705dc0fe3759d8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-62817f594a2b0707d8c5af27">
+            <div class="column is-2">2022-05-15</div>
+            <div class="column is-2">abc************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">튜*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-62817f594a2b0707d8c5af27" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-62817f594a2b0707d8c5af27">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-6284ae594a2b0707d8c5af65">
+            <div class="column is-2">2022-05-18</div>
+            <div class="column is-2">seo********************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">장**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-6284ae594a2b0707d8c5af65" class="has-background-danger-light has-text-danger">
+                  <option class="has-background-link-light has-text-link" value="basic-user">일반사용자</option>
+                  <option class="has-background-danger-light has-text-danger" selected="" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-6284ae594a2b0707d8c5af65">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-6286f4edbeb794b731d9ae5e">
+            <div class="column is-2">2022-05-20</div>
+            <div class="column is-2">ktk*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-6286f4edbeb794b731d9ae5e" class="has-background-danger-light has-text-danger">
+                  <option class="has-background-link-light has-text-link" value="basic-user">일반사용자</option>
+                  <option class="has-background-danger-light has-text-danger" selected="" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-6286f4edbeb794b731d9ae5e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-62871fa7b6d7aafc77f9b6f5">
+            <div class="column is-2">2022-05-20</div>
+            <div class="column is-2">ktk*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">k*******</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-62871fa7b6d7aafc77f9b6f5" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-62871fa7b6d7aafc77f9b6f5">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628792e0eb95c6e17271e93d">
+            <div class="column is-2">2022-05-20</div>
+            <div class="column is-2">abc*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628792e0eb95c6e17271e93d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628792e0eb95c6e17271e93d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ade71ae629ef7dc9d6fe6">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tes***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">e****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ade71ae629ef7dc9d6fe6" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ade71ae629ef7dc9d6fe6">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628adfc3ae629ef7dc9d7046">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">you*****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">정****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628adfc3ae629ef7dc9d7046" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628adfc3ae629ef7dc9d7046">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628adfccae629ef7dc9d704d">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">kim**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628adfccae629ef7dc9d704d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628adfccae629ef7dc9d704d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628afe18ae629ef7dc9d70f1">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">whw***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">조**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628afe18ae629ef7dc9d70f1" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628afe18ae629ef7dc9d70f1">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b08ecae629ef7dc9d718c">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">seh************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b08ecae629ef7dc9d718c" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b08ecae629ef7dc9d718c">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b0c6aae629ef7dc9d71da">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">abc**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b0c6aae629ef7dc9d71da" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b0c6aae629ef7dc9d71da">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b14d6ae629ef7dc9d7277">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">day*****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b14d6ae629ef7dc9d7277" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b14d6ae629ef7dc9d7277">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1523ae629ef7dc9d7283">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tes**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1523ae629ef7dc9d7283" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1523ae629ef7dc9d7283">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b15ebae629ef7dc9d7294">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">hel************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b15ebae629ef7dc9d7294" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b15ebae629ef7dc9d7294">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1964ae629ef7dc9d72e1">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">kjk*****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">재*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1964ae629ef7dc9d72e1" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1964ae629ef7dc9d72e1">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b19ddae629ef7dc9d7313">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">zab****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b19ddae629ef7dc9d7313" class="has-background-danger-light has-text-danger">
+                  <option class="has-background-link-light has-text-link" value="basic-user">일반사용자</option>
+                  <option class="has-background-danger-light has-text-danger" selected="" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b19ddae629ef7dc9d7313">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1a8cae629ef7dc9d732d">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">qot*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">배**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1a8cae629ef7dc9d732d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1a8cae629ef7dc9d732d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1b04ae629ef7dc9d734e">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">aks*******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">주**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1b04ae629ef7dc9d734e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1b04ae629ef7dc9d734e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1d8aae629ef7dc9d739b">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tea*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t*****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1d8aae629ef7dc9d739b" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1d8aae629ef7dc9d739b">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b1eabae629ef7dc9d73a8">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">a@a****</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">조**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b1eabae629ef7dc9d73a8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b1eabae629ef7dc9d73a8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b21c4ae629ef7dc9d73db">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">a12************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b21c4ae629ef7dc9d73db" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b21c4ae629ef7dc9d73db">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b22b6ae629ef7dc9d73ee">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">dnj***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b22b6ae629ef7dc9d73ee" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b22b6ae629ef7dc9d73ee">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b22daae629ef7dc9d73f7">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">123***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b22daae629ef7dc9d73f7" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b22daae629ef7dc9d73f7">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b2331ae629ef7dc9d740d">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">vnv******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b2331ae629ef7dc9d740d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b2331ae629ef7dc9d740d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b2359ae629ef7dc9d7414">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">cha*****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">이*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b2359ae629ef7dc9d7414" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b2359ae629ef7dc9d7414">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b27c1ae629ef7dc9d748a">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">yer************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b27c1ae629ef7dc9d748a" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b27c1ae629ef7dc9d748a">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b29f9ae629ef7dc9d74b3">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">sek**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b29f9ae629ef7dc9d74b3" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b29f9ae629ef7dc9d74b3">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b2fa9ae629ef7dc9d758e">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">20@********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b2fa9ae629ef7dc9d758e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b2fa9ae629ef7dc9d758e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b324cae629ef7dc9d75c7">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tut*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b324cae629ef7dc9d75c7" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b324cae629ef7dc9d75c7">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b32f5ae629ef7dc9d75d8">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tks*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">주**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b32f5ae629ef7dc9d75d8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b32f5ae629ef7dc9d75d8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3388ae629ef7dc9d75f1">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">qwe**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3388ae629ef7dc9d75f1" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3388ae629ef7dc9d75f1">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b33d9ae629ef7dc9d7608">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">abc**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b33d9ae629ef7dc9d7608" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b33d9ae629ef7dc9d7608">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b343eae629ef7dc9d7619">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">ayl****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b343eae629ef7dc9d7619" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b343eae629ef7dc9d7619">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3457ae629ef7dc9d7622">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">aaa*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3457ae629ef7dc9d7622" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3457ae629ef7dc9d7622">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3481ae629ef7dc9d7629">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tut*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t*****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3481ae629ef7dc9d7629" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3481ae629ef7dc9d7629">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b354dae629ef7dc9d7645">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">kro************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b354dae629ef7dc9d7645" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b354dae629ef7dc9d7645">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3629ae629ef7dc9d766d">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tut******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t*********</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3629ae629ef7dc9d766d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3629ae629ef7dc9d766d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b36ecae629ef7dc9d769e">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">a@e********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">엘**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b36ecae629ef7dc9d769e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b36ecae629ef7dc9d769e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b372eae629ef7dc9d76af">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tes***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b372eae629ef7dc9d76af" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b372eae629ef7dc9d76af">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3ba2ae629ef7dc9d7728">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">abc********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">서**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3ba2ae629ef7dc9d7728" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3ba2ae629ef7dc9d7728">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b3ca2ae629ef7dc9d7747">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">TES**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">T***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b3ca2ae629ef7dc9d7747" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b3ca2ae629ef7dc9d7747">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b4036ae629ef7dc9d77da">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tks*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">주**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b4036ae629ef7dc9d77da" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b4036ae629ef7dc9d77da">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b45b1ae629ef7dc9d784d">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">tes************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b45b1ae629ef7dc9d784d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b45b1ae629ef7dc9d784d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b7992ae629ef7dc9d796b">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">hil******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b7992ae629ef7dc9d796b" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b7992ae629ef7dc9d796b">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b8a17ae629ef7dc9d79ab">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">eli****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">e********</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b8a17ae629ef7dc9d79ab" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b8a17ae629ef7dc9d79ab">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b9150ae629ef7dc9d79c8">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">seo************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">s*****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b9150ae629ef7dc9d79c8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b9150ae629ef7dc9d79c8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b98edae629ef7dc9d79e7">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">aa@******</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">강**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b98edae629ef7dc9d79e7" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b98edae629ef7dc9d79e7">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628b9a62ae629ef7dc9d7a07">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">qm3************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628b9a62ae629ef7dc9d7a07" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628b9a62ae629ef7dc9d7a07">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ba03dae629ef7dc9d7a3e">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">3@g********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">e**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ba03dae629ef7dc9d7a3e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ba03dae629ef7dc9d7a3e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ba3e5ae629ef7dc9d7a53">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">you**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ba3e5ae629ef7dc9d7a53" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ba3e5ae629ef7dc9d7a53">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628bab80ae629ef7dc9d7a86">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">a@b****</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628bab80ae629ef7dc9d7a86" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628bab80ae629ef7dc9d7a86">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628bb91eae629ef7dc9d7aa7">
+            <div class="column is-2">2022-05-23</div>
+            <div class="column is-2">aaa**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628bb91eae629ef7dc9d7aa7" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628bb91eae629ef7dc9d7aa7">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c22e4ae629ef7dc9d7aec">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">lov***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c22e4ae629ef7dc9d7aec" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c22e4ae629ef7dc9d7aec">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c30acae629ef7dc9d7b0c">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">eli*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">q**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c30acae629ef7dc9d7b0c" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c30acae629ef7dc9d7b0c">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c4305ae629ef7dc9d7b59">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">asd**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">홍**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c4305ae629ef7dc9d7b59" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c4305ae629ef7dc9d7b59">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c52a9ae629ef7dc9d7baf">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">eks*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">단*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c52a9ae629ef7dc9d7baf" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c52a9ae629ef7dc9d7baf">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c555fae629ef7dc9d7bd3">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">A@n********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">D*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c555fae629ef7dc9d7bd3" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c555fae629ef7dc9d7bd3">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c5e8aae629ef7dc9d7c21">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">tes*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">s****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c5e8aae629ef7dc9d7c21" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c5e8aae629ef7dc9d7c21">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c5fdeae629ef7dc9d7c56">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">tmd*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">강**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c5fdeae629ef7dc9d7c56" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c5fdeae629ef7dc9d7c56">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c638aae629ef7dc9d7c77">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">abc*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">진*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c638aae629ef7dc9d7c77" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c638aae629ef7dc9d7c77">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c66fdae629ef7dc9d7cb8">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">abc*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c66fdae629ef7dc9d7cb8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c66fdae629ef7dc9d7cb8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c6ecfae629ef7dc9d7d1d">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">yge**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">연*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c6ecfae629ef7dc9d7d1d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c6ecfae629ef7dc9d7d1d">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c7be8ae629ef7dc9d7d61">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">okd****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">연**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c7be8ae629ef7dc9d7d61" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c7be8ae629ef7dc9d7d61">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c7c36ae629ef7dc9d7d69">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">jus***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">가**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c7c36ae629ef7dc9d7d69" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c7c36ae629ef7dc9d7d69">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c8900ae629ef7dc9d7e30">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">tes************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t*****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c8900ae629ef7dc9d7e30" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c8900ae629ef7dc9d7e30">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c89afae629ef7dc9d7e48">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">tes***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">홍**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c89afae629ef7dc9d7e48" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c89afae629ef7dc9d7e48">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c8f06ae629ef7dc9d7ea2">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">abc**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c8f06ae629ef7dc9d7ea2" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c8f06ae629ef7dc9d7ea2">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c9292ae629ef7dc9d7ec5">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">jae***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">지**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c9292ae629ef7dc9d7ec5" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c9292ae629ef7dc9d7ec5">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c93dfae629ef7dc9d7ee8">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">is_******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c93dfae629ef7dc9d7ee8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c93dfae629ef7dc9d7ee8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628c9dbdae629ef7dc9d7f27">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">a@n********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628c9dbdae629ef7dc9d7f27" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628c9dbdae629ef7dc9d7f27">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cad17ae629ef7dc9d7f51">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">pso**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cad17ae629ef7dc9d7f51" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cad17ae629ef7dc9d7f51">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cb5a2ae629ef7dc9d7f72">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">adm************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">관**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cb5a2ae629ef7dc9d7f72" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cb5a2ae629ef7dc9d7f72">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cb988ae629ef7dc9d7f8b">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">jma***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cb988ae629ef7dc9d7f8b" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cb988ae629ef7dc9d7f8b">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cccedae629ef7dc9d8001">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">xow****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cccedae629ef7dc9d8001" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cccedae629ef7dc9d8001">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ce22fae629ef7dc9d8077">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">rha***************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">신**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ce22fae629ef7dc9d8077" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ce22fae629ef7dc9d8077">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ce9e5ae629ef7dc9d80b8">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">hel************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">h****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ce9e5ae629ef7dc9d80b8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ce9e5ae629ef7dc9d80b8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cee4bae629ef7dc9d80eb">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">coz************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cee4bae629ef7dc9d80eb" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cee4bae629ef7dc9d80eb">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628cfacdae629ef7dc9d8142">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">asd*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628cfacdae629ef7dc9d8142" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628cfacdae629ef7dc9d8142">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d11abae629ef7dc9d8180">
+            <div class="column is-2">2022-05-24</div>
+            <div class="column is-2">wld**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">w******</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d11abae629ef7dc9d8180" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d11abae629ef7dc9d8180">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d7981ae629ef7dc9d81d7">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">eks*****************</div>
+            <div class="column is-2">
+              <span class="tag is-success">소셜</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d7981ae629ef7dc9d81d7" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d7981ae629ef7dc9d81d7">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d82adae629ef7dc9d8201">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">tes**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">t*********</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d82adae629ef7dc9d8201" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d82adae629ef7dc9d8201">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d9981ae629ef7dc9d8278">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">cod*********************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d9981ae629ef7dc9d8278" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d9981ae629ef7dc9d8278">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d9dbcae629ef7dc9d8284">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">mil****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">m********</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d9dbcae629ef7dc9d8284" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d9dbcae629ef7dc9d8284">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628d9fc3ae629ef7dc9d8299">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">tes*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">q***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628d9fc3ae629ef7dc9d8299" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628d9fc3ae629ef7dc9d8299">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628daeb7ae629ef7dc9d82cd">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">dd@******</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">d*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628daeb7ae629ef7dc9d82cd" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628daeb7ae629ef7dc9d82cd">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628db303ae629ef7dc9d82f6">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">tes***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">연**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628db303ae629ef7dc9d82f6" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628db303ae629ef7dc9d82f6">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628db91cae629ef7dc9d8328">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">lan***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628db91cae629ef7dc9d8328" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628db91cae629ef7dc9d8328">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dc92bae629ef7dc9d83cc">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">wld**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">W***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dc92bae629ef7dc9d83cc" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dc92bae629ef7dc9d83cc">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dcefcae629ef7dc9d8440">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">a@g********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a*******</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dcefcae629ef7dc9d8440" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dcefcae629ef7dc9d8440">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dcf04ae629ef7dc9d8443">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">eli************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">여**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dcf04ae629ef7dc9d8443" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dcf04ae629ef7dc9d8443">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dcf12ae629ef7dc9d844e">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">kim***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dcf12ae629ef7dc9d844e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dcf12ae629ef7dc9d844e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dcf1aae629ef7dc9d8455">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">b@g********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a*****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dcf1aae629ef7dc9d8455" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dcf1aae629ef7dc9d8455">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dd0b1ae629ef7dc9d8485">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">tes*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">테**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dd0b1ae629ef7dc9d8485" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dd0b1ae629ef7dc9d8485">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dd2404b97c7204779e366">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">sup***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">두*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dd2404b97c7204779e366" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dd2404b97c7204779e366">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ddbe3ae629ef7dc9d84e8">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">123***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ddbe3ae629ef7dc9d84e8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ddbe3ae629ef7dc9d84e8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dde47ae629ef7dc9d8507">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">js@**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dde47ae629ef7dc9d8507" class="has-background-danger-light has-text-danger">
+                  <option class="has-background-link-light has-text-link" value="basic-user">일반사용자</option>
+                  <option class="has-background-danger-light has-text-danger" selected="" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dde47ae629ef7dc9d8507">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628dde93ae629ef7dc9d8515">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">soa***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">안**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628dde93ae629ef7dc9d8515" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628dde93ae629ef7dc9d8515">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628e1f44ae629ef7dc9d86c4">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">tnw****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">한**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628e1f44ae629ef7dc9d86c4" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e1f44ae629ef7dc9d86c4">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628e377eae629ef7dc9d873f">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">aaa**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628e377eae629ef7dc9d873f" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e377eae629ef7dc9d873f">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628e37aeae629ef7dc9d874c">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">aaa***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628e37aeae629ef7dc9d874c" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e37aeae629ef7dc9d874c">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628e385aae629ef7dc9d8756">
+            <div class="column is-2">2022-05-25</div>
+            <div class="column is-2">abc**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628e385aae629ef7dc9d8756" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628e385aae629ef7dc9d8756">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ee7c2ae629ef7dc9d88fd">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">tks*****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">주**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ee7c2ae629ef7dc9d88fd" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ee7c2ae629ef7dc9d88fd">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ee821ae629ef7dc9d8900">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">ho@*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">h*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ee821ae629ef7dc9d8900" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ee821ae629ef7dc9d8900">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ef5b2ae629ef7dc9d893f">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">qwe***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ef5b2ae629ef7dc9d893f" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ef5b2ae629ef7dc9d893f">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ef698ae629ef7dc9d8956">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">its**********************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">이**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ef698ae629ef7dc9d8956" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ef698ae629ef7dc9d8956">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628ef7b6ae629ef7dc9d8979">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">abc**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628ef7b6ae629ef7dc9d8979" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628ef7b6ae629ef7dc9d8979">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f04d9ae629ef7dc9d89f2">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">pmj**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f04d9ae629ef7dc9d89f2" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f04d9ae629ef7dc9d89f2">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f0705ae629ef7dc9d8a09">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">tes***************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">박**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f0705ae629ef7dc9d8a09" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f0705ae629ef7dc9d8a09">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f0ceaae629ef7dc9d8a3c">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">abc**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f0ceaae629ef7dc9d8a3c" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f0ceaae629ef7dc9d8a3c">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f1500ae629ef7dc9d8a8e">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">myy****************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">윤**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f1500ae629ef7dc9d8a8e" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f1500ae629ef7dc9d8a8e">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f1a0feb5d1ed00c61e18b">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">adm*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">임****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f1a0feb5d1ed00c61e18b" class="has-background-danger-light has-text-danger">
+                  <option class="has-background-link-light has-text-link" value="basic-user">일반사용자</option>
+                  <option class="has-background-danger-light has-text-danger" selected="" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f1a0feb5d1ed00c61e18b">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f31d0eb5d1ed00c61e2a4">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">tes**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">설**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f31d0eb5d1ed00c61e2a4" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f31d0eb5d1ed00c61e2a4">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f61b6eb5d1ed00c61e4d8">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">asd*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">황**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f61b6eb5d1ed00c61e4d8" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f61b6eb5d1ed00c61e4d8">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f693feb5d1ed00c61e516">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">yy@*********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">유**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f693feb5d1ed00c61e516" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f693feb5d1ed00c61e516">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f810beb5d1ed00c61e58f">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">dd1********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">a***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f810beb5d1ed00c61e58f" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f810beb5d1ed00c61e58f">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f8172eb5d1ed00c61e59b">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">tes***********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">테****</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f8172eb5d1ed00c61e59b" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f8172eb5d1ed00c61e59b">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f986beb5d1ed00c61e615">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">123**********</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">1***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f986beb5d1ed00c61e615" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f986beb5d1ed00c61e615">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628f9922eb5d1ed00c61e625">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">eli*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">p***</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628f9922eb5d1ed00c61e625" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628f9922eb5d1ed00c61e625">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-628fb873eb5d1ed00c61e735">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">fud**************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-628fb873eb5d1ed00c61e735" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-628fb873eb5d1ed00c61e735">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-629013bceb5d1ed00c61e76f">
+            <div class="column is-2">2022-05-26</div>
+            <div class="column is-2">kim*******************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">김**</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-629013bceb5d1ed00c61e76f" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-629013bceb5d1ed00c61e76f">회원정보 삭제</button>
+            </div>
+          </div>
+
+          <div class="columns orders-item" id="user-6290220ceb5d1ed00c61e79d">
+            <div class="column is-2">2022-05-27</div>
+            <div class="column is-2">gks*************</div>
+            <div class="column is-2">
+              <span class="tag">일반</span>
+            </div>
+            <div class="column is-2">한*</div>
+            <div class="column is-2">
+              <div class="select">
+                <select id="roleSelectBox-6290220ceb5d1ed00c61e79d" class="has-background-link-light has-text-link">
+                  <option class="has-background-link-light has-text-link" selected="" value="basic-user">
+                    일반사용자
+                  </option>
+                  <option class="has-background-danger-light has-text-danger" value="admin">관리자</option>
+                </select>
+              </div>
+            </div>
+            <div class="column is-2">
+              <button class="button" id="deleteButton-6290220ceb5d1ed00c61e79d">회원정보 삭제</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
