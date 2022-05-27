@@ -1,17 +1,11 @@
 import * as Api from '/api.js';
 
-
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
+document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton);
+document.querySelector('#subtitleCart').addEventListener('click', () => {
+    window.location.href = '/cart'
+})
 
-// document.querySelector('#checkoutButton').addEventListener('click', event => {
-//     window.location.href = '/order/complete';
-// })
-
-document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton)
-
-
-// document.quersySelector('#receiverName').value = 
-//주소 검색
 function findAddress() {
     new daum.Postcode({
     oncomplete: function(data) {
@@ -65,12 +59,13 @@ function loadName(fullName) {
     document.querySelector('#receiverName').value = fullName;
 }
 
-window.onload = () => {
-    Api.get('http://localhost:5070/api/user').then(result => {
-        loadName(result.fullName);
-    })
+function clearSessionStorage() {
+    const iBought = checkWhatIBuy();
+    
+    sessionStorage.removeItem('order');
+    // const check = checkWhatIBuy();
+    // console.log((check));
 }
-
 
 function handleCheckoutButton() {
     if(!(document.querySelector('#receiverPhoneNumber')).value) {
@@ -84,6 +79,94 @@ function handleCheckoutButton() {
     if(!(document.querySelector('#address2').value)) {
         return alert('상세주소를 입력해주세요.');
     }
+    clearSessionStorage();
 
     window.location.href = '/order/complete';
+}
+
+function checkWhatIBuy() {
+    const checkedId = JSON.parse(sessionStorage.getItem('order'));
+    const cartItems = JSON.parse(sessionStorage.getItem('cart'));
+    let productsTitle =[];
+    let productsTotal = 0;
+    let result = [];
+
+    for(let i = 0; i < cartItems.length; i++) {
+        checkedId.forEach(item => {
+            if(cartItems[i]._id === item) {
+                // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
+                // productsTotal += cartItems[i].price * cartItems[i].quantity;
+                result.push(cartItems[i]);
+            }
+        })
+    }
+    return result;
+}
+checkWhatIBuy();
+
+function makeListOfProductTitle() {
+    const whatIBuy = checkWhatIBuy();
+    let totalPrice = 0;
+
+    document.querySelector('#productsTitle').innerHTML = ''
+    whatIBuy.forEach(item => {
+        document.querySelector('#productsTitle').innerHTML += `${item.name} </br>`
+        totalPrice += item.price * item.quantity;
+    })
+
+    document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
+    document.querySelector('#orderTotal').innerHTML = totalPrice + 3000 
+}
+
+let userID;
+
+function callUserApi() {
+    let userApi = Api.get('http://localhost:5070/api/user').then(result => {
+        userID = result.email;
+    })
+}
+
+
+
+
+function makeApiOderRegisterData() {
+    const whatIBuy = checkWhatIBuy();
+    const productList = []
+    whatIBuy.forEach(item => {
+        const product = {
+            name: item.name,
+            quantity: item.quantity
+        }
+        productList.push(product);
+    })
+    console.log(productList);
+    const userId = Api.get('http://localhost:5070/api/user')
+    
+    let userApi = await Api.get('http://localhost:5070/api/user').then(result => {
+        userID = result.email;
+    })
+    const data =  {
+        userId : userID,
+        orderInfo: { 
+            product: productList,
+            name: document.querySelector('#receiverName').value,
+            phoneNumber: document.querySelector('#receiverPhoneNumber').value,
+            address1: document.querySelector('#address1').value,
+            address2: document.querySelector('#address2').value,
+            requests: document.querySelector('#requestSelectBox').value,
+        },
+        orderState: "상품 준비중" 
+    }
+    console.log(data);
+    try {
+        const res = await Api.post('/api/orderregister', data);
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+window.onload = () => {
+    loadName(result.fullName);
+    makeListOfProductTitle();
+    makeApiOderRegisterData();    
 }

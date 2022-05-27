@@ -95,7 +95,6 @@ document.querySelector('.cart-products-container').addEventListener('click', (e)
         count = parseInt(item.quantity);
         count++;
         item.quantity = count;
-        console.log(item);
       }
 
       updateProductPriceSum+= (item.price * item.quantity);
@@ -105,7 +104,6 @@ document.querySelector('.cart-products-container').addEventListener('click', (e)
     })
     document.querySelector('#productsTotal').innerText = updateProductPriceSum;
     document.querySelector('#orderTotal').innerHTML = updateProductPriceSum + 3000;
-    console.log(productNode.querySelector('.input'));
     // count = productNode.querySelector('.input').value;
     
     productNode.querySelector('.input').value = count;
@@ -193,7 +191,6 @@ if(savedCartItems !== null) {
   //전체 선택
   document.querySelector('#allSelectCheckbox').addEventListener('click', (event) => {
     const checkboxes = document.querySelectorAll('.check-item');
-    console.log(checkboxes);
     const originStorage = JSON.parse(sessionStorage.getItem('order'));
     let testArr = [];
     
