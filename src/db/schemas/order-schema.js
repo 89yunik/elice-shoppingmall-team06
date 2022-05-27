@@ -10,6 +10,7 @@ const OrderSchema = new Schema(
       type: new Schema({
         product: Array,
         name: String,
+        total: Number,
         phoneNumber: String,
         postalCode: String,
         address1: String,
