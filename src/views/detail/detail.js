@@ -14,7 +14,7 @@ const sessionArr = [];
 
 //fetch 받아오기
 async function getItems(){
-	return fetch(`/api/productlist/${urlId}`)
+	return fetch(`/api/products/${urlId}`)
 		.then(res=>res.json())
 }
 
