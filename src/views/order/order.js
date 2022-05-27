@@ -1,7 +1,19 @@
+import * as Api from '/api.js';
+
+
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
 
+// document.querySelector('#checkoutButton').addEventListener('click', event => {
+//     window.location.href = '/order/complete';
+// })
+
+document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton)
+
+
+// document.quersySelector('#receiverName').value = 
+//주소 검색
 function findAddress() {
-  new daum.Postcode({
+    new daum.Postcode({
     oncomplete: function(data) {
         // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
@@ -47,4 +59,31 @@ function findAddress() {
         document.getElementById("address2").focus();
     }
 }).open();
-  }
+}
+
+function loadName(fullName) {
+    document.querySelector('#receiverName').value = fullName;
+}
+
+window.onload = () => {
+    Api.get('http://localhost:5070/api/user').then(result => {
+        loadName(result.fullName);
+    })
+}
+
+
+function handleCheckoutButton() {
+    if(!(document.querySelector('#receiverPhoneNumber')).value) {
+        return alert('전화번호를 입력해주세요.');
+    }
+
+    if(!(document.querySelector('#postalCode').value)) {
+        return alert('우편번호를 입력해주세요.');
+    }
+
+    if(!(document.querySelector('#address2').value)) {
+        return alert('상세주소를 입력해주세요.');
+    }
+
+    window.location.href = '/order/complete';
+}
