@@ -223,7 +223,7 @@ document.querySelector('#partialDeleteLabel .help').addEventListener('click', ev
 document.querySelector('#purchaseButton').addEventListener('click', moveToOrder)
 
 function moveToOrder() {
-  location.href = `/order`;
+  window.location.href = '/order';
 
 }
 
