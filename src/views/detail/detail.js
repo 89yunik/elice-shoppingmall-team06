@@ -13,7 +13,6 @@ const sessionArr = [];
 const testArr = [];
 const sessionId = [];
 
-
 //fetch 받아오기
 async function getItems(){
 	return fetch(`/api/products/${urlId}`)
@@ -47,7 +46,6 @@ function parseToHTML(item){
 	//장바구니 추가
 	const cart = document.querySelector(".add-to-cart")
 
-	
 	async function addToCart(e) {
 		e.preventDefault();
 		
