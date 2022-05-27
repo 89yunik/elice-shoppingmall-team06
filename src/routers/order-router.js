@@ -71,25 +71,33 @@ orderRouter.get('/orderlist', loginRequired, async function (req, res, next) {
 // (예를 들어 /api/orders/abc12345 로 요청하면 req.params.categoryId는 'abc12345' 문자열로 됨)
 orderRouter.patch('/order/:orderId', loginRequired, async function (req, res, next) {
   try {
+    const userToken = req.headers['authorization']?.split(' ')[1];
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    const jwtDecoded = jwt.verify(userToken, secretKey);
+    const role = jwtDecoded.role;
+    // admin만 접근 가능하게 만듬.
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
+    if (role === 'admin') {
+      // params로부터 id를 가져옴
+      const orderId = req.params.orderId;
 
-    // params로부터 id를 가져옴
-    const orderId = req.params.orderId;
+      // body data 로부터 업데이트할 오더 정보를 추출함.
+      // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
+      // 보내주었다면, 업데이트용 객체에 삽입함.
+      const toUpdate = req.body || {};
 
-    // body data 로부터 업데이트할 오더 정보를 추출함.
-    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-    // 보내주었다면, 업데이트용 객체에 삽입함.
-    const toUpdate = req.body || {};
+      // 제품 정보를 업데이트함.
+      const updatedOrderInfo = await orderService.setOrder(orderId, toUpdate);
 
-    // 제품 정보를 업데이트함.
-    const updatedOrderInfo = await orderService.setOrder(orderId, toUpdate);
-
-    // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-    res.status(200).json(updatedOrderInfo);
+      // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+      res.status(200).json(updatedOrderInfo);
+    } else {
+      res.status(403).json({ result: 'forbidden-approach', reason: 'admin이 아닙니다.' });
+    }
   } catch (error) {
     next(error);
   }
