@@ -1,11 +1,40 @@
-// 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
-// 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
-// 코드 예시를 남겨 두었습니다.
-
 import * as Api from '/api.js';
-import { randomId, logout } from '/useful-functions.js';
-import Menu from './component/Menu.js';
-// 요소(element), input 혹은 상수
 
-const logoutBtn = document.querySelector('.logout-btn');
-logoutBtn.addEventListener('click', logout);
+const tableInfo = document.querySelector('.table-info');
+
+function template(data) {
+  const arr = data.orderInfo.product;
+  const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
+  return `
+    <div class="columns orders-item">
+      <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
+      <div class="column is-6 order-summary">${orderInfo.join('<br>')}</div>
+      <div class="column is-2">${data.orderState}</div>
+      <div class="column is-2">
+        <button class="button" data-id="${data._id}">주문 취소</button>
+      </div>
+    </div>
+  `;
+}
+
+function render() {
+  getOrderData();
+}
+async function getOrderData() {
+  const res = await Api.get('/api/order');
+  const html = res.map((item) => template(item)).join('');
+  tableInfo.innerHTML = html;
+
+  tableInfo.addEventListener('click', cancelClickEvent);
+}
+
+async function cancelClickEvent(e) {
+  if (e.target.closest('.button')) {
+    const targetId = e.target.closest('.button').dataset.id;
+    const res = await Api.delete('/api/order', targetId);
+
+    render();
+  }
+}
+
+render();

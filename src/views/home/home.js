@@ -1,3 +1,66 @@
+// 메인페이지 최신상품 목록--------------------
+//fetch 받아오기
+async function getItems(){
+	return fetch('/api/productlist')
+		.then(res=>res.json())
+}
+
+// 페이지 로드시
+window.onload = ()=>{
+	getItems()
+	.then(items => {
+    const list = document.querySelector(".list-wrap")
+    for(let i=0; i<6; i++){
+      
+      const text = `
+      <li class="item" id="${items[i]._id}">
+        <a href="/product/detail/${items[i]._id}" class="item-wrap">
+          <div class="item-img">
+            <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/happy-and-cheerful-dog-playing-fetch-with-toy-bone-royalty-free-image-1590068781.jpg?crop=0.668xw:1.00xh;0,0&resize=640:*" alt="">
+          </div>
+          <div class="item-text">
+            <p class="name">${items[i].name}</p>
+            <p class="price">${items[i].price}원</p>
+            <p class="description">${items[i].descriptionSummary}</p>
+          </div>
+        </a>
+      </li>`
+      list.innerHTML=list.innerHTML+text;
+    };
+	});
+  getCategories()
+};
+
+// 상품목록 아이콘------------------------
+let categoryList = [];
+
+//HTML Display
+function displayIcons(categories, type){
+	const category = document.querySelector('.category > .wrap');
+	if(type){
+		category.innerHTML = categories.filter(val=>val.type === type).map(parseToHTML).join('');
+	}
+	else category.innerHTML = categories.map(parseToHTML2).join('');
+
+}
+
+// innerHTML
+function parseToHTML2(category) {
+  return `
+    <li><a href="/product/list/${category.name}">${category.name}</a></li>
+  `
+}
+
+async function getCategories(){
+  return fetch('/api/categorylist')
+    .then(res=>res.json())
+    .then(categories => {
+      categories.forEach(category => categoryList.push(category));
+      displayIcons(categories);
+    });
+}
+
+
 // 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
 // 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
 // 코드 예시를 남겨 두었습니다.

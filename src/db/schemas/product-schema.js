@@ -6,15 +6,20 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    price: {
-      type: Number,
-      required: true,
-    },
-    description: {
-      type: String,
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'categories',
       required: true,
     },
     company: {
+      type: String,
+      required: true,
+    },
+    descriptionSummary: {
+      type: String,
+      required: true,
+    },
+    descriptionDetail: {
       type: String,
       required: true,
     },
@@ -22,9 +27,16 @@ const ProductSchema = new Schema(
       type: String,
       required: false,
     },
-    category: {
-      type: Schema.Types.ObjectId,
-      ref: 'categories',
+    stock: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    keywords: {
+      type: Array,
       required: false,
     },
   },
