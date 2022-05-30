@@ -5,7 +5,7 @@ const Order = model('orders', OrderSchema);
 
 export class OrderModel {
   async findById(userId) {
-    const order = await Order.find({ userId: userId });
+    const order = await Order.find({ userId });
     return order;
   }
 
@@ -19,13 +19,13 @@ export class OrderModel {
     return orderes;
   }
 
-  async update({ orderId, update }) {
-    const updatedOrder = await Order.findOneAndUpdate({ _id: orderId, returnOriginal: false }, update);
+  async update({ _id, update }) {
+    const updatedOrder = await Order.findOneAndUpdate({ _id, returnOriginal: false }, update);
     return updatedOrder;
   }
 
-  async delete(orderId) {
-    const order = await Order.deleteOne({ _id: orderId });
+  async delete(_id) {
+    const order = await Order.deleteOne({ _id });
     return order;
   }
 }
