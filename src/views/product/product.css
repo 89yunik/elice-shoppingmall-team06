@@ -16,9 +16,6 @@
   font-size: 1.25rem;
   padding: 0.5rem;
 }
-.menu-card:hover {
-  background-color: rgba(255, 120, 0, 0.2);
-}
 
 .menu-container {
   grid-gap: 2rem;
@@ -31,6 +28,9 @@
 .subtitle,
 .title {
   word-break: break-word;
+}
+.subtitle {
+  padding-bottom: 15px;
 }
 
 .menu-body {
@@ -47,6 +47,14 @@
   padding: 1rem;
 }
 
-i {
-  color: #7a7a7a;
+.columns {
+  border-bottom: 1px solid #aaa;
+  /* bulma padding */
+  padding: 0 !important;
+  text-align: center;
+}
+
+.display-none {
+  /* bulma button inline-flex 속성 제외 */
+  display: none !important;
 }
