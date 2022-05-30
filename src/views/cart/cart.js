@@ -86,7 +86,7 @@ function displayCartLIsts() {
   cartStorage.forEach((item) => {
     documentFragment.appendChild(makeCartLists(item));
   });
-  cartProductsContainer.appendChild('beforeend', documentFragment);
+  cartProductsContainer.appendChild(documentFragment);
 }
 
 //전체선택버튼
