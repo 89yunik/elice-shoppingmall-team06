@@ -5,41 +5,34 @@ const Product = model('products', ProductSchema);
 
 export class ProductModel {
   async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
-    return createdNewProduct;
+    return await Product.create(productInfo);
   }
 
   async findByName(name) {
-    const product = await Product.findOne({ name });
-    return product;
+    return await Product.findOne({ name });
   }
 
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
-    return product;
+  async findById(_id) {
+    return await Product.findOne({ _id });
   }
 
   async findByCategory(category) {
-    const products = await Product.find({ category });
-    return products;
+    return await Product.find({ category });
   }
 
   async findAll() {
-    const products = await Product.find({});
-    return products;
+    return await Product.find({});
   }
 
-  async update({ productId, update }) {
-    const filter = { _id: productId };
+  async update({ _id, update }) {
+    const filter = { _id };
     const option = { returnOriginal: false };
 
-    const updatedProduct = await Product.findOneAndUpdate(filter, update, option);
-    return updatedProduct;
+    return await Product.findOneAndUpdate(filter, update, option);
   }
 
-  async delete(productId) {
-    const product = await Product.deleteOne({ _id: productId });
-    return product;
+  async delete(_id) {
+    return await Product.deleteOne({ _id });
   }
 }
 
