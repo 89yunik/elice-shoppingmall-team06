@@ -28,7 +28,7 @@ async function submitButtonEvent(e) {
   try {
     const res = await Api.post('/api/categoryregister', data);
     alert('성공적으로 등록되었습니다.');
-    location.href = '/category/add/';
+    location.href = '/category/';
   } catch (error) {
     console.log(error);
   }

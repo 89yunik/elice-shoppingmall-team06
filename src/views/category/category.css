@@ -47,7 +47,10 @@
   text-align: center;
 }
 .columns {
-  border-bottom: 1px solid #d5d9d9;
+  border-bottom: 1px solid #aaa;
+  /* bulma padding */
+  padding: 0 !important;
+  text-align: center;
 }
 
 .display-none {
