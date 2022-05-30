@@ -1,5 +1,7 @@
 import * as Api from '/api.js';
 
+const MAIN_PAGE_URL = 'http://localhost:5070';
+
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
 document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton);
 document.querySelector('#subtitleCart').addEventListener('click', () => {
@@ -81,14 +83,13 @@ async function handleCheckoutButton() {
     return alert('상세주소를 입력해주세요.');
   }
 
+  if (!document.querySelector('#address2').value) {
+    return alert('상세주소를 입력해주세요.');
+  }
+
   await makeApiOderRegisterData();
 
-    if(!(document.querySelector('#address2').value)) {
-        return alert('상세주소를 입력해주세요.');
-    }
-    makeApiOderRegisterData();    
-
-    clearSessionStorage();
+  clearSessionStorage();
 
   window.location.href = '/order/complete';
 }
@@ -130,55 +131,49 @@ function makeListOfProductTitle() {
 let userID;
 
 function callUserApi() {
-  let userApi = Api.get('http://localhost:5070/api/user').then((result) => {
+  let userApi = Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
     userID = result.email;
   });
 }
 
-
-
-
-
 async function makeApiOderRegisterData() {
-    const whatIBuy = checkWhatIBuy();
-    const productList = []
-    whatIBuy.forEach(item => {
-        const product = {
-            name: item.name,
-            quantity: item.quantity
-        }
-        productList.push(product);
-    })
-    console.log(productList);
-    const userId = Api.get('http://localhost:5070/api/user')
-    
-    let userApi = await Api.get('http://localhost:5070/api/user').then(result => {
-        userID = result._id;
-    })
-    const data =  {
-        userId : userID,
-        orderInfo: { 
-            product: productList,
-            name: document.querySelector('#receiverName').value,
-            phoneNumber: document.querySelector('#receiverPhoneNumber').value,
-            address1: document.querySelector('#address1').value,
-            address2: document.querySelector('#address2').value,
-            requests: document.querySelector('#requestSelectBox').value,
-        },
-        orderState: "상품 준비중" 
-    }
-    console.log(data);
-    try {
-        const res = await Api.post('/api/orderregister', data);
-    } catch(error) {
-        console.log(error);
-    }
+  const whatIBuy = checkWhatIBuy();
+  const productList = [];
+  whatIBuy.forEach((item) => {
+    const product = {
+      name: item.name,
+      quantity: item.quantity,
+    };
+    productList.push(product);
+  });
+  console.log(productList);
+
+  let userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
+    userID = result._id;
+  });
+  const data = {
+    userId: userID,
+    orderInfo: {
+      product: productList,
+      name: document.querySelector('#receiverName').value,
+      phoneNumber: document.querySelector('#receiverPhoneNumber').value,
+      address1: document.querySelector('#address1').value,
+      address2: document.querySelector('#address2').value,
+      requests: document.querySelector('#requestSelectBox').value,
+    },
+    orderState: '상품 준비중',
+  };
+  console.log(data);
+  try {
+    const res = await Api.post('/api/orderregister', data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 window.onload = () => {
-    Api.get('http://localhost:5070/api/user').then(result => {
-        loadName(result.fullName);
-    
-    })
-    makeListOfProductTitle();
-}
+  Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
+    loadName(result.fullName);
+  });
+  makeListOfProductTitle();
+};
