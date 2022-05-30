@@ -14,11 +14,8 @@ productRouter.post('/productregister', async (req, res, next) => {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    // req (request)의 body 에서 데이터 가져오기
-    const newProductData = req.body;
-
     // 위 데이터를 제품 db에 추가하기
-    const newProduct = await productService.addProduct(newProductData);
+    const newProduct = await productService.addProduct(req.body);
 
     // 추가된 제품의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
@@ -70,8 +67,8 @@ productRouter.get('/products/:productId', async function (req, res, next) {
 });
 
 // 제품 수정 api
-// (예를 들어 /api/products/abc12345 로 요청하면 req.params.productId는 'abc12345' 문자열로 됨)
-productRouter.patch('/products/:productId', async function (req, res, next) {
+// (예를 들어 /api/product/abc12345 로 요청하면 req.params.id는 'abc12345' 문자열로 됨)
+productRouter.patch('/product/:id', async function (req, res, next) {
   try {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
@@ -79,15 +76,12 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    // params로부터 id를 가져옴
-    const productId = req.params.productId;
-
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
     // 보내주었다면, 업데이트용 객체에 삽입함.
     const toUpdate = req.body || {};
     // 제품 정보를 업데이트함.
-    const updatedProductInfo = await productService.setProduct(productId, toUpdate);
+    const updatedProductInfo = await productService.setProduct(req.params.id, toUpdate);
 
     // 업데이트 이후의 제품 데이터를 프론트에 보내 줌
     res.status(200).json(updatedProductInfo);
@@ -97,11 +91,9 @@ productRouter.patch('/products/:productId', async function (req, res, next) {
 });
 
 // 제품 삭제 api
-productRouter.delete('/products/:productId', async function (req, res, next) {
+productRouter.delete('/product/:id', async function (req, res, next) {
   try {
-    const { productId } = req.params;
-    // 삭제할 제품 id를 얻음
-    const product = await productService.deleteProduct(productId);
+    const product = await productService.deleteProduct(req.params.id);
     // 제품 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(product);
   } catch (error) {

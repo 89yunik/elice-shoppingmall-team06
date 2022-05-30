@@ -14,12 +14,10 @@ categoryRouter.post('/categoryregister', async (req, res, next) => {
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    // req (request)의 body 에서 데이터 가져오기
-    const newCategoryData = req.body;
-
     // 위 데이터를 카테고리 db에 추가하기
-    const newCategory = await categoryService.addCategory(newCategoryData);
-
+    const newCategory = await categoryService.addCategory(req.body);
+    console.log(nexCategory);
+    console.log('test');
     // 추가된 카테고리의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     res.status(201).json(newCategory);
@@ -42,8 +40,8 @@ categoryRouter.get('/categorylist', async function (req, res, next) {
 });
 
 // 카테고리 수정 api
-// (예를 들어 /api/categories/abc12345 로 요청하면 req.params.categoryId는 'abc12345' 문자열로 됨)
-categoryRouter.patch('/categories/:categoryId', async function (req, res, next) {
+// (예를 들어 /api/category/abc12345 로 요청하면 req.params.id는 'abc12345' 문자열로 됨)
+categoryRouter.patch('/category/:id', async function (req, res, next) {
   try {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
@@ -51,16 +49,13 @@ categoryRouter.patch('/categories/:categoryId', async function (req, res, next) 
       throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
     }
 
-    // params로부터 id를 가져옴
-    const categoryId = req.params.categoryId;
-
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
     // 보내주었다면, 업데이트용 객체에 삽입함.
     const toUpdate = req.body || {};
 
     // 카테고리 정보를 업데이트함.
-    const updatedCategoryInfo = await categoryService.setCategory(categoryId, toUpdate);
+    const updatedCategoryInfo = await categoryService.setCategory(req.params.id, toUpdate);
 
     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
     res.status(200).json(updatedCategoryInfo);
@@ -70,11 +65,10 @@ categoryRouter.patch('/categories/:categoryId', async function (req, res, next) 
 });
 
 // 카테고리 삭제 api
-categoryRouter.delete('/categories/:categoryId', async function (req, res, next) {
+categoryRouter.delete('/category/:id', async function (req, res, next) {
   try {
-    const { categoryId } = req.params;
     // 삭제할 카테고리 id를 얻음
-    const category = await categoryService.deleteCategory(categoryId);
+    const category = await categoryService.deleteCategory(req.params.id);
     // 카테고리 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(category);
   } catch (error) {
