@@ -8,8 +8,8 @@ export class UserModel {
     return await User.findOne({ email });
   }
 
-  async findById(userId) {
-    return await User.findOne({ _id: userId });
+  async findById(_id) {
+    return await User.findOne({ _id });
   }
 
   async create(userInfo) {
