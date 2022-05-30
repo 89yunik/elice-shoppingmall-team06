@@ -5,28 +5,23 @@ const Order = model('orders', OrderSchema);
 
 export class OrderModel {
   async findById(userId) {
-    const order = await Order.find({ userId });
-    return order;
+    return await Order.find({ userId });
   }
 
   async create(orderInfo) {
-    const createdNewOrder = await Order.create(orderInfo);
-    return createdNewOrder;
+    return await Order.create(orderInfo);
   }
 
   async findAll() {
-    const orderes = await Order.find({});
-    return orderes;
+    return await Order.find({});
   }
 
   async update({ _id, update }) {
-    const updatedOrder = await Order.findOneAndUpdate({ _id, returnOriginal: false }, update);
-    return updatedOrder;
+    return await Order.findOneAndUpdate({ _id, returnOriginal: false }, update);
   }
 
   async delete(_id) {
-    const order = await Order.deleteOne({ _id });
-    return order;
+    return await Order.deleteOne({ _id });
   }
 }
 
