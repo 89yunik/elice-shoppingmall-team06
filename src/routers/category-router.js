@@ -50,10 +50,9 @@ categoryRouter.patch('/category/:id', async function (req, res, next) {
     // body data 로부터 업데이트할 사용자 정보를 추출함.
     // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
     // 보내주었다면, 업데이트용 객체에 삽입함.
-    const toUpdate = req.body || {};
 
     // 카테고리 정보를 업데이트함.
-    const updatedCategoryInfo = await categoryService.setCategory(req.params.id, toUpdate);
+    const updatedCategoryInfo = await categoryService.setCategory(req.params.id, req.body);
 
     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
     res.status(200).json(updatedCategoryInfo);

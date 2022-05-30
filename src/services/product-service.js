@@ -36,15 +36,15 @@ class ProductService {
   }
 
   // id에 해당하는 제품을 받음.
-  async getProductById(productId) {
-    const product = await this.productModel.findById(productId);
+  async getProductById(_id) {
+    const product = await this.productModel.findById(_id);
     return product;
   }
 
   // 제품정보 수정
-  async setProduct(productId, toUpdate) {
+  async setProduct(_id, toUpdate) {
     // 우선 해당 id의 제품이 db에 있는지 확인
-    let product = await this.productModel.findById(productId);
+    let product = await this.productModel.findById(_id);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!product) {
@@ -53,7 +53,7 @@ class ProductService {
 
     // 업데이트 진행
     product = await this.productModel.update({
-      productId,
+      _id,
       update: toUpdate,
     });
 
@@ -61,8 +61,8 @@ class ProductService {
   }
 
   //제품 삭제
-  async deleteProduct(productId) {
-    const product = await this.productModel.delete(productId);
+  async deleteProduct(_id) {
+    const product = await this.productModel.delete(_id);
     return product;
   }
 }
