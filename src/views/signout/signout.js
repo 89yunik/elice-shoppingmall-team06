@@ -26,8 +26,8 @@ function deleteCompleteButtonEvent(e) {
     currentPassword: passwordInput.value,
   };
   try {
-    Api.post('/api/user', data);
-
+    const res = Api.post('/api/user', data);
+    // if(res)
     logout();
     location.href = '/';
   } catch (error) {
@@ -44,9 +44,7 @@ function deleteCancelButtonEvent(e) {
   closeModal(modal);
 }
 
-(
-  document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []
-).forEach(($close) => {
+(document.querySelectorAll('[data-close]') || []).forEach(($close) => {
   const $target = $close.closest('.modal');
 
   $close.addEventListener('click', () => {
@@ -55,7 +53,7 @@ function deleteCancelButtonEvent(e) {
 });
 
 document.onkeydown = function (evt) {
-  evt = evt || window.event;
+  evt = evt;
   if (evt.keyCode == 27) {
     closeModal(modal);
   }

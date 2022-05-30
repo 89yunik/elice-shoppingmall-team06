@@ -4,6 +4,7 @@ const titleInput = document.getElementById('titleInput');
 const descriptionInput = document.getElementById('descriptionInput');
 const imageInput = document.getElementById('imageInput');
 const addCategoryButton = document.getElementById('addCategoryButton');
+const registerCategoryForm = document.getElementById('registerCategoryForm');
 
 addAllElements();
 addAllEvents();
@@ -11,7 +12,8 @@ addAllEvents();
 async function addAllElements() {}
 
 function addAllEvents() {
-  addCategoryButton.addEventListener('click', submitButtonEvent);
+  // addCategoryButton.addEventListener('click', submitButtonEvent);
+  registerCategoryForm.onsubmit = submitButtonEvent;
 }
 
 async function submitButtonEvent(e) {
