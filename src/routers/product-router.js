@@ -54,7 +54,7 @@ productRouter.get('/productlist/:category', async function (req, res, next) {
 
 //제품 상세 api
 //productId에 해당하는 제품 정보를 가져옴
-productRouter.get('/products/:productId', async function (req, res, next) {
+productRouter.get('/product/:id', async function (req, res, next) {
   try {
     const { productId } = req.params;
     // id에 해당하는 제품 정보를 얻음
