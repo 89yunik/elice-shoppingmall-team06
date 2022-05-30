@@ -46,7 +46,7 @@ let userData = {};
 async function getUserData() {
   userData = await Api.get('/api/user');
 
-  securityTitle.innerHTML = `회원정보 관리 (${userData.email})`;
+  securityTitle.innerHTML = `(${userData.email})`;
   fullNameInput.value = `${userData.fullName}`;
 
   if (userData.address) {

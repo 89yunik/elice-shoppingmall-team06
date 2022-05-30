@@ -46,17 +46,19 @@ async function getData() {
 
   tableInfo.innerHTML = userData.map((item) => template(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
-  document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
+  tableInfo.addEventListener('change', onChangeEvent);
 }
 
 async function onChangeEvent(e) {
-  if (e.target.closest('.statusSelectBox')) {
-    const role = e.target.closest('.statusSelectBox').value;
-    const id = e.target.closest('.statusSelectBox').dataset.id;
+  const selectBox = e.target.closest('.statusSelectBox');
+  if (selectBox) {
+    const role = selectBox.value;
+    const id = selectBox.dataset.id;
 
     const data = {
       role,
     };
+
     const res = await Api.patch('/api/admin', `${id}/${role}`);
 
     render();
