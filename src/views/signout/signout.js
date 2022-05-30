@@ -3,6 +3,7 @@ import { logout } from '/useful-functions.js';
 
 const submitButton = document.getElementById('submitButton');
 const modal = document.getElementById('modal');
+const registerUserForm = document.getElementById('registerUserForm');
 const deleteCompleteButton = document.getElementById('deleteCompleteButton');
 const deleteCancelButton = document.getElementById('deleteCancelButton');
 
@@ -14,24 +15,24 @@ addAllEvents();
 async function addAllElements() {}
 
 function addAllEvents() {
-  submitButton.addEventListener('click', submitButtonEvent);
+  registerUserForm.onsubmit = submitButtonEvent;
   deleteCancelButton.addEventListener('click', deleteCancelButtonEvent);
   deleteCompleteButton.addEventListener('click', deleteCompleteButtonEvent);
 }
 
-function deleteCompleteButtonEvent(e) {
+async function deleteCompleteButtonEvent(e) {
   e.preventDefault();
   //something logic ex) api;
   const data = {
     currentPassword: passwordInput.value,
   };
   try {
-    const res = Api.post('/api/user', data);
-    // if(res)
+    const res = await Api.post('/api/user', data);
     logout();
     location.href = '/';
   } catch (error) {
-    console.log(error);
+    alert('올바른 패스워드를 입력하세요.');
+    passwordInput.focus();
   }
 }
 
