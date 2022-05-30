@@ -8,16 +8,17 @@ const userRouter = Router();
 // 회원 유저 아이디값으로 탈퇴를 진행함.
 userRouter.post('/user', loginRequired, async (req, res, next) => {
   try {
+    const { currentPassword } = req.body;
+    // currentPassword 없을 시, 진행 불가
+    if (!currentPassword) {
+      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
+    }
+
     const userToken = req.headers['authorization']?.split(' ')[1];
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const userId = jwtDecoded.userId;
     // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-    const currentPassword = req.body.currentPassword;
-    // currentPassword 없을 시, 진행 불가
-    if (!currentPassword) {
-      throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
-    }
 
     const userInfoRequired = { userId, currentPassword };
     const deleteUserInfo = await userService.delUser(userInfoRequired);
@@ -133,14 +134,7 @@ userRouter.patch('/users/:userId', loginRequired, async function (req, res, next
     const userId = req.params.userId;
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    const fullName = req.body.fullName;
-    const password = req.body.password;
-    const address = req.body.address;
-    const phoneNumber = req.body.phoneNumber;
-    const role = req.body.role;
-
-    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-    const currentPassword = req.body.currentPassword;
+    const { fullName, password, address, phoneNumber, role, currentPassword } = req.body;
 
     // currentPassword 없을 시, 진행 불가
     if (!currentPassword) {
@@ -168,7 +162,6 @@ userRouter.patch('/users/:userId', loginRequired, async function (req, res, next
     next(error);
   }
 });
-
 //회원 권한 수정 api
 //jwt token으로 로그인된 계정이 admin인지 확인. 맞을 경우 userId의 role 변경
 userRouter.patch('/admin/:userId/:newRole', loginRequired, async (req, res, next) => {
@@ -209,5 +202,4 @@ userRouter.delete('/admin/:userId', loginRequired, async (req, res, next) => {
     next(error);
   }
 });
-
 export { userRouter };
