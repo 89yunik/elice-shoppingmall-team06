@@ -23,8 +23,8 @@ export class UserModel {
   async update({ userId, update }) {
     return await User.findOneAndUpdate({ _id: userId, returnOriginal: false }, update);
   }
-  async delete({ userId }) {
-    return await User.deleteOne({ _id: userId, returnOriginal: false });
+  async delete({ _id }) {
+    return await User.deleteOne({ _id, returnOriginal: false });
   }
 }
 
