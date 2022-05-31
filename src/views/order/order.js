@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { deleteNameStorageItem } from './../useful-functions.js';
 
 const MAIN_PAGE_URL = 'http://localhost:5070';
 
@@ -66,6 +67,10 @@ function loadName(fullName) {
 }
 
 function clearSessionStorage() {
+  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  orderStorage.map((item) => {
+    deleteNameStorageItem(item);
+  });
   const iBought = checkWhatIBuy();
 
   sessionStorage.removeItem('order');
