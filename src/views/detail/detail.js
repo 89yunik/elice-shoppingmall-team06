@@ -40,7 +40,6 @@ function parseToHTML(item){
 		const sessionArr = JSON.parse(localStorage.getItem("cart")) || [];
 		const getCart = sessionStorage.getItem("cart")
 		const parseCart = JSON.parse(getCart)
-		// console.log(parseCart[0]["_id"])
 
 		const nameArr = JSON.parse(localStorage.getItem("name")) || [];
 		const getName = sessionStorage.getItem("name")
@@ -49,7 +48,7 @@ function parseToHTML(item){
 		const orderArr = JSON.parse(localStorage.getItem("order")) || [];
 
 		if(parseCart !== null){
-			for(let i=0; i<parseCart.length; i++){
+			for(let i=0; i<parseName.length; i++){
 				sessionArr.push((parseCart[i]))
 				nameArr.push(parseName[i])
 				orderArr.push(parseCart[i]["_id"])
@@ -82,16 +81,7 @@ let quickBtn = document.querySelector(".quick-buy")
 async function quickBuy(e) {
 	e.preventDefault();
 	let item = await Api.get(`/api/product/${urlId}`);
-
-	const productInfo = {
-		"_id":`${item._id}`,
-		"name":`${item.name}`,
-		"price":`${item.price}`,
-		"quantity":1
-	}
-
-	sessionStorage.setItem("quick", JSON.stringify(productInfo))
-	location.href="/order/order.html";
+	location.href=`/order/order.html`+`?id=${item._id}`;
 }
 
 quickBtn.addEventListener("click", quickBuy)
