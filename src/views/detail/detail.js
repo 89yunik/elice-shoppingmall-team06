@@ -47,8 +47,6 @@ function parseToHTML(item){
 		const parseName = JSON.parse(getName)
 
 		const orderArr = JSON.parse(localStorage.getItem("order")) || [];
-		const getOrder = sessionStorage.getItem("order")
-		const parseOrder = JSON.parse(getOrder)
 
 		if(parseCart !== null){
 			for(let i=0; i<parseCart.length; i++){
@@ -61,12 +59,12 @@ function parseToHTML(item){
 		// object 형태의 객체는 indexof가 먹히지 않아 stringify로 변환해줌
 		let SAmap = nameArr.map(JSON.stringify)
 
-		if(SAmap.indexOf(JSON.stringify(productInfo.name)) >= 0 ){
+		if(SAmap.indexOf(JSON.stringify(productInfo._id)) >= 0 ){
 			alert("해당 제품이 장바구니에 있습니다.")
 		}
 		else {
 			sessionArr.push(productInfo)
-			nameArr.push(productInfo.name)
+			nameArr.push(productInfo._id)
 			orderArr.push(productInfo._id)
 			alert("장바구니에 추가되었습니다.")
 		}
