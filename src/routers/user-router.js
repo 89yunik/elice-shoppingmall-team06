@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
+import { redisClient } from '../app';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { userService, mailer } from '../services';
@@ -59,7 +60,16 @@ userRouter.get('/user', loginRequired, async (req, res, next) => {
 userRouter.post('/mailAuth', async (req, res, next) => {
   try {
     const mailAuth = await mailer(req.body.email);
-    res.status(200).json({ Auth: mailAuth.generatedAuthNumber });
+    const redisSave = await redisClient.setEx(
+      req.body.email,
+      process.env.DEFAULT_EXPIRATION,
+      mailAuth.generatedAuthNumber,
+    );
+    console.log(redisSave);
+    const redisGet = await redisClient.get(req.body.email, (err, reply) => {
+      console.log(reply);
+    });
+    res.status(200);
   } catch (err) {
     console.log(err);
     res.status(401).json({ error: '메일을 보내는것에 실패하였습니다.' });
