@@ -2,9 +2,11 @@ import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
-import { userService } from '../services';
+import { userService, mailer } from '../services';
 import jwt from 'jsonwebtoken';
+
 const userRouter = Router();
+
 // 회원 유저 아이디값으로 탈퇴를 진행함.
 userRouter.post('/user', loginRequired, async (req, res, next) => {
   try {
@@ -54,7 +56,15 @@ userRouter.get('/user', loginRequired, async (req, res, next) => {
     });
   }
 });
-
+userRouter.post('/mailAuth', async (req, res, next) => {
+  try {
+    const mailAuth = await mailer(req.body.email);
+    res.status(200).json({ Auth: mailAuth.generatedAuthNumber });
+  } catch (err) {
+    console.log(err);
+    res.status(401).json({ error: '메일을 보내는것에 실패하였습니다.' });
+  }
+});
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post('/register', async (req, res, next) => {
   try {
@@ -65,10 +75,7 @@ userRouter.post('/register', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const fullName = req.body.fullName;
-    const email = req.body.email;
-    const password = req.body.password;
-
+    const { fullName, email, password } = req.body;
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
