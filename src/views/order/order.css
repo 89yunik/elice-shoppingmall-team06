@@ -24,7 +24,7 @@
   margin-top: 0;
   padding: 2rem 1rem 0;
 }
-.title:not(.is-spaced)+.subtitle {
+.title:not(.is-spaced) + .subtitle {
   margin-top: 0;
 }
 
@@ -54,16 +54,17 @@
   text-align: left;
 }
 
-.delivery-info .field-body, .delivery-info .select {
+.delivery-info .field-body,
+.delivery-info .select {
   flex-basis: 35rem;
   flex-grow: 0;
   height: 3rem;
 }
 
-.delivery-info .field-body .control, .delivery-info .field-body .input {
+.delivery-info .field-body .control,
+.delivery-info .field-body .input {
   height: 100%;
 }
-
 
 .tile-order-summary {
   height: 100%;
@@ -72,11 +73,13 @@
 }
 
 .order-summary {
-  background-color: #f0f5f7;
+  background-color: #f5f5f7;
   width: 100%;
+  padding: 1.25rem;
 }
 
-.order-info, .order-summary .header {
+.order-info,
+.order-summary .header {
   border-bottom: 1px solid #555;
 }
 
@@ -127,10 +130,12 @@
   font-weight: 800;
   height: 4rem;
   width: 100%;
+  background-color: #ff7800;
+  border-radius: 10px px;
 }
 
 .select select {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, 0.3);
   height: 100%;
   width: 100%;
 }

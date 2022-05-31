@@ -22,11 +22,6 @@ function makeCartLists(data) {
     <label class="checkbox">
       <input type="checkbox" id="checkbox-${id}" checked class="check-item" />
     </label>
-    <button class="delete-button" id="delete-${id}">
-      <span class="icon">
-        <i class="fas fa-trash-can" aria-hidden="true"></i>
-      </span>
-    </button>
     <figure class="image is-96x96">
       <img
         id="image-${id}"
@@ -61,6 +56,7 @@ function makeCartLists(data) {
           </span>
         </button>
       </div>
+      
     </div>
     <div class="calculation">
       <p id="unitPrice-${id}">${data.price}</p><p>원</p>
@@ -77,6 +73,11 @@ function makeCartLists(data) {
       </p>
       <p id="total-${id}">${data.price * quantity}</p><p>원</p>
     </div>
+    <button class="delete-button" id="delete-${id}">
+      <span class="icon">
+        <i class="fas fa-trash-can" aria-hidden="true"></i>
+      </span>
+    </button>
   </div>`;
   return template.content;
 }
