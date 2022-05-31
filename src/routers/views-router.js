@@ -1,6 +1,6 @@
 import express from 'express';
 import path from 'path';
-
+import { viewhandler } from '../middlewares';
 const viewsRouter = express.Router();
 
 // 페이지별로 html, css, js 파일들을 라우팅함
@@ -9,17 +9,17 @@ const viewsRouter = express.Router();
 viewsRouter.use('/', serveStatic('home'));
 viewsRouter.use('/register', serveStatic('register'));
 viewsRouter.use('/login', serveStatic('login'));
-viewsRouter.use('/account', serveStatic('account'));
+viewsRouter.use('/account', viewhandler, serveStatic('account'));
 viewsRouter.use('/cart', serveStatic('cart'));
 viewsRouter.use('/order', serveStatic('order'));
-viewsRouter.use('/order/complete', serveStatic('complete'));
+viewsRouter.use('/order/complete', viewhandler, serveStatic('complete'));
 viewsRouter.use('/account/orders', serveStatic('orders'));
 viewsRouter.use('/account/security', serveStatic('security'));
 viewsRouter.use('/admin/product/add', serveStatic('add'));
 viewsRouter.use('/admin/product', serveStatic('product'));
 viewsRouter.use('/account/signout', serveStatic('signout'));
-viewsRouter.use('/product/list/:name', serveStatic('list'));
-viewsRouter.use('/product/detail/:productId', serveStatic('detail'));
+viewsRouter.use('/product/list/:id', serveStatic('list'));
+viewsRouter.use('/product/detail/:id', serveStatic('detail'));
 viewsRouter.use('/admin', serveStatic('admin'));
 viewsRouter.use('/admin/orders', serveStatic('adminOrders'));
 viewsRouter.use('/admin/users', serveStatic('users'));
