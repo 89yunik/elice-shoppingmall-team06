@@ -1,5 +1,4 @@
 const DELIVERY_FEE = 3000;
-
 document.querySelector('#allSelectCheckbox').addEventListener('click', clickCheckAllButton);
 document.querySelector('.cart-only-product').addEventListener('click', checkWhatIClick);
 document.querySelector('#purchaseButton').addEventListener('click', moveToOrderPage);
@@ -191,8 +190,9 @@ function clickHandleQuantityButton(event) {
 
 //실시간으로 상품계산 바뀌게(결제정보 x)
 function calculateImmediatelyCart(id, item) {
+  console.log(item.quantity);
+  document.querySelector(`#total-${id}`).innerHTML = item.quantity * parseInt(item.price);
   document.querySelector(`#quantity-${id}`).innerHTML = item.quantity;
-  document.querySelector(`#total-${id}`).innerHTML = item.quantity * item.price;
 }
 
 //수량 입력후 enter 입력시
@@ -201,12 +201,8 @@ function enterItemQuantity(event) {
   const id = event.closest('.cart-product-item').dataset.id;
   console.log(event);
 
-  cartStorage.forEach((item) => {
-    console.log(item);
-    calculateImmediatelyCart(id, item);
-  });
   sessionStorage.setItem('cart', JSON.stringify(cartStorage));
-  calculateImmediatelyCart();
+  // calculateImmediatelyCart();
 }
 
 //trashcan button 클릭시
@@ -232,7 +228,6 @@ function deleteNameStorageItem(item) {
 
 //선택삭제 버튼 클릭시
 function clickPartialDeleteLabel(event) {
-  // debugger;
   let orderStorage = JSON.parse(sessionStorage.getItem('order'));
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
