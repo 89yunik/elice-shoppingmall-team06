@@ -12,9 +12,13 @@ document.querySelector('#partialDeleteLabel .help').addEventListener('click', cl
 //구매하기 버튼 클릭시
 function moveToOrderPage() {
   const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
   const myUrl = new URL(`${SERVICE_URL}/order`);
-  orderStorage.forEach((id) => {
-    myUrl.searchParams.append('id', id);
+  const intersectItems = orderStorage.map((orderId) => cartStorage.find((cart) => cart._id === orderId));
+
+  intersectItems.forEach((item) => {
+    myUrl.searchParams.append('id', item._id);
+    myUrl.searchParams.append('quantity', item.quantity);
   });
   window.location.href = myUrl;
 }
