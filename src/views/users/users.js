@@ -1,13 +1,42 @@
 import * as Api from '/api.js';
 
 const tableInfo = document.querySelector('.table-info');
-
+const level = document.querySelector('.level');
 render();
 addAllEvents();
 
 function addAllEvents() {}
 
-function template(data) {
+function levelTemplate(data) {
+  return `
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">총회원수</p>
+        <p class="title" id="usersCount">${data.length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">회원</p>
+        <p class="title" id="adminCount">${data.filter((item) => item.role === 'basic-user').length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">관리자</p>
+        <p class="title" id="adminCount">${data.filter((item) => item.role === 'admin').length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">OAuth가입자수</p>
+        <p class="title" id="OAuthCount">${data.filter((item) => item.type === '소셜').length}</p>
+      </div>
+    </div>
+  `;
+}
+
+function tableTemplate(data) {
   return `
   <div class="columns orders-item">
     <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
@@ -43,8 +72,8 @@ function render() {
 
 async function getData() {
   const userData = await Api.get('/api/userlist');
-
-  tableInfo.innerHTML = userData.map((item) => template(item)).join('');
+  level.innerHTML = levelTemplate(userData);
+  tableInfo.innerHTML = userData.map((item) => tableTemplate(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
   tableInfo.addEventListener('change', onChangeEvent);
 }
