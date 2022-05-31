@@ -7,6 +7,9 @@ document.querySelector('#checkoutButton').addEventListener('click', handleChecko
 document.querySelector('#subtitleCart').addEventListener('click', () => {
   window.location.href = '/cart';
 });
+$(window).on('beforeunload', function () {
+  sessionStorage.removeItem('quick');
+});
 
 function findAddress() {
   new daum.Postcode({
@@ -100,19 +103,22 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-
-  for (let i = 0; i < cartItems.length; i++) {
-    checkedId.forEach((item) => {
-      if (cartItems[i]._id === item) {
-        // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
-        // productsTotal += cartItems[i].price * cartItems[i].quantity;
-        result.push(cartItems[i]);
-      }
-    });
+  // console.log(quickStorage);
+  if (sessionStorage.getItem('quick') === null) {
+    for (let i = 0; i < cartItems.length; i++) {
+      checkedId.forEach((item) => {
+        if (cartItems[i]._id === item) {
+          // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
+          // productsTotal += cartItems[i].price * cartItems[i].quantity;
+          result.push(cartItems[i]);
+        }
+      });
+    }
+  } else {
+    result.push(JSON.parse(sessionStorage.getItem('quick')));
   }
   return result;
 }
-checkWhatIBuy();
 
 function makeListOfProductTitle() {
   const whatIBuy = checkWhatIBuy();
@@ -176,4 +182,5 @@ window.onload = () => {
     loadName(result.fullName);
   });
   makeListOfProductTitle();
+  // checkWhatIBuy();
 };
