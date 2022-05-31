@@ -92,8 +92,16 @@
   
   async function initPage(){
     const navbar = document.getElementById('navbar');
+    const pathname = window.location.pathname;
+    const isAdminPath = pathname.search('admin') !== -1
+    const isAccountPath = pathname.search('account') !== -1
     try {
       if(!sessionStorage.getItem('token')) {
+        if(isAdminPath || isAccountPath){
+          alert('잘못된 접근입니다. 로그인해주세요.');
+          location.href="/login";
+        }
+
         navbar.innerHTML = `
           <li class="login-btn"><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
@@ -110,9 +118,15 @@
       };
 
       const userData = await get('/api/user');
-      
+
       if(userData){
         if(userData.role === 'basic-user'){
+          if(isAdminPath){
+            sessionStorage.removeItem('token');
+            alert('잘못된 접근입니다. 관리자계정으로 로그인해주세요.');
+            location.href="/login";
+          }
+
           navbar.innerHTML = `
             <li class="account-management"><a href="/account">계정관리</a></li>
             <li class="logout-btn"><a  href="#">로그아웃</a></li>
@@ -145,7 +159,9 @@
         logoutBtn.addEventListener('click', logoutBtnEvent);
       }
     } catch (error) {
-      console.log(error);
+      sessionStorage.removeItem('token');
+      alert('잘못된 토큰입니다. 다시 로그인해주세요.');
+      location.href = "/login"
     }
   }
   initPage();
