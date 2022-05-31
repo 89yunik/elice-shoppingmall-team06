@@ -171,6 +171,7 @@ async function makeApiOderRegisterData() {
       address1: document.querySelector('#address1').value,
       address2: document.querySelector('#address2').value,
       requests: document.querySelector('#requestSelectBox').value,
+      total: document.querySelector('#orderTotal').innerText,
     },
     orderState: '상품 준비중',
   };
