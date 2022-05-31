@@ -1,6 +1,7 @@
 import { deleteNameStorageItem } from './../useful-functions.js';
 
 const DELIVERY_FEE = 3000;
+const SERVICE_URL = 'http://localhost:5070';
 
 document.querySelector('#allSelectCheckbox').addEventListener('click', clickCheckAllButton);
 document.querySelector('.cart-only-product').addEventListener('click', checkWhatIClick);
@@ -10,7 +11,12 @@ document.querySelector('#partialDeleteLabel .help').addEventListener('click', cl
 
 //구매하기 버튼 클릭시
 function moveToOrderPage() {
-  window.location.href = '/order';
+  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  const myUrl = new URL(`${SERVICE_URL}/order`);
+  orderStorage.forEach((id) => {
+    myUrl.searchParams.append('id', id);
+  });
+  window.location.href = myUrl;
 }
 
 //sessionStorage 'cart'에 따른 요소 만들기

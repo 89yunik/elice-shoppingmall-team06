@@ -1,3 +1,9 @@
+/*
+[] total을 구할 때 상품의 가격이랑 수량을 곱해햐 하는데 수량은 api에 없어서 sessionStorage에서 값을 불러와야됨.
+-> 계산하기 위해서 api와 sessionStorage를 둘 다 실행해야 하고 API에 저장하는 함수에 사용하기 위해서
+    total을 전역변수로 사용해야 하는 문제
+*/
+
 import * as Api from '/api.js';
 import { deleteNameStorageItem } from './../useful-functions.js';
 
@@ -8,9 +14,10 @@ document.querySelector('#checkoutButton').addEventListener('click', handleChecko
 document.querySelector('#subtitleCart').addEventListener('click', () => {
   window.location.href = '/cart';
 });
-$(window).on('beforeunload', function () {
-  sessionStorage.removeItem('quick');
-});
+
+// $(window).on('beforeunload', function () {
+//   sessionStorage.removeItem('quick');
+// });
 
 function findAddress() {
   new daum.Postcode({
@@ -132,31 +139,33 @@ function checkWhatIBuy() {
   return result;
 }
 
-function makeListOfProductTitle() {
-  const whatIBuy = checkWhatIBuy();
-  let totalPrice = 0;
+let totalPrice = 0;
 
-  document.querySelector('#productsTitle').innerHTML = '';
-  whatIBuy.forEach((item) => {
-    document.querySelector('#productsTitle').innerHTML += `${item.name} </br>`;
-    totalPrice += item.price * item.quantity;
+function makeListOfProductTitle(orderList) {
+  const whatIBuy = checkWhatIBuy();
+  console.log(whatIBuy);
+
+  orderList.forEach((item) => {
+    let quantity;
+    whatIBuy.map((ele) => {
+      if (ele._id === item._id) quantity = ele.quantity;
+    });
+
+    console.log(quantity, item.price);
+    document.querySelector('#productsTitle').innerHTML += `${item.name} / ${quantity} </br>`;
+    totalPrice += item.price * quantity;
   });
 
   document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
-  document.querySelector('#orderTotal').innerHTML = totalPrice + 3000;
-}
+  document.querySelector('#orderTotal').innerHTML = parseInt(totalPrice) + 3000;
 
-let userID;
-
-function callUserApi() {
-  let userApi = Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    userID = result.email;
-  });
+  console.log(totalPrice);
 }
 
 async function makeApiOderRegisterData() {
   const whatIBuy = checkWhatIBuy();
   const productList = [];
+
   whatIBuy.forEach((item) => {
     const product = {
       name: item.name,
@@ -166,19 +175,19 @@ async function makeApiOderRegisterData() {
   });
   console.log(productList);
 
-  let userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    userID = result._id;
-  });
+  const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  // const orderApi = await Api.get(`${MAIN_PAGE_URL}`/api/product/${orderIds[i]})
+  console.log(userApi);
   const data = {
-    userId: userID,
+    userId: userApi._id,
     orderInfo: {
       product: productList,
-      name: document.querySelector('#receiverName').value,
+      name: userApi.fullName,
       phoneNumber: document.querySelector('#receiverPhoneNumber').value,
       address1: document.querySelector('#address1').value,
       address2: document.querySelector('#address2').value,
       requests: document.querySelector('#requestSelectBox').value,
-      total: document.querySelector('#orderTotal').innerText,
+      total: totalPrice,
     },
     orderState: '상품 준비중',
   };
@@ -190,10 +199,46 @@ async function makeApiOderRegisterData() {
   }
 }
 
-window.onload = () => {
-  Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    loadName(result.fullName);
-  });
-  makeListOfProductTitle();
-  // checkWhatIBuy();
-};
+function getUrlParameters() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const order = urlParams.getAll('id');
+  return order;
+}
+
+async function checkItemsInApi(orderIds) {
+  let productApi = [];
+  for (let i = 0; i < orderIds.length; i++) {
+    productApi.push(await Api.get(`${MAIN_PAGE_URL}/api/product/${orderIds[i]}`));
+  }
+  // orderIds.forEach( (id) => {
+  //   productApi = await Api.get(`${MAIN_PAGE_URL}/api/product/${id}`);
+  // });
+  //async await는 forEach문 안에서 작동이 원활하게 되지 않는다.
+  //forEach문에서 productApi를 저장하고 밖에서 출력하면 undefine가 나온다.
+
+  return productApi;
+}
+
+//window.onload랑 함수를 만들어서 실행하는거랑 차이점이 뭐지?
+// window.onload = () => {
+//   const Ids = getUrlParameters();
+
+//   console.log(checkItemsInApi(Ids));
+
+//   Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
+//     loadName(result.fullName);
+//   });
+//   // makeListOfProductTitle();
+//   // checkWhatIBuy();
+// };
+async function App() {
+  const Ids = getUrlParameters();
+  const itemsApi = await checkItemsInApi(Ids);
+  makeListOfProductTitle(itemsApi);
+  // console.log(itemsApi);
+  const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  loadName(memberInfo.fullName);
+}
+
+App();
