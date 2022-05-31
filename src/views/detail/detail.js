@@ -1,34 +1,17 @@
-// 페이지 로딩 시 한번 리로딩 - 뒤로가기 버튼 클릭 시 남아있는 캐시로 인한 오류 보완
-$(window).bind("pageshow", function(event) {
-	if (event.originalEvent.persisted) {
-			document.location.reload();
-	}
-});
+import * as Api from '/api.js'
 
 // url id 분리
 const url = window.location.href
 const urlSplit = url.split("/")
 const urlId = urlSplit[urlSplit.length-2]
-const sessionArr = [];
-const testArr = [];
-const sessionId = [];
 
 //fetch 받아오기
 async function getItems(){
-	return fetch(`/api/products/${urlId}`)
-		.then(res=>res.json())
+	let item = await Api.get(`/api/product/${urlId}`);
+	parseToHTML(item)
+	return
 }
-
-const af = sessionStorage.getItem("cart")
-const fa = JSON.parse(af)
-const sd = sessionStorage.getItem("productName")
-const ds = JSON.parse(sd)
-if(fa !== null){
-	for(let i=0; i<fa.length; i++){
-		sessionArr.push(fa[i])
-		testArr.push(ds[i])
-	}
-}
+getItems();
 
 //데이터 -> HTML 변환 
 function parseToHTML(item){
@@ -42,42 +25,70 @@ function parseToHTML(item){
 	price.innerHTML = `${item.price}`;
 	description.innerHTML = `${item.descriptionDetail}`;
 
+	const productInfo = {
+		"_id":`${item._id}`,
+		"name":`${item.name}`,
+		"price":`${item.price}`,
+		"quantity":1
+	}
 
 	//장바구니 추가
-	const cart = document.querySelector(".add-to-cart")
-
+	const cartBtn = document.querySelector(".add-to-cart")
+	
 	async function addToCart(e) {
 		e.preventDefault();
-		
-		const productInfo = {
-			"_id":`${item._id}`,
-			"name":`${item.name}`,
-			"price":`${item.price}`,
-			"quantity":1
+		const sessionArr = JSON.parse(localStorage.getItem("cart")) || [];
+		const nameArr = JSON.parse(localStorage.getItem("name")) || [];
+		const getCart = sessionStorage.getItem("cart")
+		const parseCart = JSON.parse(getCart)
+		const getName = sessionStorage.getItem("name")
+		const parseName = JSON.parse(getName)
+
+		if(parseCart !== null){
+			for(let i=0; i<parseCart.length; i++){
+				sessionArr.push((parseCart[i]))
+				nameArr.push(parseName[i])
+			}
 		}
-		if(testArr.indexOf(productInfo.name) >= 0 ){
+
+		// object 형태의 객체는 indexof가 먹히지 않아 stringify로 변환해줌
+		let SAmap = nameArr.map(JSON.stringify)
+
+		if(SAmap.indexOf(JSON.stringify(productInfo.name)) >= 0 ){
 			alert("해당 제품이 장바구니에 있습니다.")
 		}
 		else {
 			sessionArr.push(productInfo)
-			testArr.push(productInfo.name)
+			nameArr.push(productInfo.name)
 			alert("장바구니에 추가되었습니다.")
 		}
-		
 		sessionStorage.setItem("cart", JSON.stringify(sessionArr))
-		sessionStorage.setItem("productName", JSON.stringify(testArr))
+		sessionStorage.setItem("name", JSON.stringify(nameArr))
 	}
-	cart.addEventListener("click", addToCart)
+	cartBtn.addEventListener("click", addToCart)
 }
 
-// 페이지 로드시 목록 자동추가
-window.onload = ()=>{
-	getItems()
-		.then(item => {
-			parseToHTML(item);
-		});
-	
-};
+
+// 바로 구매하기
+let quickBtn = document.querySelector(".quick-buy")
+
+async function quickBuy(e) {
+	e.preventDefault();
+	let item = await Api.get(`/api/product/${urlId}`);
+
+	const productInfo = {
+		"_id":`${item._id}`,
+		"name":`${item.name}`,
+		"price":`${item.price}`,
+		"quantity":1
+	}
+
+	sessionStorage.setItem("quick", JSON.stringify(productInfo))
+	location.href="/order/order.html";
+}
+
+quickBtn.addEventListener("click", quickBuy)
+
 
 
 

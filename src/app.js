@@ -5,6 +5,7 @@ import { errorHandler } from './middlewares';
 import morgan from 'morgan';
 const app = express();
 
+
 // CORS 에러 방지
 app.use(cors());
 app.use(morgan('dev'));
@@ -29,5 +30,8 @@ app.use('/api', orderRouter);
 // 순서 중요 (errorHandler은 다른 일반 라우팅보다 나중에 있어야 함)
 // 그래야, 에러가 났을 때 next(error) 했을 때 여기로 오게 됨
 app.use(errorHandler);
-
+// public 폴더 접근
+app.use(express.static('public'));
 export { app };
+
+
