@@ -1,9 +1,3 @@
-/*
-[] total을 구할 때 상품의 가격이랑 수량을 곱해햐 하는데 수량은 api에 없어서 sessionStorage에서 값을 불러와야됨.
--> 계산하기 위해서 api와 sessionStorage를 둘 다 실행해야 하고 API에 저장하는 함수에 사용하기 위해서
-    total을 전역변수로 사용해야 하는 문제
-*/
-
 import * as Api from '/api.js';
 import { deleteNameStorageItem } from './../useful-functions.js';
 
@@ -14,10 +8,6 @@ document.querySelector('#checkoutButton').addEventListener('click', handleChecko
 document.querySelector('#subtitleCart').addEventListener('click', () => {
   window.location.href = '/cart';
 });
-
-// $(window).on('beforeunload', function () {
-//   sessionStorage.removeItem('quick');
-// });
 
 function findAddress() {
   new daum.Postcode({
@@ -122,7 +112,6 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-  // console.log(quickStorage);
   if (sessionStorage.getItem('quick') === null) {
     for (let i = 0; i < cartItems.length; i++) {
       checkedId.forEach((item) => {
@@ -143,23 +132,15 @@ let totalPrice = 0;
 
 function makeListOfProductTitle(orderList) {
   const whatIBuy = checkWhatIBuy();
-  console.log(whatIBuy);
-
-  orderList.forEach((item) => {
-    let quantity;
-    whatIBuy.map((ele) => {
-      if (ele._id === item._id) quantity = ele.quantity;
-    });
-
-    console.log(quantity, item.price);
-    document.querySelector('#productsTitle').innerHTML += `${item.name} / ${quantity} </br>`;
-    totalPrice += item.price * quantity;
+  console.log(orderList);
+  orderList.forEach((product) => {
+    product.quantity = parseInt(product.quantity);
+    document.querySelector('#productsTitle').innerHTML += `${product.item.name} / ${product.quantity} </br>`;
+    totalPrice += product.item.price * product.quantity;
   });
 
   document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
   document.querySelector('#orderTotal').innerHTML = parseInt(totalPrice) + 3000;
-
-  console.log(totalPrice);
 }
 
 async function makeApiOderRegisterData() {
@@ -177,7 +158,7 @@ async function makeApiOderRegisterData() {
 
   const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
   // const orderApi = await Api.get(`${MAIN_PAGE_URL}`/api/product/${orderIds[i]})
-  console.log(userApi);
+
   const data = {
     userId: userApi._id,
     orderInfo: {
@@ -202,15 +183,20 @@ async function makeApiOderRegisterData() {
 function getUrlParameters() {
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
-  const order = urlParams.getAll('id');
-  return order;
+  const id = urlParams.getAll('id');
+  const quantity = urlParams.getAll('quantity');
+  return { id, quantity };
 }
 
-async function checkItemsInApi(orderIds) {
+async function checkItemsInApi(orderItems) {
   let productApi = [];
-  for (let i = 0; i < orderIds.length; i++) {
-    productApi.push(await Api.get(`${MAIN_PAGE_URL}/api/product/${orderIds[i]}`));
+
+  for (let i = 0; i < orderItems.id.length; i++) {
+    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+    console.log(apiResult);
+    productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
   }
+
   // orderIds.forEach( (id) => {
   //   productApi = await Api.get(`${MAIN_PAGE_URL}/api/product/${id}`);
   // });
@@ -219,7 +205,6 @@ async function checkItemsInApi(orderIds) {
 
   return productApi;
 }
-
 //window.onload랑 함수를 만들어서 실행하는거랑 차이점이 뭐지?
 // window.onload = () => {
 //   const Ids = getUrlParameters();
@@ -234,9 +219,9 @@ async function checkItemsInApi(orderIds) {
 // };
 async function App() {
   const Ids = getUrlParameters();
+  console.log(Ids);
   const itemsApi = await checkItemsInApi(Ids);
   makeListOfProductTitle(itemsApi);
-  // console.log(itemsApi);
   const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
   loadName(memberInfo.fullName);
 }
