@@ -68,12 +68,19 @@ function loadName(fullName) {
 
 function clearSessionStorage() {
   const orderStorage = JSON.parse(sessionStorage.getItem('order'));
-  orderStorage.map((item) => {
+  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+
+  orderStorage.forEach((item) => {
+    cartStorage = cartStorage.filter((element) => element._id !== item);
     deleteNameStorageItem(item);
   });
-  const iBought = checkWhatIBuy();
+  console.log(orderStorage);
+  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+
+  // const iBought = checkWhatIBuy();
 
   sessionStorage.removeItem('order');
+
   // const check = checkWhatIBuy();
   // console.log((check));
 }
