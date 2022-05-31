@@ -4,8 +4,11 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  async findById(userId) {
+  async find(userId) {
     return await Order.find({ userId });
+  }
+  async findById(_id) {
+    return await Order.findById({ _id });
   }
 
   async create(orderInfo) {

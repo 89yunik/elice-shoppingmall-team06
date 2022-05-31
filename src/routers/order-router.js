@@ -12,6 +12,7 @@ orderRouter.get('/order', loginRequired, async (req, res, next) => {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const userId = jwtDecoded.userId;
+    console.log(userId);
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
     const orderdata = await orderService.getOrder(userId);
     res.status(200).json(orderdata);
@@ -21,6 +22,7 @@ orderRouter.get('/order', loginRequired, async (req, res, next) => {
     res.status(403).json({
       result: 'forbidden-approach',
       reason: '정상적인 토큰이 아닙니다.',
+      error: error,
     });
   }
 });
