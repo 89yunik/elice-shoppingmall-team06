@@ -1,8 +1,7 @@
 const DELIVERY_FEE = 3000;
 
 document.querySelector('#allSelectCheckbox').addEventListener('click', clickCheckAllButton);
-document.querySelector('#cartProductsContainer').addEventListener('click', checkWhatIClick);
-document.querySelector('#partialDeleteLabel .help').addEventListener('click', clickPartialDeleteLabel);
+document.querySelector('.cart-only-product').addEventListener('click', checkWhatIClick);
 document.querySelector('#purchaseButton').addEventListener('click', moveToOrderPage);
 
 //구매하기 버튼 클릭시
@@ -79,7 +78,7 @@ function makeCartLists(data) {
 
 //'cart'에 있는 내용 화면에 나타내기
 function displayCartLIsts() {
-  const cartProductsContainer = document.querySelector('#cartProductsContainer');
+  const cartProductsContainer = document.querySelector('.cart-only-product');
   const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
   let documentFragment = document.createDocumentFragment();
 
@@ -159,12 +158,26 @@ function clickHandleQuantityButton(event) {
 
       cartProductItem.querySelector(`#quantityInput-${id}`).value = item.quantity;
       cartProductItem.querySelector(`#minus-${id}`).disabled = false;
+      cartProductItem.querySelector(`#quantity-${id}`).innerHTML = item.quantity;
+      cartProductItem.querySelector(`#total-${id}`).innerHTML = item.quantity * item.price;
     }
   });
 
   sessionStorage.setItem('cart', JSON.stringify(cartStorage));
 
   calculateOrderTotalPrice();
+}
+
+//실시간으로 상품계산 바뀌게(결제정보 x)
+function calculateImmediatelyCart() {}
+
+//수량 입력후 enter 입력시
+function enterItemQuantity(event) {
+  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+  const id = event.closest('.cart-product-item').dataset.id;
+  console.log(event);
+
+  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
 }
 
 //trashcan button 클릭시
@@ -198,25 +211,27 @@ function checkWhatIClick(event) {
   else if (event.target.classList.contains('fa-plus') || event.target.classList.contains('fa-minus')) {
     clickHandleQuantityButton(event.target);
   } else if (event.target.classList.contains('fa-trash-can')) clickTrashCanButton(event.target);
-}
 
-//로딩 시 체크박스
-function checkOrderStorageAndCheckBox() {}
+  event.target.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') enterItemQuantity(event.target);
+  });
+}
 
 function App() {
   displayCartLIsts();
   calculateOrderTotalPrice();
   checkingAllCheckBox();
 
-  // const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
-  // if (cartStorage.length !== 0) {
-  //   const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  //로딩 시 체크박스
+  const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+  if (cartStorage.length !== 0) {
+    const orderStorage = JSON.parse(sessionStorage.getItem('order'));
 
-  //   cartStorage.forEach((item) => {
-  //     if (orderStorage.includes(item._id)) document.querySelector(`#checkbox-${item._id}`).checked = true;
-  //     else document.querySelector(`#checkbox-${item._id}`).checked = false;
-  //   });
-  // }
+    cartStorage.forEach((item) => {
+      if (orderStorage.includes(item._id)) document.querySelector(`#checkbox-${item._id}`).checked = true;
+      else document.querySelector(`#checkbox-${item._id}`).checked = false;
+    });
+  }
 }
 
 App();
