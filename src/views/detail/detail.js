@@ -39,15 +39,19 @@ function parseToHTML(item){
 		e.preventDefault();
 		const sessionArr = JSON.parse(localStorage.getItem("cart")) || [];
 		const nameArr = JSON.parse(localStorage.getItem("name")) || [];
+		const orderArr = JSON.parse(localStorage.getItem("order")) || [];
 		const getCart = sessionStorage.getItem("cart")
 		const parseCart = JSON.parse(getCart)
 		const getName = sessionStorage.getItem("name")
 		const parseName = JSON.parse(getName)
+		const getOrder = sessionStorage.getItem("order")
+		const parseOrder = JSON.parse(getOrder)
 
 		if(parseCart !== null){
 			for(let i=0; i<parseCart.length; i++){
 				sessionArr.push((parseCart[i]))
 				nameArr.push(parseName[i])
+				orderArr.push(parseOrder[i])
 			}
 		}
 
@@ -60,10 +64,12 @@ function parseToHTML(item){
 		else {
 			sessionArr.push(productInfo)
 			nameArr.push(productInfo.name)
+			orderArr.push(productInfo._id)
 			alert("장바구니에 추가되었습니다.")
 		}
 		sessionStorage.setItem("cart", JSON.stringify(sessionArr))
 		sessionStorage.setItem("name", JSON.stringify(nameArr))
+		sessionStorage.setItem("order", JSON.stringify(orderArr))
 	}
 	cartBtn.addEventListener("click", addToCart)
 }
