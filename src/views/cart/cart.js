@@ -1,12 +1,16 @@
+import { deleteNameStorageItem } from './../useful-functions.js';
+
 const DELIVERY_FEE = 3000;
 
 document.querySelector('#allSelectCheckbox').addEventListener('click', clickCheckAllButton);
 document.querySelector('.cart-only-product').addEventListener('click', checkWhatIClick);
 document.querySelector('#purchaseButton').addEventListener('click', moveToOrderPage);
+document.querySelector('.cart-only-product').addEventListener('change', enterItemQuantity);
+document.querySelector('#partialDeleteLabel .help').addEventListener('click', clickPartialDeleteLabel);
 
 //구매하기 버튼 클릭시
 function moveToOrderPage() {
-  if (JSON.parse(sessionStorage.getItem('order')).length) window.location.href = '/order';
+  window.location.href = '/order';
 }
 
 //sessionStorage 'cart'에 따른 요소 만들기
@@ -34,23 +38,24 @@ function makeCartLists(data) {
       <p id="title-${id}">${data.name}</p>
       <div class="quantity">
         <button
-          class="button is-rounded"
+          class="button btn-minus is-rounded"
           id="minus-${id}"
-          disabled=""
+          ${quantity <= 0 ? "disabled = ''" : ''}
         >
           <span class="icon is-small">
             <i class="fas fa-thin fa-minus" aria-hidden="true"></i>
           </span>
         </button>
         <input
-          class="input"
+          class="input input-enter"
           id="quantityInput-${id}"
           type="number"
           min="1"
           max="99"
           value="${quantity}"
+          data-id='${id}'
         />
-        <button class="button is-rounded" id="plus-${id}">
+        <button class="button btn-plus is-rounded" id="plus-${id}">
           <span class="icon">
             <i class="fas fa-lg fa-plus" aria-hidden="true"></i>
           </span>
@@ -58,7 +63,7 @@ function makeCartLists(data) {
       </div>
     </div>
     <div class="calculation">
-      <p id="unitPrice-${id}">${data.price}원</p>
+      <p id="unitPrice-${id}">${data.price}</p><p>원</p>
       <p>
         <span class="icon">
           <i class="fas fa-thin fa-xmark" aria-hidden="true"></i>
@@ -70,7 +75,7 @@ function makeCartLists(data) {
           <i class="fas fa-thin fa-equals" aria-hidden="true"></i>
         </span>
       </p>
-      <p id="total-${id}">${data.price * quantity}원</p>
+      <p id="total-${id}">${data.price * quantity}</p><p>원</p>
     </div>
   </div>`;
   return template.content;
@@ -117,9 +122,17 @@ function calculateOrderTotalPrice() {
   intersectItems.forEach((item) => {
     productsTotalPrice += item.quantity * item.price;
   });
+  let productsCount = 0;
+  orderStorage.forEach((id) => {
+    cartStorage.forEach((item) => {
+      if (item._id === id) productsCount += item.quantity;
+    });
+  });
+
   document.querySelector('#productsTotal').innerHTML = productsTotalPrice;
   document.querySelector('#orderTotal').innerHTML = productsTotalPrice + DELIVERY_FEE;
-  return productsTotalPrice;
+  document.querySelector('#productsCount').innerHTML = productsCount;
+  return productsTotalPrice; // 리턴 ??
 }
 
 //개별 체크박스를 체크하였을 때
@@ -146,38 +159,69 @@ function checkingAllCheckBox() {
 
 //plus, minus 버튼 클릭시
 function clickHandleQuantityButton(event) {
-  console.log(event);
+  const isPlus = event.closest('.btn-plus');
   const cartProductItem = event.closest('.cart-product-item');
-  const id = cartProductItem.dataset.id;
+  const targetId = cartProductItem.dataset.id;
 
-  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+  const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
-  cartStorage.forEach((item) => {
-    if (item._id === id) {
-      item.quantity = event.classList.contains('fa-plus') ? ++item.quantity : --item.quantity;
+  const quantityInput = cartProductItem.querySelector(`#quantityInput-${targetId}`);
+  const quantity = cartProductItem.querySelector(`#quantity-${targetId}`);
+  const total = cartProductItem.querySelector(`#total-${targetId}`);
+  const priceValue = Number(cartProductItem.querySelector(`#unitPrice-${targetId}`).innerText);
 
-      cartProductItem.querySelector(`#quantityInput-${id}`).value = item.quantity;
-      cartProductItem.querySelector(`#minus-${id}`).disabled = false;
-      cartProductItem.querySelector(`#quantity-${id}`).innerHTML = item.quantity;
-      cartProductItem.querySelector(`#total-${id}`).innerHTML = item.quantity * item.price;
-    }
-  });
+  const quantityInputValue = Number(quantityInput.value);
+  const newQuantityInput = isPlus ? quantityInputValue + 1 : quantityInputValue - 1;
 
-  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  if (newQuantityInput > 0) {
+    cartProductItem.querySelector(`#minus-${targetId}`).disabled = false;
+    quantityInput.value = newQuantityInput;
+    quantity.innerHTML = newQuantityInput;
+    total.innerHTML = newQuantityInput * priceValue;
+  } else {
+    cartProductItem.querySelector(`#minus-${targetId}`).disabled = true;
+    quantityInput.value = 0;
+    quantity.innerHTML = 0;
+    total.innerHTML = 0 * priceValue;
+  }
+
+  sessionStorage.setItem(
+    'cart',
+    JSON.stringify(
+      cartStorage.map((item) => {
+        if (item._id === targetId) {
+          item.quantity = newQuantityInput > 0 ? newQuantityInput : 0;
+        }
+        return item;
+      }),
+    ),
+  );
 
   calculateOrderTotalPrice();
 }
 
 //실시간으로 상품계산 바뀌게(결제정보 x)
-function calculateImmediatelyCart() {}
+function calculateImmediatelyCart(id, item) {
+  console.log(item.quantity);
+  document.querySelector(`#total-${id}`).innerHTML = item.quantity * parseInt(item.price);
+  document.querySelector(`#quantity-${id}`).innerHTML = item.quantity;
+}
 
 //수량 입력후 enter 입력시
 function enterItemQuantity(event) {
-  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
-  const id = event.closest('.cart-product-item').dataset.id;
-  console.log(event);
-
-  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  if (event.target.classList.contains('input-enter')) {
+    let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+    const id = event.target.closest('.cart-product-item').dataset.id;
+    console.log(cartStorage);
+    cartStorage.map((item) => {
+      if (item._id === id) {
+        item.quantity = event.target.value;
+        calculateImmediatelyCart(id, item);
+      }
+      calculateOrderTotalPrice();
+    });
+    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  }
 }
 
 //trashcan button 클릭시
@@ -185,22 +229,36 @@ function clickTrashCanButton(event) {
   const cartProductItem = event.closest('.cart-product-item');
   const id = cartProductItem.dataset.id;
 
-  let cartStorage = JSON.parse(sessionStorage.getItem('cart')).filter((item) => item._id !== id);
-  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  const cartStorage = JSON.parse(sessionStorage.getItem('cart')).filter((item) => item._id !== id);
+  const orderStorage = JSON.parse(sessionStorage.getItem('order')).filter((item) => item !== id);
 
+  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  sessionStorage.setItem('order', JSON.stringify(orderStorage));
+
+  deleteNameStorageItem(id);
   cartProductItem.remove();
 }
 
+// export function deleteNameStorageItem(item) {
+//   let nameStorage = JSON.parse(sessionStorage.getItem('name'));
+//   nameStorage = nameStorage.filter((element) => element != item);
+//   sessionStorage.setItem('name', JSON.stringify(nameStorage));
+// }
+
 //선택삭제 버튼 클릭시
 function clickPartialDeleteLabel(event) {
-  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  let orderStorage = JSON.parse(sessionStorage.getItem('order'));
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
   orderStorage.forEach((item) => {
     document.querySelector(`#productItem-${item}`).remove();
     cartStorage = cartStorage.filter((element) => element._id !== item);
+    orderStorage = orderStorage.filter((element) => element != element);
+    deleteNameStorageItem(item);
     console.log(cartStorage);
   });
+  console.log(orderStorage);
+  sessionStorage.setItem('order', JSON.stringify(orderStorage));
   sessionStorage.setItem('cart', JSON.stringify(cartStorage));
   calculateOrderTotalPrice();
 }
@@ -208,13 +266,9 @@ function clickPartialDeleteLabel(event) {
 //어떤 버튼 클릭했는지 확인하기
 function checkWhatIClick(event) {
   if (event.target.classList.contains('check-item')) checkingCheckBox(event.target);
-  else if (event.target.classList.contains('fa-plus') || event.target.classList.contains('fa-minus')) {
+  else if (event.target.closest('.btn-minus') || event.target.closest('.btn-plus')) {
     clickHandleQuantityButton(event.target);
   } else if (event.target.classList.contains('fa-trash-can')) clickTrashCanButton(event.target);
-
-  event.target.addEventListener('keypress', (event) => {
-    if (event.key === 'Enter') enterItemQuantity(event.target);
-  });
 }
 
 function App() {
@@ -224,6 +278,7 @@ function App() {
 
   //로딩 시 체크박스
   const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+
   if (cartStorage.length !== 0) {
     const orderStorage = JSON.parse(sessionStorage.getItem('order'));
 
