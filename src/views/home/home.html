@@ -29,81 +29,37 @@
     <script type="text/javascript">
       $(document).ready(function () {
         $("#header").load("/header.html");
+        $("#footer").load("/footer.html");
       });
     </script>
   </head>
   <body>
-    <!-- 헤더 -->
+    <!-- header -->
     <div id="header"></div>
+
     <div class="div-container">
-      <!-- <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
-      </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
-      </div> -->
       <section class="main">
         <div class="img-section" >
           <!-- <img src="images/bg_img.jpg" alt=""> -->
+          <p class="left">우리<br>강아지가</p>
+          <p class="right">원하는<br>것은?</p>
         </div>
-        <div class="category">
+        <div class="category-list">
           <ul class="wrap">
           </ul>
         </div>
       </section>
       
       <section class="list">
+        <h2>최신상품</h2>
         <ul class="list-wrap">
           
         </ul>
       </section>
     </div>
-
-    <footer>
-      <div class="footer-wrap">
-        <div class="customer-center">
-          <ul class="wrap">
-          
-            <li class="cc1 cc">
-              <p class="title">CUSTOMER CENTER</p>
-              <p class="contect">02-0000-0000</p>
-              <ul>
-                <li>평일 오전 10:30 ~ 오후 18:00</li>
-                <li>점심시간 오후 12:00 ~ 오후 13:00</li>
-                <li>토/일/공휴일 휴무</li>
-              </ul>
-            </li>
-            <li class="cc2 cc">
-              <p class="title">ACCOUNT INFO</p>
-              <p>우리은행 0000-000-000000</p>
-              <p>예금주 : 엘리스</p>
-              <p class="title" style="margin-top:30px;">RETURN/EXCHANGE</p>
-              <p>서울 강남구 테헤란로53길 16 예안빌딩 B1층</p>
-            </li>
-          </ul>
-        </div>
-        <div class="about-us">
-          <div class="wrap">
-            <div class="text">
-              <div>
-                <span><b>대표자</b> team 6</span>
-                <span><b>사업자등록번호</b> 000-00-00000</span>
-                <span><b>대표전화</b> 02-0000-0000</span>
-              </div>
-              <div>
-                <span><b>주소</b> 서울 강남구 테헤란로53길 16 예안빌딩 B1층</span>
-                <span><b>개인정보보호책임자</b> team 6</span>
-              </div>
-            </div>
-            <div class="logo">
-              <img src="/elice-rabbit.png" width="30" height="30" />
-            </div>
-          </div>
-          
-        </div>
-
-      </div>
-    </footer>
+    
+    <!-- footer -->
+    <div id="footer"></div>
 
   </body>
 </html>

@@ -32,7 +32,7 @@ function parseToHTML(item){
 				</div>
 				<div class="item-text">
 					<p class="name">${item.name}</p>
-					<p class="price">${item.price}</p>
+					<p class="price">${item.price}원</p>
 					<p class="description">${item.descriptionSummary}</p>
 				</div>
 			</a>

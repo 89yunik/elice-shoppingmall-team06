@@ -22,7 +22,7 @@ function parseToHTML(item){
 	
 	category.innerHTML = `${item.name}`;
 	title.innerHTML = `${item.name}`;
-	price.innerHTML = `${item.price}`;
+	price.innerHTML = `${item.price}원`;
 	description.innerHTML = `${item.descriptionDetail}`;
 
 	const productInfo = {
