@@ -1,4 +1,6 @@
 import { Router } from 'express';
+import fs from 'fs';
+import util from 'util';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { categoryService } from '../services';
@@ -7,6 +9,7 @@ import multer from 'multer';
 
 const categoryRouter = Router();
 const upload = multer({ dest: 'public/images' });
+const unlinkFile = util.promisify(fs.unlink);
 
 // 카테고리 등록 api (아래는 /categoryregister이지만, 실제로는 /api/categoryregister로 요청해야 함.)
 categoryRouter.post('/categoryregister', upload.single('image'), async (req, res, next) => {
@@ -15,6 +18,7 @@ categoryRouter.post('/categoryregister', upload.single('image'), async (req, res
     const file = req.file;
     if (file) {
       const result = await uploadFile(file);
+      await unlinkFile(file.path);
       req.body.imageUrl = await result.Location;
     }
     if (req.body.image) {
