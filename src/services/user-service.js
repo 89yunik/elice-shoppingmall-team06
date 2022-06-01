@@ -8,7 +8,10 @@ class UserService {
   constructor(userModel) {
     this.userModel = userModel;
   }
-
+  //이메일 중복검사
+  async duplicationUser(email) {
+    return await this.userModel.findByEmail(email);
+  }
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring

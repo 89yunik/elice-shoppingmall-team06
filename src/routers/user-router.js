@@ -61,17 +61,24 @@ userRouter.get('/user', loginRequired, async (req, res, next) => {
 // Redis 메일인증 라우터
 userRouter.post('/mailAuth', async (req, res, next) => {
   try {
+    //이메일 중복확인
+    const mailcheck = await userService.duplicationUser(req.body.email);
+
+    if (mailcheck) {
+      return res.status(401).json({ error: '이메일중복입니다.' });
+    }
     const mailAuth = await mailer(req.body.email);
     const redisSave = await redisClient.setEx(
       req.body.email,
       process.env.DEFAULT_EXPIRATION,
       mailAuth.generatedAuthNumber,
     );
-    console.log(redisSave);
+    if (!redisSave) {
+      res.status(401).json({ error: 'redis 생성 실패하였습니다.' });
+    }
     res.status(200).json({ success: '메일발송성공' });
   } catch (err) {
-    console.log(err);
-    res.status(401).json({ error: '메일을 보내는것에 실패하였습니다.' });
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 // Redis 인증번호 확인 라우터
@@ -84,7 +91,7 @@ userRouter.post('/authNumber', async (req, res, next) => {
       res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
     }
   } catch (err) {
-    res.status(401).json({ error: '인증에 문제가 생겨 실패했습니다.' });
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
@@ -108,8 +115,8 @@ userRouter.post('/register', async (req, res, next) => {
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
     // 물론 프론트에서 안 쓸 수도 있지만, 편의상 일단 보내 줌
     res.status(201).json(newUser);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 
@@ -130,8 +137,8 @@ userRouter.post('/login', async function (req, res, next) {
 
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 
@@ -144,8 +151,8 @@ userRouter.get('/userlist', loginRequired, async function (req, res, next) {
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(users);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 
@@ -187,8 +194,8 @@ userRouter.patch('/users/:_id', loginRequired, async function (req, res, next) {
 
     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
     res.status(200).json(updatedUserInfo);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 //회원 권한 수정 api
@@ -207,8 +214,8 @@ userRouter.patch('/admin/:_id/:newRole', loginRequired, async (req, res, next) =
     // 유저 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(user);
     res.status(200).json();
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 
@@ -227,8 +234,8 @@ userRouter.delete('/admin/:_id', loginRequired, async (req, res, next) => {
     const user = await userService.delUserByAdmin(_id);
     // 유저 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(user);
-  } catch (error) {
-    next(error);
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
   }
 });
 export { userRouter };
