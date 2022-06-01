@@ -19,17 +19,20 @@ function parseToHTML(item){
 	const title = document.querySelector('.title');
 	const price = document.querySelector('.price');
 	const description = document.querySelector('.description');
+	const detailImg = document.querySelector('.detail-image > .wrap')
 	
 	category.innerHTML = `${item.name}`;
 	title.innerHTML = `${item.name}`;
 	price.innerHTML = `${item.price}원`;
 	description.innerHTML = `${item.descriptionDetail}`;
+	detailImg.innerHTML = `<img src="${item.imageUrl}" alt="">`
 
 	const productInfo = {
 		"_id":`${item._id}`,
 		"name":`${item.name}`,
 		"price":`${item.price}`,
-		"quantity":1
+		"quantity":1,
+		"imageUrl":`${item.imageUrl}`
 	}
 
 	//장바구니 추가
@@ -81,7 +84,7 @@ let quickBtn = document.querySelector(".quick-buy")
 async function quickBuy(e) {
 	e.preventDefault();
 	let item = await Api.get(`/api/product/${urlId}`);
-	location.href=`/order/order.html`+`?id=${item._id}`;
+	location.href=`/order/order.html`+`?id=${item._id}&quantity=1`;
 }
 
 quickBtn.addEventListener("click", quickBuy)

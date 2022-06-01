@@ -8,7 +8,7 @@ async function getItems(){
     <li class="item" id="${items[i]._id}">
       <a href="/product/detail/${items[i]._id}" class="item-wrap">
         <div class="item-img">
-          <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/happy-and-cheerful-dog-playing-fetch-with-toy-bone-royalty-free-image-1590068781.jpg?crop=0.668xw:1.00xh;0,0&resize=640:*" alt="">
+          <img src="${items[i].imageUrl}" alt="">
         </div>
         <div class="item-text">
           <p class="name">${items[i].name}</p>

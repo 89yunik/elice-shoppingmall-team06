@@ -11,6 +11,9 @@
 .navbar {
   border-bottom:3px solid #FF7800;
 }
+.navbar-end-m {
+  display:none;
+}
 
 .logo-text {
   font-size:1.2rem;
@@ -56,12 +59,15 @@
   right:5%;
   text-align: right;
 }
-
+.main .img-section p.mobile {
+  display:none;
+}
 .category-list {
   position:absolute;
   left:50%;
   top:30px;
   width:600px;
+  max-height:100px;
   transform: translate(-50%, 0);
   background-color: white;
   border-radius: 65px;
@@ -168,6 +174,7 @@
 	position:relative;
 	border-radius: 20px;
   margin-bottom:10px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
 .list-wrap .item a .item-img img {
 	position:absolute;
@@ -227,7 +234,7 @@ footer .customer-center .wrap {
   width:100%;
 }
 footer .customer-center .cc {
-  width:33.333%;
+  width:50%;
   display:table-cell;
   border-right:1px solid #ddd;
   padding-left:50px;
@@ -303,10 +310,78 @@ footer .about-us .wrap .logo {
 }
 
 
-@media screen and (max-width:1000px) {
+@media screen and (max-width:1200px) {
+  footer .footer-wrap > div {
+    padding:0 5%;
+  }
+  footer .footer-wrap > div.about-us {
+    padding: 30px 5%;
+  }
+}
+
+@media screen and (max-width:1024px) {
+  .navbar {
+    width:100%;
+    position: static;
+  }
+  .container {
+    position: static;
+  }
+  .navbar-burger {
+    width:80px;
+    height:80px;
+    z-index: 9999;
+  }
+  .navbar-end {
+    display:none;
+  }
+  .navbar-end-m {
+    z-index: 999;
+  }
+  .on {
+    display:block;
+    position:absolute;
+    height:100%;
+    width:100%;
+    right:0;
+    
+  }
+  .navber-m-bg {
+    background-color: rgba(0,0,0,.5);
+    height:100%;
+  }
+  #navbar-m {
+    position: absolute;
+    right:0;
+    top:0;
+    display:block;
+    padding-top:80px;
+    width:300px;
+    height:100%;
+    background-color:white;
+  }
+  #navbar-m li:hover {
+    background-color: #FF7800;
+  }
+  #navbar-m li:hover a {
+    color:white;
+  }
+  .breadcrumb li {
+    display:block;
+    width:100%;
+    line-height:60px;
+    border-bottom:1px solid #ccc;
+  }
+  .breadcrumb li+li::before {
+    display:none;
+  }
+  .breadcrumb li:first-child {
+    border-top:1px solid #ccc;
+  }
   /*상품목록 6개*/
   .list {
     width:100%;
+    padding: 0 5%;
   }
   .list-wrap .item {
     width:45%;
@@ -317,6 +392,46 @@ footer .about-us .wrap .logo {
   }
   .list-wrap .item:nth-child(3n) {
     margin-right:5%;
+  }
+  .list-wrap .item:last-child {
+    margin-right:0;
+  }
+
+  .main .img-section p {
+    display:none;
+  }
+  .main .img-section p.mobile {
+    display:block;
+    text-align: center;
+    font-size:4rem;
+    line-height: 4.5rem;
+    width:100%;
+    left:50%;
+    transform: translate(-50%, 0);
+    text-shadow: 0 0 10px rgba(0,0,0,.2);
+  }
+}
+
+@media screen and (max-width:700px) {
+  .category-list {
+    width:90%;
+  }
+
+  footer .customer-center .cc {
+    width:100%;
+    display: block;
+    border-right:none;
+    border-bottom: 1px solid #ccc;
+    padding-left:0;
+  }
+  footer .customer-center .cc1 {
+    padding-bottom: 30px;
+  }
+  footer .customer-center .cc2 {
+    padding-top: 30px;
+  }
+  footer .about-us .wrap .logo {
+    display:none;
   }
 }
 
@@ -330,5 +445,26 @@ footer .about-us .wrap .logo {
   .list-wrap .item a .item-img img {
     min-width: 250px;
     min-height: 250px;
+  }
+
+  .category-list {
+    height:80px;
+  }
+  .category-list li a {
+    height:80px;
+  }
+}
+
+@media screen and (max-width:450px) {
+  .main .img-section p.mobile {
+    font-size:2.5rem;
+    line-height:3rem;
+  }
+
+  .category-list  {
+    height:60px;
+  }
+  .category-list li a {
+    height:60px;
   }
 }

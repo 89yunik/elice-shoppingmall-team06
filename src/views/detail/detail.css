@@ -1,8 +1,9 @@
-#section {
-	margin:50px auto 0 auto;
+.section {
+	margin:0 auto;
 	max-width:1344px;
 	margin-bottom:50px;
 }
+
 .section-wrap {
 	
 }
@@ -18,6 +19,7 @@
 	width:100%;
 	overflow: hidden;
 	border-radius: 30px;
+	box-shadow: 0 0 10px rgba(0,0,0,.1);
 }
 .product-detail .detail-image .wrap img {
 	max-width:100%;
@@ -62,9 +64,7 @@
 	grid-gap:4%;
 	vertical-align: bottom;
 	width:100%;
-	position:absolute;
-	left:0;
-	bottom:0;
+	margin-top:30px;
 }
 .product-detail .detail-text .detail-btns a {
 	text-align: center;
