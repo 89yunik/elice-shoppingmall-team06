@@ -44,9 +44,8 @@ async function post(endpoint, data) {
   // 응답 코드가 4XX 계열일 때 (400, 403 등)
   if (!res.ok) {
     const errorContent = await res.json();
-    const { reason } = errorContent;
-
-    throw new Error(reason);
+    const { error } = errorContent;
+    throw new Error(error);
   }
 
   const result = await res.json();

@@ -7,6 +7,10 @@ const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const passwordConfirmInput = document.querySelector('#passwordConfirmInput');
 const submitButton = document.querySelector('#submitButton');
+const requestEmailButton = document.getElementById('requestEmailButton');
+const verifyInput = document.querySelector('#verifyInput');
+const verifyButton = document.getElementById('verifyButton');
+const countText = document.querySelector('#countText');
 
 addAllElements();
 addAllEvents();
@@ -17,6 +21,78 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
+  requestEmailButton.addEventListener('click', handleRequestEmail);
+  verifyButton.addEventListener('click', handleVerify);
+}
+
+function paddedFormat(num) {
+  return num < 10 ? '0' + num : num;
+}
+
+let count = 0;
+
+function Timer(duration, ele) {
+  let timeRemaining = duration;
+  let min = 0;
+  let sec = 0;
+
+  if (count) clearInterval(count);
+
+  count = setInterval(() => {
+    timeRemaining -= 1;
+
+    min = Math.floor(timeRemaining / 60);
+    sec = Number(timeRemaining % 60);
+
+    countText.innerHTML = `${paddedFormat(min)} : ${paddedFormat(sec)}`;
+
+    if (timeRemaining < 0) clearInterval(count);
+  }, 1000);
+}
+
+async function handleVerify(e) {
+  e.preventDefault();
+
+  const data = {
+    email: emailInput.value,
+    authNumber: verifyInput.value,
+  };
+
+  try {
+    const res = await Api.post('/api/authNumber', data);
+    clearInterval(count);
+
+    // countText.innerHTML = '';
+    countText.style.display = 'none';
+    emailInput.disabled = true;
+    requestEmailButton.disabled = true;
+    verifyInput.disabled = true;
+    verifyButton.disabled = true;
+
+    verifyButton.innerHTML = '인증 완료';
+  } catch (error) {
+    alert(error);
+  }
+}
+
+async function handleRequestEmail(e) {
+  e.preventDefault();
+
+  const data = {
+    email: emailInput.value,
+  };
+
+  try {
+    requestEmailButton.innerHTML = '인증번호 전송중';
+    requestEmailButton.disabled = true;
+    const res = await Api.post('/api/mailAuth', data);
+    requestEmailButton.innerHTML = '재전송';
+    requestEmailButton.disabled = false;
+
+    Timer(180, countText);
+  } catch (error) {
+    alert(`${error} 올바른 이메일을 입력해주세요.`);
+  }
 }
 
 // 회원가입 진행
