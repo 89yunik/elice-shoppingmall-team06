@@ -28,7 +28,9 @@ export class CategoryModel {
   }
 
   async delete(_id) {
-    return await Category.deleteOne({ _id });
+    const filter = { _id };
+    const option = { returnOriginal: false };
+    return await Category.findOneAndDelete(filter, option);
   }
 }
 

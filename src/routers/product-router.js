@@ -4,7 +4,7 @@ import util from 'util';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { productService } from '../services';
-import { uploadFile } from '../s3';
+import { uploadFile, deleteFile } from '../s3';
 import multer from 'multer';
 
 const productRouter = Router();
@@ -99,7 +99,14 @@ productRouter.patch('/product/:_id', async function (req, res, next) {
 // 제품 삭제 api
 productRouter.delete('/product/:_id', async function (req, res, next) {
   try {
+    // 삭제할 제품 값을 얻음
     const product = await productService.deleteProduct(req.params._id);
+
+    //image가 있을 경우 s3 서버에서 삭제해줌
+    if (product.imageUrl) {
+      const key = product.imageUrl.split('/')[3];
+      deleteFile(key);
+    }
     // 제품 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(product);
   } catch (error) {
