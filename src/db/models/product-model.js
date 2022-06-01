@@ -32,7 +32,9 @@ export class ProductModel {
   }
 
   async delete(_id) {
-    return await Product.deleteOne({ _id });
+    const filter = { _id };
+    const option = { returnOriginal: false };
+    return await Product.findOneAndDelete(filter, option);
   }
 }
 

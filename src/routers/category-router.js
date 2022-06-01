@@ -4,7 +4,7 @@ import util from 'util';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { categoryService } from '../services';
-import { uploadFile } from '../s3';
+import { uploadFile, deleteFile } from '../s3';
 import multer from 'multer';
 
 const categoryRouter = Router();
@@ -74,8 +74,14 @@ categoryRouter.patch('/category/:_id', async function (req, res, next) {
 // 카테고리 삭제 api
 categoryRouter.delete('/category/:_id', async function (req, res, next) {
   try {
-    // 삭제할 카테고리 _id를 얻음
+    // 삭제할 카테고리 값을 얻음
     const category = await categoryService.deleteCategory(req.params._id);
+
+    //image가 있을 경우 s3 서버에서 삭제해줌
+    if (category.imageUrl) {
+      const key = category.imageUrl.split('/')[3];
+      deleteFile(key);
+    }
     // 카테고리 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(category);
   } catch (error) {
