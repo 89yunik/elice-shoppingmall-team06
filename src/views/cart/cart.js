@@ -33,14 +33,18 @@ function makeCartLists(data) {
       <input type="checkbox" id="checkbox-${id}" checked class="check-item" />
     </label>
     <figure class="image is-96x96">
+    <a href="${SERVICE_URL}/product/detail/${id}">
       <img
         id="image-${id}"
         src="./sampleData/images/sodong.png"
         alt="product-image"
       />
+    </a>
     </figure>
     <div class="content">
-      <p id="title-${id}">${data.name}</p>
+    <a href="${SERVICE_URL}/product/detail/${id}">
+      <p id="title-${id}">${data.name}</p>  
+    </a>
       <div class="quantity">
         <button
           class="button btn-minus is-rounded"
