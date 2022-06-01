@@ -199,7 +199,7 @@
           navbarM.innerHTML = `
             <li class="admin"><a href="/admin">관리자</a></li>
             <li class="account-management"><a href="/account">계정관리</a></li>
-            <li class="logout-btn"><a  href="#">로그아웃</a></li>
+            <li class="logout-btn-m"><a  href="#">로그아웃</a></li>
             <li>
               <a href="/cart" aria-current="page">
                 <span class="icon">
@@ -211,7 +211,9 @@
           `  
         }
         const logoutBtn = document.querySelector('.logout-btn');
+        const logoutBtnM = document.querySelector('.logout-btn-m');
         logoutBtn.addEventListener('click', logoutBtnEvent);
+        logoutBtnM.addEventListener('click', logoutBtnEvent);
       }
     } catch (error) {
       sessionStorage.removeItem('token');
