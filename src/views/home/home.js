@@ -28,7 +28,7 @@ let categoryList = [];
 
 //HTML Display
 function displayIcons(categories, type){
-	const category = document.querySelector('.category > .wrap');
+	const category = document.querySelector('.category-list > .wrap');
 	if(type){
 		category.innerHTML = categories.filter(val=>val.type === type).map(parseToHTML).join('');
 	}
@@ -39,7 +39,13 @@ function displayIcons(categories, type){
 // innerHTML
 function parseToHTML2(category) {
   return `
-    <li><a href="/product/list/${category._id}">${category.name}</a></li>
+    <li>
+      <a href="/product/list/${category._id}">
+        <img src="images/${category._id}-1.png" alt="" class="non-hover-img">
+        <img src="images/${category._id}-2.png" alt="" class="hover-img">
+        <p>${category.name}</p>
+      </a>
+    </li>
   `
 }
 
@@ -49,7 +55,7 @@ async function getCategories(){
   displayIcons(categories);
 }
 
-// let imgSection = document.querySelector(".img-section")
+
 
 
 

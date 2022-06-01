@@ -13,7 +13,7 @@ class OrderService {
   }
   // 해당하는 사용자 아이디를 토대로 오더 정보를 받음
   async getOrder(userId) {
-    return await this.orderModel.find({ userId });
+    return await this.orderModel.find(userId);
   }
 
   // 오더 목록을 받음.(관리자만 가능)

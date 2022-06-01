@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
+import { redisClient } from '../app';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
 import { userService, mailer } from '../services';
@@ -56,13 +57,34 @@ userRouter.get('/user', loginRequired, async (req, res, next) => {
     });
   }
 });
+
+// Redis 메일인증 라우터
 userRouter.post('/mailAuth', async (req, res, next) => {
   try {
     const mailAuth = await mailer(req.body.email);
-    res.status(200).json({ Auth: mailAuth.generatedAuthNumber });
+    const redisSave = await redisClient.setEx(
+      req.body.email,
+      process.env.DEFAULT_EXPIRATION,
+      mailAuth.generatedAuthNumber,
+    );
+    console.log(redisSave);
+    res.status(200).json({ success: '메일발송성공' });
   } catch (err) {
     console.log(err);
     res.status(401).json({ error: '메일을 보내는것에 실패하였습니다.' });
+  }
+});
+// Redis 인증번호 확인 라우터
+userRouter.post('/authNumber', async (req, res, next) => {
+  try {
+    const redisGet = await redisClient.get(req.body.email, (err, reply) => {});
+    if (req.body.authNumber === redisGet) {
+      res.status(200).json({ success: '번호인증성공' });
+    } else {
+      res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
+    }
+  } catch (err) {
+    res.status(401).json({ error: '인증에 문제가 생겨 실패했습니다.' });
   }
 });
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)

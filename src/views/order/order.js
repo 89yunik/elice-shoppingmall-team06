@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import { deleteNameStorageItem } from './../useful-functions.js';
 
 const MAIN_PAGE_URL = 'http://localhost:5070';
 
@@ -63,9 +64,20 @@ function loadName(fullName) {
 }
 
 function clearSessionStorage() {
-  const iBought = checkWhatIBuy();
+  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
+
+  orderStorage.forEach((item) => {
+    cartStorage = cartStorage.filter((element) => element._id !== item);
+    deleteNameStorageItem(item);
+  });
+  console.log(orderStorage);
+  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+
+  // const iBought = checkWhatIBuy();
 
   sessionStorage.removeItem('order');
+
   // const check = checkWhatIBuy();
   // console.log((check));
 }
@@ -100,45 +112,41 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-
-  for (let i = 0; i < cartItems.length; i++) {
-    checkedId.forEach((item) => {
-      if (cartItems[i]._id === item) {
-        // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
-        // productsTotal += cartItems[i].price * cartItems[i].quantity;
-        result.push(cartItems[i]);
-      }
-    });
+  if (sessionStorage.getItem('quick') === null) {
+    for (let i = 0; i < cartItems.length; i++) {
+      checkedId.forEach((item) => {
+        if (cartItems[i]._id === item) {
+          // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
+          // productsTotal += cartItems[i].price * cartItems[i].quantity;
+          result.push(cartItems[i]);
+        }
+      });
+    }
+  } else {
+    result.push(JSON.parse(sessionStorage.getItem('quick')));
   }
   return result;
 }
-checkWhatIBuy();
 
-function makeListOfProductTitle() {
+let totalPrice = 0;
+
+function makeListOfProductTitle(orderList) {
   const whatIBuy = checkWhatIBuy();
-  let totalPrice = 0;
-
-  document.querySelector('#productsTitle').innerHTML = '';
-  whatIBuy.forEach((item) => {
-    document.querySelector('#productsTitle').innerHTML += `${item.name} </br>`;
-    totalPrice += item.price * item.quantity;
+  console.log(orderList);
+  orderList.forEach((product) => {
+    product.quantity = parseInt(product.quantity);
+    document.querySelector('#productsTitle').innerHTML += `${product.item.name} / ${product.quantity} </br>`;
+    totalPrice += product.item.price * product.quantity;
   });
 
   document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
-  document.querySelector('#orderTotal').innerHTML = totalPrice + 3000;
-}
-
-let userID;
-
-function callUserApi() {
-  let userApi = Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    userID = result.email;
-  });
+  document.querySelector('#orderTotal').innerHTML = parseInt(totalPrice) + 3000;
 }
 
 async function makeApiOderRegisterData() {
   const whatIBuy = checkWhatIBuy();
   const productList = [];
+
   whatIBuy.forEach((item) => {
     const product = {
       name: item.name,
@@ -148,18 +156,19 @@ async function makeApiOderRegisterData() {
   });
   console.log(productList);
 
-  let userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    userID = result._id;
-  });
+  const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  // const orderApi = await Api.get(`${MAIN_PAGE_URL}`/api/product/${orderIds[i]})
+
   const data = {
-    userId: userID,
+    userId: userApi._id,
     orderInfo: {
       product: productList,
-      name: document.querySelector('#receiverName').value,
+      name: userApi.fullName,
       phoneNumber: document.querySelector('#receiverPhoneNumber').value,
       address1: document.querySelector('#address1').value,
       address2: document.querySelector('#address2').value,
       requests: document.querySelector('#requestSelectBox').value,
+      total: totalPrice,
     },
     orderState: '상품 준비중',
   };
@@ -171,9 +180,50 @@ async function makeApiOderRegisterData() {
   }
 }
 
-window.onload = () => {
-  Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-    loadName(result.fullName);
-  });
-  makeListOfProductTitle();
-};
+function getUrlParameters() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.getAll('id');
+  const quantity = urlParams.getAll('quantity');
+  return { id, quantity };
+}
+
+async function checkItemsInApi(orderItems) {
+  let productApi = [];
+
+  for (let i = 0; i < orderItems.id.length; i++) {
+    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+    console.log(apiResult);
+    productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
+  }
+
+  // orderIds.forEach( (id) => {
+  //   productApi = await Api.get(`${MAIN_PAGE_URL}/api/product/${id}`);
+  // });
+  //async await는 forEach문 안에서 작동이 원활하게 되지 않는다.
+  //forEach문에서 productApi를 저장하고 밖에서 출력하면 undefine가 나온다.
+
+  return productApi;
+}
+//window.onload랑 함수를 만들어서 실행하는거랑 차이점이 뭐지?
+// window.onload = () => {
+//   const Ids = getUrlParameters();
+
+//   console.log(checkItemsInApi(Ids));
+
+//   Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
+//     loadName(result.fullName);
+//   });
+//   // makeListOfProductTitle();
+//   // checkWhatIBuy();
+// };
+async function App() {
+  const Ids = getUrlParameters();
+  console.log(Ids);
+  const itemsApi = await checkItemsInApi(Ids);
+  makeListOfProductTitle(itemsApi);
+  const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  loadName(memberInfo.fullName);
+}
+
+App();
