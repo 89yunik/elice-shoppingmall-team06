@@ -74,12 +74,15 @@
           <label class="label" for="emailInput">이메일</label>
           <div class="control">
             <input class="input" id="emailInput" type="email" placeholder="abc@example.com" autocomplete="on" />
+            <button class="button" id="requestEmailButton">인증번호 요청</button>
           </div>
         </div>
         <div class="field">
           <label class="label" for="verifyInput">인증번호확인</label>
           <div class="control">
             <input class="input" id="verifyInput" type="input" placeholder="인증번호를 입력하세요." autocomplete="on" />
+            <span class="tag is-white" id="countText"></span>
+            <button class="button" id="verifyButton">인증번호 확인</button>
           </div>
         </div>
 
