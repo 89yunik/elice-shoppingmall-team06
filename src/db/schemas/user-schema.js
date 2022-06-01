@@ -12,7 +12,7 @@ const UserSchema = new Schema(
     },
     password: {
       type: String,
-      required: true,
+      required: false,
     },
     userType: {
       type: String,
@@ -20,6 +20,10 @@ const UserSchema = new Schema(
       default: 'normal',
     },
     phoneNumber: {
+      type: String,
+      required: false,
+    },
+    Oauth_refresh_token: {
       type: String,
       required: false,
     },
