@@ -7,19 +7,31 @@ const urlId = urlSplit[urlSplit.length - 2];
 
 async function newFunction() {
   let datas = await Api.get(`/api/productlist/${urlId}`);
+  let cate = await Api.get(`/api/categorylist`);
+  let cateName = '';
   let itemList = [];
   datas.forEach((item) => {
     itemList.push(item);
     displayItems(itemList);
     parseToHTML(item);
+
+    cate.forEach((category) => {
+      if (category._id === item.category) {
+        cateName = category.name;
+        let categoryH2 = document.querySelector('.section > h2');
+        categoryH2.innerHTML = cateName;
+      }
+    });
   });
   return;
 }
 
 //HTML Display
 function displayItems(items) {
+  const listH2 = document.querySelector('.section > h2');
   const ul = document.querySelector('.section-wrap');
   ul.innerHTML = items.map(parseToHTML).join('');
+  // listH2.innerHTML = ${items.}
 }
 
 //데이터 -> HTML 변환

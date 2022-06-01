@@ -129,7 +129,7 @@ async function submitButtonEvent(e) {
   try {
     const res = await Api.postForm('/api/productregister', formData);
     alert('성공적으로 등록되었습니다.');
-    location.href = '/account/add/';
+    location.href = '/admin/product/add/';
   } catch (error) {
     console.log(error);
   }
