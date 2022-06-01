@@ -1,4 +1,5 @@
 import { deleteNameStorageItem } from './../useful-functions.js';
+import { addCommas } from './../useful-functions.js';
 
 const DELIVERY_FEE = 3000;
 const SERVICE_URL = 'http://localhost:5070';
@@ -73,7 +74,7 @@ function makeCartLists(data) {
       
     </div>
     <div class="calculation">
-      <p id="unitPrice-${id}">${data.price}</p><p>원</p>
+      <p id="unitPrice-${id}">${addCommas(data.price)}</p><p>원</p>
       <p>
         <span class="icon">
           <i class="fas fa-thin fa-xmark" aria-hidden="true"></i>
@@ -144,8 +145,8 @@ function calculateOrderTotalPrice() {
     });
   });
 
-  document.querySelector('#productsTotal').innerHTML = productsTotalPrice;
-  document.querySelector('#orderTotal').innerHTML = productsTotalPrice + DELIVERY_FEE;
+  document.querySelector('#productsTotal').innerHTML = addCommas(productsTotalPrice) + '원';
+  document.querySelector('#orderTotal').innerHTML = addCommas(productsTotalPrice + DELIVERY_FEE) + '원';
   document.querySelector('#productsCount').innerHTML = productsCount;
   return productsTotalPrice; // 리턴 ??
 }

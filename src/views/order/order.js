@@ -1,5 +1,5 @@
 import * as Api from '/api.js';
-import { deleteNameStorageItem } from './../useful-functions.js';
+import { deleteNameStorageItem, addCommas } from './../useful-functions.js';
 
 const MAIN_PAGE_URL = 'http://localhost:5070';
 
@@ -116,8 +116,6 @@ function checkWhatIBuy() {
     for (let i = 0; i < cartItems.length; i++) {
       checkedId.forEach((item) => {
         if (cartItems[i]._id === item) {
-          // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
-          // productsTotal += cartItems[i].price * cartItems[i].quantity;
           result.push(cartItems[i]);
         }
       });
@@ -139,8 +137,8 @@ function makeListOfProductTitle(orderList) {
     totalPrice += product.item.price * product.quantity;
   });
 
-  document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
-  document.querySelector('#orderTotal').innerHTML = parseInt(totalPrice) + 3000;
+  document.querySelector('#productsTotal').innerHTML = `${addCommas(totalPrice)}원`;
+  document.querySelector('#orderTotal').innerHTML = addCommas(parseInt(totalPrice) + 3000) + '원';
 }
 
 async function makeApiOderRegisterData() {
@@ -190,20 +188,18 @@ function getUrlParameters() {
 
 async function checkItemsInApi(orderItems) {
   let productApi = [];
+  try {
+    for (let i = 0; i < orderItems.id.length; i++) {
+      const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+      console.log(apiResult);
+      productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
+    }
 
-  for (let i = 0; i < orderItems.id.length; i++) {
-    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
-    console.log(apiResult);
-    productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
+    return productApi;
+  } catch (err) {
+    console.log(err);
+    alert('error');
   }
-
-  // orderIds.forEach( (id) => {
-  //   productApi = await Api.get(`${MAIN_PAGE_URL}/api/product/${id}`);
-  // });
-  //async await는 forEach문 안에서 작동이 원활하게 되지 않는다.
-  //forEach문에서 productApi를 저장하고 밖에서 출력하면 undefine가 나온다.
-
-  return productApi;
 }
 //window.onload랑 함수를 만들어서 실행하는거랑 차이점이 뭐지?
 // window.onload = () => {
