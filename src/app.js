@@ -3,24 +3,21 @@ import express from 'express';
 import { viewsRouter, userRouter, productRouter, categoryRouter, orderRouter } from './routers';
 import { errorHandler } from './middlewares';
 import morgan from 'morgan';
-const redis = require('redis');
+import * as redis from 'redis';
 const app = express();
 // CORS 에러 방지
 app.use(cors());
 app.use(morgan('dev'));
 
-console.log(redis.createClient(process.env.REDIS_URL));
-// async function redisStart() {
-//   const client = redis.createClient();
-//   console.log(await client.connect());
-//   client.on('error', (err) => {
-//     console.log(err);
-//   });
-//   client.on('ready', () => {
-//     console.log('READY');
-//   });
-// }
-// redisStart();
+const redisClient = redis.createClient({ url: `${process.env.REDIS_URL}` });
+redisClient.connect();
+redisClient.on('error', (err) => {
+  console.log(err);
+});
+redisClient.on('ready', () => {
+  console.log('정상적으로 Redis 서버에 연결되었습니다.');
+});
+
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
 
@@ -43,4 +40,4 @@ app.use('/api', orderRouter);
 app.use(errorHandler);
 // public 폴더 접근
 app.use(express.static('public'));
-export { app };
+export { app, redisClient };
