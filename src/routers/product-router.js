@@ -1,19 +1,29 @@
 import { Router } from 'express';
+import fs from 'fs';
+import util from 'util';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { productService } from '../services';
+import { uploadFile } from '../s3';
+import multer from 'multer';
 
 const productRouter = Router();
+const upload = multer({ dest: 'public/images' });
+const unlinkFile = util.promisify(fs.unlink);
 
 // 제품 등록 api (아래는 /productregister이지만, 실제로는 /api/productregister로 요청해야 함.)
-productRouter.post('/productregister', async (req, res, next) => {
+productRouter.post('/productregister', upload.single('image'), async (req, res, next) => {
   try {
-    // Content-Type: application/json 설정을 안 한 경우, 에러를 만들도록 함.
-    // application/json 설정을 프론트에서 안 하면, body가 비어 있게 됨.
-    if (is.emptyObject(req.body)) {
-      throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
+    // s3에 이미지 업로드
+    const file = req.file;
+    if (file) {
+      const result = await uploadFile(file);
+      await unlinkFile(file.path);
+      req.body.imageUrl = await result.Location;
     }
-
+    if (req.body.image) {
+      delete req.body.image;
+    }
     // 위 데이터를 제품 db에 추가하기
     const newProduct = await productService.addProduct(req.body);
     // 추가된 제품의 db 데이터를 프론트에 다시 보내줌

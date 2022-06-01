@@ -34,7 +34,12 @@
             <img src="/images/logo.png" width="50" height="50" style="max-height: 50px;"/>
             <span class="logo-text">소동이네</span>
           </a>
-          
+          <div class="navbar-end-m breadcrumb my-auto" aria-label="breadcrumbs">
+            <div class="navber-m-bg"></div>
+            <ul id="navbar-m" class="navbar-m">
+              
+            </ul>
+          </div>
           <a
           role="button"
           class="navbar-burger"
@@ -42,10 +47,11 @@
           aria-expanded="false"
           data-target="navbarBasicExample"
           >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
+        
       </div>
       
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
@@ -58,6 +64,16 @@
 </nav>
 
 <script>
+  let navbarBurger = document.querySelector('.navbar-burger');
+  let navbarBG = document.querySelector('.navber-m-bg')
+  navbarBurger.addEventListener("click", function(){
+    $('.navbar-end-m').toggleClass('on');
+  })
+  navbarBG.addEventListener("click", function(){
+    $('.navbar-end-m').toggleClass('on');
+  })
+
+
   async function get(endpoint, params = '') {
     const apiUrl = `${endpoint}/${params}`;
     console.log(`%cGET 요청: ${apiUrl} `, 'color: #a25cd1;');
@@ -93,6 +109,7 @@
   
   async function initPage(){
     const navbar = document.getElementById('navbar');
+    const navbarM = document.getElementById('navbar-m');
     const pathname = window.location.pathname;
     const isAdminPath = pathname.search('admin') !== -1
     const isAccountPath = pathname.search('account') !== -1
@@ -104,6 +121,18 @@
         }
 
         navbar.innerHTML = `
+          <li class="login-btn"><a href="/login">로그인</a></li>
+          <li><a href="/register">회원가입</a></li>
+          <li>
+            <a href="/cart" aria-current="page">
+              <span class="icon">
+                <i class="fas fa-cart-shopping"></i>
+              </span>
+              <span>카트</span>
+            </a>
+          </li>
+        `
+        navbarM.innerHTML = `
           <li class="login-btn"><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
           <li>
@@ -140,6 +169,19 @@
               </a>
             </li>
           `
+          navbarM.innerHTML = `
+            <li class="account-management"><a href="/account">계정관리</a></li>
+            <li class="logout-btn"><a  href="#">로그아웃</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+                <span>카트</span>
+              </a>
+            </li>
+          `
+
         }else if(userData.role === 'admin'){
           navbar.innerHTML = `
             <li class="admin"><a href="/admin">관리자</a></li>
@@ -154,7 +196,19 @@
               </a>
             </li>
           `  
-
+          navbarM.innerHTML = `
+            <li class="admin"><a href="/admin">관리자</a></li>
+            <li class="account-management"><a href="/account">계정관리</a></li>
+            <li class="logout-btn"><a  href="#">로그아웃</a></li>
+            <li>
+              <a href="/cart" aria-current="page">
+                <span class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </span>
+                <span>카트</span>
+              </a>
+            </li>
+          `  
         }
         const logoutBtn = document.querySelector('.logout-btn');
         logoutBtn.addEventListener('click', logoutBtnEvent);

@@ -31,22 +31,15 @@ body {
 
 .cart-header .title {
   margin-bottom: 0;
-  padding: 1rem 0 0 1rem;
 }
+
 .cart-header .subtitle {
   line-height: 2.5rem;
   padding: 3rem 1rem 0;
 }
-.is-size-2 {
-  font-size: 2.5rem !important;
-}
 
 .title:not(.is-spaced) + .subtitle {
   margin-top: -1.25rem;
-}
-
-.is-size-6 {
-  font-size: 1rem !important;
 }
 
 .tile {
@@ -172,6 +165,11 @@ body {
   cursor: pointer;
   font-size: 1.4rem;
   margin-bottom: 0.5em;
+  color: #363636;
+  font-weight: 600;
+}
+.cart-product-item .content p:visited {
+  color: #363636;
 }
 
 .cart-product-item .quantity .button {
