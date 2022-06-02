@@ -188,31 +188,30 @@ function getUrlParameters() {
 
 async function checkItemsInApi(orderItems) {
   let productApi = [];
-  try {
-    for (let i = 0; i < orderItems.id.length; i++) {
-      const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
-      console.log(apiResult);
-      productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
-    }
 
-    return productApi;
-  } catch (err) {
-    console.log(err);
-    alert('error');
+  console.log(orderItems);
+  for (let i = 0; i < orderItems.id.length; i++) {
+    console.log(orderItems.id[i]);
+    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+    productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
   }
+  console.log(productApi);
+  return productApi;
+
+  // try {
+  //   for (let i = 0; i < orderItems.id.length; i++) {
+  //     const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+  //     console.log(apiResult);
+  //     productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
+  //   }
+
+  //   return productApi;
+  // } catch (err) {
+  //   console.log(err);
+  //   alert('error');
+  // }
 }
-//window.onload랑 함수를 만들어서 실행하는거랑 차이점이 뭐지?
-// window.onload = () => {
-//   const Ids = getUrlParameters();
 
-//   console.log(checkItemsInApi(Ids));
-
-//   Api.get(`${MAIN_PAGE_URL}/api/user`).then((result) => {
-//     loadName(result.fullName);
-//   });
-//   // makeListOfProductTitle();
-//   // checkWhatIBuy();
-// };
 async function App() {
   const Ids = getUrlParameters();
   console.log(Ids);
