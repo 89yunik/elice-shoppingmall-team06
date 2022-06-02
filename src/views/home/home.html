@@ -13,11 +13,18 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
     <script src="home.js" type="module" defer></script>
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       fetch('/header.html')
         .then((res) => res.text())
         .then((text) => {
           document.querySelector('#header').innerHTML = text;
+        });
+      fetch('/header.js')
+        .then((response) => response.text())
+        .then((txt) => {
+          var script = document.createElement('script');
+          script.innerHTML = txt;
+          document.body.appendChild(script);
         });
       fetch('/footer.html')
         .then((res) => res.text())
@@ -25,7 +32,6 @@
           document.querySelector('#footer').innerHTML = text;
         });
     </script>
-    <script src="/header.js" type="module" defer></script>
   </head>
   <body>
     <!-- header -->
