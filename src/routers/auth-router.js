@@ -4,6 +4,7 @@ import qs from 'qs';
 import { userService } from '../services';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 const authRouter = Router();
 
 // auth/kakao로 들어온 것 처리
@@ -53,9 +54,11 @@ authRouter.get('/kakao', async (req, res, next) => {
       res.cookie('token', suctoken);
       res.redirect('http://localhost:5070/auth');
     } else {
+      const hashedPassword = await bcrypt.hash('kakao', 10);
       const userInfo = {
         email: user.data.kakao_account.email,
         fullName: user.data.properties.nickname,
+        password: hashedPassword,
         userType: 'kakao',
         Oauth_refresh_token: token.data.refresh_token,
       };
