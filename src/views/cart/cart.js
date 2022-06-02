@@ -295,12 +295,7 @@ function checkWhatIClick(event) {
 
 function checkingCheckBoxesAndOrderList() {
   const checkBoxes = document.querySelectorAll('.check-item');
-  let orderStorage;
-  if (sessionStorage.getItem('order') === null) {
-    orderStorage = [];
-  } else {
-    orderStorage = JSON.parse(sessionStorage.getItem('order'));
-  }
+  let orderStorage = [];
   checkBoxes.forEach((item) => {
     const id = item.closest('.cart-product-item').dataset.id;
     if (item.checked) {
