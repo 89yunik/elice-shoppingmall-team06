@@ -50,7 +50,8 @@ authRouter.get('/kakao', async (req, res, next) => {
       // 로그인 성공 -> JWT 웹 토큰 생성
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: userData._id, role: userData.role }, secretKey);
-      res.redirect('http://localhost:5070');
+      res.cookie('token', suctoken);
+      res.redirect('http://localhost:5070/auth');
     } else {
       const userInfo = {
         email: user.data.kakao_account.email,
@@ -63,7 +64,8 @@ authRouter.get('/kakao', async (req, res, next) => {
       // 로그인 성공 -> JWT 웹 토큰 생성
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: newUser._id, role: newUser.role }, secretKey);
-      res.redirect('http://localhost:5070');
+      res.cookie('token', suctoken);
+      res.redirect('http://localhost:5070/auth');
     }
   } catch (err) {
     res.status(401).json({ error: `${err.message}` });
