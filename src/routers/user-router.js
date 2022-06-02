@@ -25,7 +25,7 @@ userRouter.post('/user', loginRequired, async (req, res, next) => {
 
     const userInfoRequired = { _id, currentPassword };
     const deleteUserInfo = await userService.delUser(userInfoRequired);
-    res.status(200).json(deleteUserInfo);
+    res.status(200).json({ message: 'success' });
   } catch (error) {
     // jwt.verify 함수가 에러를 발생시키는 경우는 토큰이 정상적으로 decode 안되었을 경우임.
     // 403 코드로 JSON 형태로 프론트에 전달함.
