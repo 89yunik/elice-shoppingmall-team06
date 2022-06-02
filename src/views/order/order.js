@@ -64,19 +64,17 @@ function loadName(fullName) {
 }
 
 function clearSessionStorage() {
-  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  const Ids = getUrlParameters();
+  console.log(Ids);
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
-  if (orderStorage !== null) {
-    orderStorage.forEach((item) => {
-      cartStorage = cartStorage.filter((element) => element._id !== item);
-      deleteNameStorageItem(item);
-    });
-    console.log(orderStorage);
-    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  for (let i = 0; i < Ids.id.length; i++) {
+    cartStorage = cartStorage.filter((element) => element._id !== Ids.id[i]);
+  }
 
-    sessionStorage.removeItem('order');
-  } else return;
+  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+
+  sessionStorage.removeItem('order');
 }
 
 async function handleCheckoutButton() {
@@ -196,7 +194,6 @@ async function checkItemsInApi(orderItems) {
 
 async function App() {
   const Ids = getUrlParameters();
-  console.log(Ids);
   const itemsApi = await checkItemsInApi(Ids);
   makeListOfProductTitle(itemsApi);
   const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
