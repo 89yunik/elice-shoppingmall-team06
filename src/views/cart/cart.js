@@ -203,7 +203,6 @@ function clickHandleQuantityButton(event) {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = false;
     quantityInput.value = newQuantityInput;
     quantity.innerHTML = newQuantityInput;
-    console.log(newQuantityInput, priceValue);
     total.innerHTML = newQuantityInput * priceValue;
   } else {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = true;
@@ -229,7 +228,6 @@ function clickHandleQuantityButton(event) {
 
 //실시간으로 상품계산 바뀌게(결제정보 x)
 function calculateImmediatelyCart(id, item) {
-  console.log(item.quantity);
   document.querySelector(`#total-${id}`).innerHTML = item.quantity * parseInt(item.price);
   document.querySelector(`#quantity-${id}`).innerHTML = item.quantity;
 }
@@ -239,7 +237,6 @@ function enterItemQuantity(event) {
   if (event.target.classList.contains('input-enter')) {
     let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
     const id = event.target.closest('.cart-product-item').dataset.id;
-    console.log(cartStorage);
     cartStorage.map((item) => {
       if (item._id === id) {
         item.quantity = event.target.value;
@@ -282,9 +279,7 @@ function clickPartialDeleteLabel(event) {
     cartStorage = cartStorage.filter((element) => element._id !== item);
     orderStorage = orderStorage.filter((element) => element != element);
     deleteNameStorageItem(item);
-    console.log(cartStorage);
   });
-  console.log(orderStorage);
   sessionStorage.setItem('order', JSON.stringify(orderStorage));
   sessionStorage.setItem('cart', JSON.stringify(cartStorage));
   calculateOrderTotalPrice();
@@ -298,8 +293,26 @@ function checkWhatIClick(event) {
   } else if (event.target.classList.contains('fa-trash-can')) clickTrashCanButton(event.target);
 }
 
+function checkingCheckBoxesAndOrderList() {
+  const checkBoxes = document.querySelectorAll('.check-item');
+  let orderStorage;
+  if (sessionStorage.getItem('order') === null) {
+    orderStorage = [];
+  } else {
+    orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  }
+  checkBoxes.forEach((item) => {
+    const id = item.closest('.cart-product-item').dataset.id;
+    if (item.checked) {
+      orderStorage.push(id);
+    }
+  });
+  sessionStorage.setItem('order', JSON.stringify(orderStorage));
+}
+
 function App() {
   displayCartLIsts();
+  checkingCheckBoxesAndOrderList();
   calculateOrderTotalPrice();
   checkingAllCheckBox();
 
