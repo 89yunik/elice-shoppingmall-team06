@@ -25,16 +25,11 @@ export class ProductModel {
   }
 
   async update({ _id, update }) {
-    const filter = { _id };
-    const option = { returnOriginal: false };
-
-    return await Product.findOneAndUpdate(filter, update, option);
+    return await Product.findOneAndUpdate({ _id, returnOriginal: false }, update);
   }
 
   async delete(_id) {
-    const filter = { _id };
-    const option = { returnOriginal: false };
-    return await Product.findOneAndDelete(filter, option);
+    return await Product.findOneAndDelete({ _id, returnOriginal: false });
   }
 }
 

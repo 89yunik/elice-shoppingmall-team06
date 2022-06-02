@@ -17,20 +17,16 @@ export class CategoryModel {
   }
 
   async findAll() {
+    console.log(Category);
     return await Category.find({});
   }
 
   async update({ _id, update }) {
-    const filter = { _id };
-    const option = { returnOriginal: false };
-
-    return await Category.findOneAndUpdate(filter, update, option);
+    return await Category.findOneAndUpdate({ _id, returnOriginal: false }, update);
   }
 
   async delete(_id) {
-    const filter = { _id };
-    const option = { returnOriginal: false };
-    return await Category.findOneAndDelete(filter, option);
+    return await Category.findOneAndDelete({ _id, returnOriginal: false });
   }
 }
 
