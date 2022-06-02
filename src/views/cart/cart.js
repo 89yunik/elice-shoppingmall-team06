@@ -1,4 +1,4 @@
-import { deleteNameStorageItem } from './../useful-functions.js';
+import { convertToNumber, deleteNameStorageItem } from './../useful-functions.js';
 import { addCommas } from './../useful-functions.js';
 
 const DELIVERY_FEE = 3000;
@@ -10,11 +10,21 @@ document.querySelector('#purchaseButton').addEventListener('click', moveToOrderP
 document.querySelector('.cart-only-product').addEventListener('change', enterItemQuantity);
 document.querySelector('#partialDeleteLabel .help').addEventListener('click', clickPartialDeleteLabel);
 
+function loginCheck() {
+  if (!sessionStorage.getItem('token')) {
+    alert('로그인이 필요합니다');
+    sessionStorage.setItem('lastUrl', window.location.href);
+    location.href = SERVICE_URL + '/login';
+    return 'login';
+  }
+  return 'order';
+}
 //구매하기 버튼 클릭시
 function moveToOrderPage() {
+  // loginCheck();
   const orderStorage = JSON.parse(sessionStorage.getItem('order'));
   const cartStorage = JSON.parse(sessionStorage.getItem('cart'));
-  const myUrl = new URL(`${SERVICE_URL}/order`);
+  const myUrl = new URL(`${SERVICE_URL}/${loginCheck()}`);
   const intersectItems = orderStorage.map((orderId) => cartStorage.find((cart) => cart._id === orderId));
 
   intersectItems.forEach((item) => {
@@ -37,7 +47,7 @@ function makeCartLists(data) {
     <a href="${SERVICE_URL}/product/detail/${id}">
       <img
         id="image-${id}"
-        src="./sampleData/images/sodong.png"
+        src="${data.imageUrl}"
         alt="product-image"
       />
     </a>
@@ -184,7 +194,7 @@ function clickHandleQuantityButton(event) {
   const quantityInput = cartProductItem.querySelector(`#quantityInput-${targetId}`);
   const quantity = cartProductItem.querySelector(`#quantity-${targetId}`);
   const total = cartProductItem.querySelector(`#total-${targetId}`);
-  const priceValue = Number(cartProductItem.querySelector(`#unitPrice-${targetId}`).innerText);
+  const priceValue = Number(convertToNumber(cartProductItem.querySelector(`#unitPrice-${targetId}`).innerText));
 
   const quantityInputValue = Number(quantityInput.value);
   const newQuantityInput = isPlus ? quantityInputValue + 1 : quantityInputValue - 1;
@@ -193,6 +203,7 @@ function clickHandleQuantityButton(event) {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = false;
     quantityInput.value = newQuantityInput;
     quantity.innerHTML = newQuantityInput;
+    console.log(newQuantityInput, priceValue);
     total.innerHTML = newQuantityInput * priceValue;
   } else {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = true;
