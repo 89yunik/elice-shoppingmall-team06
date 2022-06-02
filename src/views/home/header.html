@@ -171,7 +171,7 @@
           `
           navbarM.innerHTML = `
             <li class="account-management"><a href="/account">계정관리</a></li>
-            <li class="logout-btn"><a  href="#">로그아웃</a></li>
+            <li class="logout-btn-m"><a  href="#">로그아웃</a></li>
             <li>
               <a href="/cart" aria-current="page">
                 <span class="icon">
@@ -218,7 +218,8 @@
     } catch (error) {
       sessionStorage.removeItem('token');
       alert('잘못된 토큰입니다. 다시 로그인해주세요.');
-      location.href = "/login"
+      console.log(error)
+      // location.href = "/login"
     }
   }
   initPage();
