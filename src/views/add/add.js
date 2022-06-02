@@ -12,6 +12,7 @@ const searchKeywordInput = document.getElementById('searchKeywordInput');
 const keywordContainer = document.getElementById('keywordContainer');
 const addKeywordButton = document.getElementById('addKeywordButton');
 const submitButton = document.getElementById('submitButton');
+const registerProductForm = document.getElementById('registerProductForm');
 
 const searchKeywordArr = [];
 addAllElements();
@@ -35,7 +36,7 @@ async function getCategoryData() {
 }
 
 function addAllEvents() {
-  submitButton.addEventListener('click', submitButtonEvent);
+  registerProductForm.onsubmit = submitButtonEvent;
   addKeywordButton.addEventListener('click', addKeywordButtonEvent);
   searchKeywordInput.addEventListener('keyup', searchKeywordInputEvent);
 }

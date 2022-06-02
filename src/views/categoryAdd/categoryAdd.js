@@ -27,6 +27,8 @@ async function submitButtonEvent(e) {
   const image = imageInput.files[0];
 
   const formData = new FormData();
+  if (!image) {
+  }
   formData.append('image', image);
   formData.append('name', titleInput.value);
   formData.append('description', descriptionInput.value);
