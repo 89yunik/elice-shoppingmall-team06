@@ -30,19 +30,34 @@ function levelTemplate(data) {
     <div class="level-item has-text-centered">
       <div>
         <p class="heading">OAuth가입자수</p>
-        <p class="title" id="OAuthCount">${data.filter((item) => item.type === '소셜').length}</p>
+        <p class="title" id="OAuthCount">${data.filter((item) => item.type !== 'normal').length}</p>
       </div>
     </div>
   `;
 }
 
 function tableTemplate(data) {
+  let userType = '';
+  switch (data.userType) {
+    case 'normal':
+      userType = '일반';
+      break;
+    case 'kakao':
+      userType = '카카오';
+      break;
+    case 'google':
+      userType = '구글';
+      break;
+    default:
+      userType = '일반';
+      break;
+  }
   return `
   <div class="columns orders-item">
     <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
     <div class="column is-2">${data.email}</div>
     <div class="column is-2">
-      <span class="tag">${data.type !== 'normal' ? '일반' : '소셜'}</span>
+      <span class="tag">${userType}</span>
     </div>
     <div class="column is-2">${data.fullName}</div>
     <div class="column is-2">

@@ -68,7 +68,7 @@ import { validateEmail } from '/useful-functions.js';
 
       countText.innerHTML = `${paddedFormat(min)} : ${paddedFormat(sec)}`;
 
-      if (timeRemaining < 0) {
+      if (timeRemaining <= 0) {
         certificationFunc.noCerti();
         verifyButton.disabled = true;
         clearInterval(count);
@@ -104,6 +104,7 @@ import { validateEmail } from '/useful-functions.js';
       certificationFunc.noCerti();
       requestEmailButton.innerHTML = '인증번호 전송중';
       requestEmailButton.disabled = true;
+      verifyButton.disabled = false;
       const res = await Api.post('/api/mailAuth', data);
       requestEmailButton.innerHTML = '재전송';
       requestEmailButton.disabled = false;
