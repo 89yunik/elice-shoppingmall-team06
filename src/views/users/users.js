@@ -62,10 +62,8 @@ function tableTemplate(data) {
     <div class="column is-2">${data.fullName}</div>
     <div class="column is-2">
       <div class="select">
-        <select data-id="${data._id}" class="statusSelectBox has-background-link-light has-text-link">
-          <option class="has-background-link-light has-text-link" ${
-            data.role === 'basic-user' ? 'selected=""' : ''
-          } value="basic-user">
+        <select data-id="${data._id}" class="statusSelectBox  ">
+          <option class=" " ${data.role === 'basic-user' ? 'selected=""' : ''} value="basic-user">
             일반사용자
           </option>
           <option class="has-background-danger-light has-text-danger" ${

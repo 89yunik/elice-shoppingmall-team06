@@ -5,6 +5,7 @@ const fullNameToggle = document.getElementById('fullNameToggle');
 const passwordToggle = document.getElementById('passwordToggle');
 const addressToggle = document.getElementById('addressToggle');
 const phoneNumberToggle = document.getElementById('phoneNumberToggle');
+const checkbox = document.querySelector('.checkbox');
 
 const securityTitle = document.getElementById('securityTitle');
 const fullNameInput = document.getElementById('fullNameInput');
@@ -60,27 +61,54 @@ async function getUserData() {
 }
 
 function fullNameToggleEvent(e) {
-  fullNameInput.disabled = !e.target.checked;
+  e.preventDefault();
+  const target = e.target;
+  const isToggle = e.target.classList.contains('on');
+
+  fullNameInput.disabled = isToggle;
+  target.setAttribute('aria-checked', !isToggle);
   fullNameInput.focus();
+  target.classList.toggle('on');
 }
 
 function passwordToggleEvent(e) {
-  passwordInput.disabled = !e.target.checked;
-  passwordConfirmInput.disabled = !e.target.checked;
+  e.preventDefault();
+  const target = e.target;
+  const isToggle = e.target.classList.contains('on');
+
+  passwordInput.disabled = isToggle;
+  passwordConfirmInput.disabled = isToggle;
   passwordInput.focus();
+
+  target.setAttribute('aria-checked', !isToggle);
+  target.classList.toggle('on');
 }
 
 function addressToggleEvent(e) {
-  postalCodeInput.disabled = !e.target.checked;
-  address1Input.disabled = !e.target.checked;
-  address2Input.disabled = !e.target.checked;
-  searchAddressButton.disabled = !e.target.checked;
+  e.preventDefault();
+  const target = e.target;
+  const isToggle = e.target.classList.contains('on');
+
+  postalCodeInput.disabled = isToggle;
+  address1Input.disabled = isToggle;
+  address2Input.disabled = isToggle;
+  searchAddressButton.disabled = isToggle;
   postalCodeInput.focus();
+
+  target.setAttribute('aria-checked', !isToggle);
+  target.classList.toggle('on');
 }
 
 function phoneNumberToggleEvent(e) {
-  phoneNumberInput.disabled = !e.target.checked;
+  e.preventDefault();
+  const target = e.target;
+  const isToggle = e.target.classList.contains('on');
+
+  phoneNumberInput.disabled = isToggle;
   phoneNumberInput.focus();
+
+  target.setAttribute('aria-checked', !isToggle);
+  target.classList.toggle('on');
 }
 
 function saveButtonEvent(e) {

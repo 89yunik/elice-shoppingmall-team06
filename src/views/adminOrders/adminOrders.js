@@ -56,7 +56,7 @@ function tableTemplate(data) {
             } value="상품 준비중">
               상품 준비중
             </option>
-            <option class="has-background-primary-light has-text-primary" ${
+            <option class="has-background-primary-light " ${
               data.orderState === '상품 배송중' ? `selected = ''` : ''
             } value="상품 배송중">상품 배송중</option>
             <option class="has-background-grey-light" ${
