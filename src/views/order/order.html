@@ -15,12 +15,14 @@
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="order.css" />
     <script src="order.js" type="module" defer></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $('#header').load('/header.html');
-      });
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+        });
     </script>
+    <script src="/header.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -28,6 +30,17 @@
     <section class="section">
       <div class="container">
         <div class="cart-header">
+          <div class="subtitle-cart" id="subtitleCart">
+            <p class="is-size-6">장바구니 &gt; &nbsp;</p>
+          </div>
+          <div class="first">
+            <p class="is-size-2">주문결제</p>
+          </div>
+          <div class="subtitle-cart">
+            <p class="is-size-6">&nbsp; &gt; 주문완료</p>
+          </div>
+        </div>
+        <!-- <div class="cart-header">
           <div class="subtitle subtitle-cart" id="subtitleCart">
             <p class="is-size-6">장바구니 &nbsp; &gt;</p>
           </div>
@@ -37,11 +50,11 @@
           <div class="subtitle">
             <p class="is-size-6">&gt; &nbsp;주문완료</p>
           </div>
-        </div>
+        </div> -->
 
         <div class="tile is-ancestor">
           <div class="tile is-parent cart-products">
-            <div class="box delivery-info">
+            <div class="delivery-info">
               <!-- 배송지 정보 -->
               <p class="subtitle is-4">배송지정보</p>
               <div class="field is-horizontal">
@@ -167,14 +180,14 @@
 
           <!-- 주문 정보 요약 -->
           <div class="tile is-parent tile-order-summary">
-            <div class="box order-summary">
+            <div class="order-summary">
               <div class="header">
                 <p>결제정보</p>
               </div>
               <div class="order-info">
                 <div class="info">
                   <p>주문상품</p>
-                  <p class="products-title" id="productsTitle">남성 정장 / 1개<br />아이보리 니트 / 1개</p>
+                  <p class="products-title" id="productsTitle"></p>
                 </div>
                 <div class="info">
                   <p>상품총액</p>
@@ -190,7 +203,7 @@
                 <p class="total-price" id="orderTotal">806,900원</p>
               </div>
               <div class="purchase">
-                <button class="button is-info" id="checkoutButton">결제하기</button>
+                <button class="button" id="checkoutButton">결제하기</button>
               </div>
             </div>
           </div>

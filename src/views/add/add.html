@@ -12,13 +12,15 @@
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="add.css" />
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#header').load('/header.html');
-      });
-    </script>
     <script src="add.js" type="module" defer></script>
+    <script type="text/javascript">
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+        });
+    </script>
+    <script src="/header.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -35,7 +37,14 @@
             <div class="field">
               <label class="label" for="titleInput">제품 이름</label>
               <div class="control">
-                <input class="input" id="titleInput" type="text" placeholder="아이보리 티셔츠" autocomplete="on" />
+                <input
+                  class="input"
+                  id="titleInput"
+                  type="text"
+                  placeholder="아이보리 티셔츠"
+                  autocomplete="on"
+                  required
+                />
               </div>
             </div>
 
@@ -43,7 +52,7 @@
               <label class="label" for="categorySelectBox">카테고리</label>
               <div class="control">
                 <div class="select is-fullwidth">
-                  <select id="categorySelectBox">
+                  <select id="categorySelectBox" required>
                     <option value="">카테고리를 선택해 주세요.</option>
                   </select>
                 </div>
@@ -59,6 +68,7 @@
                   type="text"
                   placeholder="OO의류제조(주)"
                   autocomplete="on"
+                  required
                 />
               </div>
             </div>
@@ -72,6 +82,7 @@
                   rows="3"
                   placeholder="제품에 대한 1~2문장의 설명을 적어 주세요."
                   autocomplete="on"
+                  required
                 ></textarea>
               </div>
             </div>
@@ -85,6 +96,7 @@
                   rows="8"
                   placeholder="제품에 대한 상세 설명을 적어 주세요."
                   autocomplete="on"
+                  required
                 ></textarea>
               </div>
             </div>
@@ -93,7 +105,14 @@
               <label class="label" for="imageInput">제품 사진</label>
               <div class="file has-name is-fullwidth">
                 <label class="file-label">
-                  <input class="file-input" id="imageInput" type="file" name="image-file" accept=".png, .jpeg, .jpg" />
+                  <input
+                    class="file-input"
+                    id="imageInput"
+                    type="file"
+                    name="image-file"
+                    accept=".png, .jpeg, .jpg"
+                    required
+                  />
                   <span class="file-cta">
                     <span class="file-icon">
                       <i class="fas fa-upload" aria-hidden="true"></i>
@@ -108,7 +127,7 @@
             <div class="field">
               <label class="label" for="inventoryInput">재고 수</label>
               <div class="control">
-                <input class="input" id="inventoryInput" type="number" placeholder="10" autocomplete="on" />
+                <input class="input" id="inventoryInput" type="number" placeholder="10" autocomplete="on" required />
               </div>
             </div>
 
@@ -116,7 +135,7 @@
               <label class="label" for="priceInput">가격</label>
               <div class="field">
                 <div class="control has-icons-right">
-                  <input class="input" id="priceInput" type="number" placeholder="10000" autocomplete="on" />
+                  <input class="input" id="priceInput" type="number" placeholder="10000" autocomplete="on" required />
                   <span class="icon is-small is-right"> 원 </span>
                 </div>
               </div>
