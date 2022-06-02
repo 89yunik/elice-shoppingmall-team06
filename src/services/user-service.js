@@ -12,6 +12,11 @@ class UserService {
   async duplicationUser(email) {
     return await this.userModel.findByEmail(email);
   }
+  // kakao 회원가입
+  async addKakaoUser(userInfo) {
+    // db에 저장
+    return await this.userModel.create(userInfo);
+  }
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring

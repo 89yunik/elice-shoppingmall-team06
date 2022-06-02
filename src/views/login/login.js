@@ -5,7 +5,7 @@ import { validateEmail } from '/useful-functions.js';
 const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
-
+const kakaoButton = document.querySelector('#kakaoButton');
 addAllElements();
 addAllEvents();
 
@@ -15,8 +15,16 @@ async function addAllElements() {}
 // 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
+  kakaoButton.addEventListener('click', handleKakao);
 }
+// 카카오 로그인 진행
+function handleKakao(e) {
+  e.preventDefault();
+  const KAKAO_CLIENT_ID = '06dc428dd314134d1b3b571b4e6da637';
+  const KAKAO_REDIRECT_URI = 'http://localhost:5070/auth/kakao';
 
+  window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+}
 // 로그인 진행
 async function handleSubmit(e) {
   e.preventDefault();
@@ -29,9 +37,7 @@ async function handleSubmit(e) {
   const isPasswordValid = password.length >= 4;
 
   if (!isEmailValid || !isPasswordValid) {
-    return alert(
-      '비밀번호가 4글자 이상인지, 이메일 형태가 맞는지 확인해 주세요.',
-    );
+    return alert('비밀번호가 4글자 이상인지, 이메일 형태가 맞는지 확인해 주세요.');
   }
 
   // 로그인 api 요청
