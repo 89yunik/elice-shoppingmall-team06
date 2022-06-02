@@ -80,7 +80,9 @@ productRouter.patch('/product/:_id', async function (req, res, next) {
     // content-type 을 application/json 로 프론트에서
     // 설정 안 하고 요청하면, body가 비어 있게 됨.
     if (is.emptyObject(req.body)) {
-      throw new Error('headers의 Content-Type을 application/json으로 설정해주세요');
+      const error = new Error('headers의 Content-Type을 application/json으로 설정해주세요');
+      error.name = 'NotAcceptable';
+      throw error;
     }
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.

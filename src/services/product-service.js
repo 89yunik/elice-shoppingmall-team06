@@ -14,7 +14,9 @@ class ProductService {
     // 제품명 중복 확인
     const product = await this.productModel.findByName(name);
     if (product) {
-      throw new Error('이 제품명은 현재 사용중입니다. 다른 제품명을 입력해 주세요.');
+      const error = new Error('이 제품명은 현재 사용중입니다. 다른 제품명을 입력해 주세요.');
+      error.name = 'Conflict';
+      throw error;
     }
 
     // db에 저장
@@ -23,7 +25,9 @@ class ProductService {
     // 정상적으로 저장됐는지 체크
     const newProductCheck = await this.categoryModel.findById(createdNewProduct._id);
     if (!newProductCheck) {
-      throw new Error('제품이 정상적으로 저장되지 않았습니다.');
+      const error = new Error('제품이 정상적으로 저장되지 않았습니다.');
+      error.name = 'InternalServerError';
+      throw error;
     }
 
     return createdNewProduct;
@@ -54,7 +58,9 @@ class ProductService {
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!product) {
-      throw new Error('해당하는 제품이 없습니다. 다시 한 번 확인해 주세요.');
+      const error = new Error('해당하는 제품이 없습니다. 다시 한 번 확인해 주세요.');
+      error.name = 'NotFound';
+      throw error;
     }
 
     // 업데이트 진행

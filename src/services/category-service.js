@@ -14,7 +14,9 @@ class CategoryService {
     // 카테고리명 중복 확인
     const category = await this.categoryModel.findByName(name);
     if (category) {
-      throw new Error('이 카테고리는 현재 사용중입니다. 다른 카테고리를 입력해 주세요.');
+      const error = new Error('이 카테고리는 현재 사용중입니다. 다른 카테고리를 입력해 주세요.');
+      error.name = 'Conflict';
+      throw error;
     }
 
     // db에 저장
@@ -23,7 +25,9 @@ class CategoryService {
     // 정상적으로 저장됐는지 체크
     const newCategoryCheck = await this.categoryModel.findById(createdNewCategory._id);
     if (!newCategoryCheck) {
-      throw new Error('카테고리가 정상적으로 저장되지 않았습니다.');
+      const error = new Error('카테고리가 정상적으로 저장되지 않았습니다.');
+      error.name = 'InternalServerError';
+      throw error;
     }
 
     return createdNewCategory;
@@ -47,7 +51,9 @@ class CategoryService {
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!category) {
-      throw new Error('해당하는 카테고리가 없습니다. 다시 한 번 확인해 주세요.');
+      const error = new Error('해당하는 카테고리가 없습니다. 다시 한 번 확인해 주세요.');
+      error.name = 'NotFound';
+      throw error;
     }
 
     // 업데이트 진행
