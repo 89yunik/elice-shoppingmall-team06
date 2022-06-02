@@ -218,8 +218,7 @@
     } catch (error) {
       sessionStorage.removeItem('token');
       alert('잘못된 토큰입니다. 다시 로그인해주세요.');
-      console.log(error)
-      // location.href = "/login"
+      location.href = "/login"
     }
   }
   initPage();
