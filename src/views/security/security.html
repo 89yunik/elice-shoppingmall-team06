@@ -41,10 +41,13 @@
                 <div class="control">
                   <input class="input" id="fullNameInput" type="text" autocomplete="off" disabled="" />
                   <!-- 토클 스위치 -->
-                  <label class="switch">
-                    <input type="checkbox" id="fullNameToggle" />
-                    <span class="slider round"></span>
-                  </label>
+                  <button
+                    type="checkbox"
+                    id="fullNameToggle"
+                    class="checkbox"
+                    role="switch"
+                    aria-checked="false"
+                  ></button>
                 </div>
               </div>
 
@@ -53,13 +56,13 @@
                 <div class="control">
                   <input class="input" id="passwordInput" type="password" autocomplete="off" disabled="" />
                   <!-- 토클 스위치 -->
-                  <label class="switch">
-                    <input type="checkbox" id="passwordToggle" />
-                    <span class="slider round"></span>
-                    <span class="info-text" style="opacity: 0" hidden>
-                      소셜 로그인의 경우는 비밀번호 설정이 불가합니다.
-                    </span>
-                  </label>
+                  <button
+                    type="checkbox"
+                    id="passwordToggle"
+                    class="checkbox"
+                    role="switch"
+                    aria-checked="false"
+                  ></button>
                 </div>
               </div>
 
@@ -91,10 +94,13 @@
                     <button class="button is-light is-hovered" id="searchAddressButton" disabled="">주소찾기</button>
                   </div>
                   <!-- 토클 스위치 -->
-                  <label class="switch switch-address">
-                    <input type="checkbox" id="addressToggle" />
-                    <span class="slider round"></span>
-                  </label>
+                  <button
+                    type="checkbox"
+                    id="addressToggle"
+                    class="checkbox"
+                    role="switch"
+                    aria-checked="false"
+                  ></button>
                 </div>
               </div>
 
@@ -142,20 +148,23 @@
                     class="input"
                     id="phoneNumberInput"
                     type="number"
-                    placeholder="- 없이 입력해 주세요."
+                    placeholder=" - 없이 입력해 주세요."
                     autocomplete="on"
                     disabled=""
                   />
                   <!-- 토클 스위치 -->
-                  <label class="switch">
-                    <input type="checkbox" id="phoneNumberToggle" />
-                    <span class="slider round"></span>
-                  </label>
+                  <button
+                    type="checkbox"
+                    id="phoneNumberToggle"
+                    class="checkbox"
+                    role="switch"
+                    aria-checked="false"
+                  ></button>
                 </div>
               </div>
 
               <button
-                class="button button-submit is-info is-fullwidth js-modal-trigger"
+                class="button button-submit is-warning is-fullwidth is-fullwidth js-modal-trigger"
                 id="saveButton"
                 data-target="modal-js-example"
               >
@@ -178,7 +187,11 @@
                       placeholder=""
                       autocomplete="on"
                     />
-                    <button class="button is-link mt-5" id="saveCompleteButton" aria-label="close">
+                    <button
+                      class="button is-link mt-5 is-warning is-fullwidth"
+                      id="saveCompleteButton"
+                      aria-label="close"
+                    >
                       저장 완료하기
                     </button>
                   </div>
