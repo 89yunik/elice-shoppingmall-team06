@@ -30,7 +30,7 @@ function levelTemplate(data) {
     <div class="level-item has-text-centered">
       <div>
         <p class="heading">OAuth가입자수</p>
-        <p class="title" id="OAuthCount">${data.filter((item) => item.type !== 'normal').length}</p>
+        <p class="title" id="OAuthCount">${data.filter((item) => item.userType !== 'normal').length}</p>
       </div>
     </div>
   `;

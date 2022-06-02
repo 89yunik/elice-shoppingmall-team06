@@ -82,18 +82,18 @@ async function getOrderData() {
   level.innerHTML = levelTemplate(res);
   tableInfo.innerHTML = res.map((item) => tableTemplate(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
-  if (document.querySelector('.statusSelectBox')) {
-    document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
-  }
+  tableInfo.addEventListener('change', onChangeEvent);
 }
 
 async function onChangeEvent(e) {
-  if (e.target.closest('.statusSelectBox')) {
+  const selectBox = e.target.closest('.statusSelectBox');
+  if (selectBox) {
     const data = {
-      orderState: e.target.closest('.statusSelectBox').value,
+      orderState: selectBox.value,
     };
-    const orderId = e.target.closest('.statusSelectBox').dataset.id;
+    const orderId = selectBox.dataset.id;
     const res = await Api.patch('/api/order', orderId, data);
+    render();
   }
 }
 

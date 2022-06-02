@@ -22,7 +22,6 @@ function addAllEvents() {
 
 async function deleteCompleteButtonEvent(e) {
   e.preventDefault();
-  //something logic ex) api;
   const data = {
     currentPassword: passwordInput.value,
   };
@@ -31,6 +30,7 @@ async function deleteCompleteButtonEvent(e) {
     logout();
     location.href = '/';
   } catch (error) {
+    console.log(error);
     alert('올바른 패스워드를 입력하세요.');
     passwordInput.focus();
   }
