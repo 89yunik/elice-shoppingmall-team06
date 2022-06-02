@@ -309,7 +309,6 @@ function checkingCheckBoxesAndOrderList() {
   });
   sessionStorage.setItem('order', JSON.stringify(orderStorage));
 }
-
 function App() {
   displayCartLIsts();
   checkingCheckBoxesAndOrderList();
