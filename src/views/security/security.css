@@ -69,12 +69,12 @@
   background-color: #938f99;
   transition: width 200ms, height 200ms, transform 200ms, background-color 200ms;
 }
-.checkbox.on {
+.checkbox.toggleOn {
   border-color: #ff7800;
   background-color: whitesmoke;
 }
 
-.checkbox.on::before {
+.checkbox.toggleOn::before {
   background-color: #ff7800;
   width: 20px;
   height: 20px;
