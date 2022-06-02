@@ -67,19 +67,16 @@ function clearSessionStorage() {
   const orderStorage = JSON.parse(sessionStorage.getItem('order'));
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
-  orderStorage.forEach((item) => {
-    cartStorage = cartStorage.filter((element) => element._id !== item);
-    deleteNameStorageItem(item);
-  });
-  console.log(orderStorage);
-  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+  if (orderStorage !== null) {
+    orderStorage.forEach((item) => {
+      cartStorage = cartStorage.filter((element) => element._id !== item);
+      deleteNameStorageItem(item);
+    });
+    console.log(orderStorage);
+    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
 
-  // const iBought = checkWhatIBuy();
-
-  sessionStorage.removeItem('order');
-
-  // const check = checkWhatIBuy();
-  // console.log((check));
+    sessionStorage.removeItem('order');
+  } else return;
 }
 
 async function handleCheckoutButton() {
@@ -112,25 +109,23 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-  if (sessionStorage.getItem('quick') === null) {
-    for (let i = 0; i < cartItems.length; i++) {
-      checkedId.forEach((item) => {
-        if (cartItems[i]._id === item) {
-          result.push(cartItems[i]);
-        }
-      });
-    }
-  } else {
-    result.push(JSON.parse(sessionStorage.getItem('quick')));
-  }
+  // if (sessionStorage.getItem('quick') === null) {
+  //   for (let i = 0; i < cartItems.length; i++) {
+  //     checkedId.forEach((item) => {
+  //       if (cartItems[i]._id === item) {
+  //         result.push(cartItems[i]);
+  //       }
+  //     });
+  //   }
+  // } else {
+  //   result.push(JSON.parse(sessionStorage.getItem('quick')));
+  // }
   return result;
 }
 
 let totalPrice = 0;
 
 function makeListOfProductTitle(orderList) {
-  const whatIBuy = checkWhatIBuy();
-  console.log(orderList);
   orderList.forEach((product) => {
     product.quantity = parseInt(product.quantity);
     document.querySelector('#productsTitle').innerHTML += `${product.item.name} / ${product.quantity} </br>`;
@@ -142,20 +137,20 @@ function makeListOfProductTitle(orderList) {
 }
 
 async function makeApiOderRegisterData() {
-  const whatIBuy = checkWhatIBuy();
   const productList = [];
 
-  whatIBuy.forEach((item) => {
+  const Ids = getUrlParameters();
+  const itemsApi = await checkItemsInApi(Ids);
+  console.log(itemsApi);
+
+  for (let i = 0; i < itemsApi.length; i++) {
     const product = {
-      name: item.name,
-      quantity: item.quantity,
+      name: itemsApi[i].item.name,
+      quantity: itemsApi[i].quantity,
     };
     productList.push(product);
-  });
-  console.log(productList);
-
+  }
   const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
-  // const orderApi = await Api.get(`${MAIN_PAGE_URL}`/api/product/${orderIds[i]})
 
   const data = {
     userId: userApi._id,
@@ -197,19 +192,6 @@ async function checkItemsInApi(orderItems) {
   }
   console.log(productApi);
   return productApi;
-
-  // try {
-  //   for (let i = 0; i < orderItems.id.length; i++) {
-  //     const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
-  //     console.log(apiResult);
-  //     productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
-  //   }
-
-  //   return productApi;
-  // } catch (err) {
-  //   console.log(err);
-  //   alert('error');
-  // }
 }
 
 async function App() {
