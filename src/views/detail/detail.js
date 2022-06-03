@@ -49,15 +49,21 @@ function parseToHTML(item) {
   async function addToCart(e) {
     e.preventDefault();
 
-    const sessionArr = JSON.parse(localStorage.getItem('cart')) || [];
-    const getCart = sessionStorage.getItem('cart');
-    const parseCart = JSON.parse(getCart);
+    const sessionArr = JSON.parse(sessionStorage.getItem('cart')) || [];
+    const getCart = sessionStorage.getItem('cart') || [];
+    let parseCart = [];
+    if (getCart.length !== 0) {
+      parseCart = JSON.parse(getCart);
+    }
 
-    const nameArr = JSON.parse(localStorage.getItem('name')) || [];
+    const nameArr = JSON.parse(sessionStorage.getItem('name')) || [];
     const getName = sessionStorage.getItem('name');
-    const parseName = JSON.parse(getName);
+    let parseName = [];
+    if (getName) {
+      let parseName = JSON.parse(getName);
+    }
 
-    const orderArr = JSON.parse(localStorage.getItem('order')) || [];
+    const orderArr = JSON.parse(sessionStorage.getItem('order')) || [];
 
     if (parseCart !== null) {
       for (let i = 0; i < parseName.length; i++) {
