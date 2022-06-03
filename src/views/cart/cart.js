@@ -294,6 +294,7 @@ function checkWhatIClick(event) {
 function checkingCheckBoxesAndOrderList() {
   const checkBoxes = document.querySelectorAll('.check-item');
   let orderStorage = [];
+
   checkBoxes.forEach((item) => {
     const id = item.closest('.cart-product-item').dataset.id;
     if (item.checked) {
