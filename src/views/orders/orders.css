@@ -44,8 +44,19 @@
   padding: 1rem;
 }
 .container .table-info {
-  min-width: 768px;
+  /* min-width: 768px; */
 }
+.orders-item {
+  align-items: center;
+  text-align: center;
+}
+.orders-item:not(:last-child) {
+  border-bottom: 1px solid #bbb;
+}
+.orders-top {
+  text-align: center;
+}
+
 .table-wrap {
   display: flex;
   justify-content: center;
