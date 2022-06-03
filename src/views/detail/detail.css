@@ -4,8 +4,6 @@
   margin-bottom: 50px;
 }
 
-.section-wrap {
-}
 .product-detail {
   display: flex;
   flex-wrap: wrap;
@@ -30,17 +28,12 @@
   position: relative;
   width: 50%;
 }
-.product-detail .detail-text .detail-details {
-}
 .product-detail .detail-text .detail-details .tabs {
   border-bottom: 1px solid #ddd;
   line-height: 30px;
   color: #555;
 }
-.product-detail .detail-text .detail-details .tabs .category {
-}
-.product-detail .detail-text .detail-details .content {
-}
+
 .product-detail .detail-text .detail-details .content .title {
   font-weight: 400;
   margin-bottom: 0.3em;
@@ -49,8 +42,6 @@
   font-size: 2em;
   font-weight: bold;
   color: #ff7800;
-}
-.product-detail .detail-text .detail-details .content .description {
 }
 
 .product-detail .detail-text .detail-btns {

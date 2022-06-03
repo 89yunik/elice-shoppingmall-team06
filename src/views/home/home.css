@@ -227,10 +227,7 @@ div.navbar-brand,
 footer {
   border-top: 1px solid #333;
 }
-footer .footer-wrap {
-}
-footer .footer-wrap > div {
-}
+
 footer .footer-wrap > div .wrap {
   max-width: 1200px;
   margin: 0 auto;
@@ -239,8 +236,6 @@ a {
   text-decoration: none;
 }
 
-footer .customer-center {
-}
 footer .customer-center .wrap {
   padding: 50px 0;
   display: table;
@@ -300,8 +295,7 @@ footer .about-us {
   padding: 30px 0;
   border-top: 1px solid #ccc;
 }
-footer .about-us .wrap {
-}
+
 footer .about-us .wrap::after {
   content: '';
   clear: both;
@@ -317,8 +311,7 @@ footer .about-us .wrap .text div span {
   margin-right: 30px;
   display: inline-block;
 }
-footer .about-us .wrap .text div span b {
-}
+
 footer .about-us .wrap .logo {
   float: right;
 }
