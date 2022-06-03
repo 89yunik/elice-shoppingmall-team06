@@ -25,11 +25,9 @@ authRouter.get('/kakao', async (req, res) => {
         code: req.query.code,
       }),
     });
-  } catch (err) {
-    res.status(401).json({ error: `${err.message}` });
-  }
-  //accesstotken 확인
-  try {
+
+    //accesstotken 확인
+
     user = await axios({
       method: 'GET',
       url: 'https://kapi.kakao.com/v2/user/me',
@@ -37,14 +35,12 @@ authRouter.get('/kakao', async (req, res) => {
         Authorization: `Bearer ${token.data.access_token}`,
       },
     });
-  } catch (err) {
-    res.status(401).json({ error: `${err.message}` });
-  }
-  console.log(user.data);
-  // 시크릿키
-  const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
-  // 중복가입자인지 확인
-  try {
+
+    console.log(user.data);
+    // 시크릿키
+    const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
+    // 중복가입자인지 확인
+
     const userData = await userService.duplicationUser(user.data.kakao_account.email);
     if (userData) {
       // 로그인 성공 -> JWT 웹 토큰 생성
