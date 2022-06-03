@@ -7,10 +7,10 @@ function template(data) {
   const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
   return `
     <div class="columns orders-item">
-      <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
-      <div class="column is-6 order-summary">${orderInfo.join('<br>')}</div>
-      <div class="column is-2">${data.orderState}</div>
-      <div class="column is-2">
+      <div class="column is-2" data-label="날짜">${data.createdAt.slice(0, 10)}</div>
+      <div class="column is-6 order-summary" data-label="주문정보">${orderInfo.join('<br>')}</div>
+      <div class="column is-2" data-label="상태">${data.orderState}</div>
+      <div class="column is-2" data-label="신청">
         <button class="button" data-id="${data._id}">주문 취소</button>
       </div>
     </div>

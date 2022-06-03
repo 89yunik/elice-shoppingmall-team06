@@ -5,20 +5,20 @@ const tableInfo = document.querySelector('.table-info');
 function template(data) {
   return `
     <div class="columns orders-item">
-      <div class="column is-2">
+      <div class="column is-2" data-label="이름">
         <div data-show>${data.name}</div>
         <input name="name" data-modify class="input display-none" type="text" value="${data.name}">
       </div>
-      <div class="column is-6 order-summary">
+      <div class="column is-6 order-summary" data-label="설명">
         <div data-show>${data.description}</div>
         <input name="description" data-modify class="input display-none" type="text" value="${data.description}">
       </div>
-      <div class="column is-2">
+      <div class="column is-2" data-label="수정">
         <button class="button btn-modify" data-show data-id="${data._id}">수정</button>
         <button class="button btn-confirm display-none" data-modify data-id="${data._id}">완료</button>
         <button class="button btn-cancel display-none" data-modify data-id="${data._id}">취소</button>
       </div>
-      <div class="column is-2">
+      <div class="column is-2" data-label="삭제">
         <button class="button btn-delete" data-id="${data._id}">삭제</button>
       </div>
     </div>
