@@ -133,7 +133,7 @@ async function passwordMailer(email) {
                   </p>
               </div>
               <div style="padding: 20px 30px; background: #ff7800">
-                  🎫 인증번호: <b>${generatedAuthNumber}</b>
+                  🔐 임시 비밀번호: <b>${generatedAuthNumber}</b>
               </div>
               <h3>🤫절대 타인에게 보여주지 마세요!</h3>
           </div>
