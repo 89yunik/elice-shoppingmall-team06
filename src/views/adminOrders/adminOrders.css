@@ -1,0 +1,49 @@
+.account-header {
+  border-bottom: 1px solid #ddd;
+  display: block;
+  padding-bottom: 0.7rem;
+}
+.orders-top {
+  border-bottom: 1px solid #aaa;
+  padding: 0;
+  text-align: center;
+}
+.columns {
+  border-bottom: 1px solid #aaa;
+  /* bulma padding */
+  padding: 0 !important;
+  text-align: center;
+}
+.orders-item {
+  align-items: center;
+  text-align: center;
+}
+.orders-item:not(:last-child) {
+  border-bottom: 1px solid #bbb;
+}
+
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  overflow: scroll;
+  height: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .level {
+    display: flex;
+  }
+  .orders-top {
+    display: none !important;
+  }
+  .columns {
+    text-align: right;
+  }
+  .column::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+}

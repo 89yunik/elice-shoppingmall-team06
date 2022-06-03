@@ -14,7 +14,16 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
+    userType: {
+      type: String,
+      required: true,
+      default: 'normal',
+    },
     phoneNumber: {
+      type: String,
+      required: false,
+    },
+    Oauth_refresh_token: {
       type: String,
       required: false,
     },
@@ -27,7 +36,7 @@ const UserSchema = new Schema(
         },
         {
           _id: false,
-        }
+        },
       ),
       required: false,
     },
@@ -40,7 +49,7 @@ const UserSchema = new Schema(
   {
     collection: 'users',
     timestamps: true,
-  }
+  },
 );
 
 export { UserSchema };

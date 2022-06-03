@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소동이네</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-favi.png" />
+
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="./detail.css" />
+    <script defer src="./detail.js" type="module"></script>
+    <script type="text/javascript" defer>
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="section-wrap">
+        <div class="product-detail">
+          <div class="detail-image">
+            <div class="wrap"></div>
+          </div>
+          <div class="detail-text">
+            <div class="detail-details">
+              <div class="tabs">
+                <p class="category"></p>
+              </div>
+              <div class="content">
+                <p class="title"></p>
+                <p class="price"></p>
+                <p class="description"></p>
+              </div>
+            </div>
+            <div class="detail-btns">
+              <a href="" class="add-to-cart">장바구니 추가하기</a>
+              <a href="" class="quick-buy">바로 구매하기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

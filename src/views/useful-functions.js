@@ -1,3 +1,9 @@
+export const deleteNameStorageItem = (item) => {
+  let nameStorage = JSON.parse(sessionStorage.getItem('name'));
+  nameStorage = nameStorage.filter((element) => element != item);
+  sessionStorage.setItem('name', JSON.stringify(nameStorage));
+};
+
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
   return Math.random().toString(36).substring(2, 7);
@@ -8,7 +14,7 @@ export const validateEmail = (email) => {
   return String(email)
     .toLowerCase()
     .match(
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
 };
 
@@ -27,3 +33,10 @@ export const convertToNumber = (string) => {
 export const wait = (ms) => {
   return new Promise((r) => setTimeout(r, ms));
 };
+
+export const logout = () => {
+  sessionStorage.removeItem('token');
+};
+
+export const SERVICE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
+// export const SERVICE_URL = 'http://localhost:5004';

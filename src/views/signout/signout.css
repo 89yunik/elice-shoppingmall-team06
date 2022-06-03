@@ -1,0 +1,14 @@
+.register-user-form-container {
+  align-items: center;
+  display: flex;
+  height: 85vh;
+  justify-content: center;
+}
+
+.register-user-form-box {
+  width: 30rem;
+}
+
+.register-user-form-box .title {
+  text-align: center;
+}

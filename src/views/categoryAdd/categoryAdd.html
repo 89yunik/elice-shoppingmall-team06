@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소동이네 | 카테고리 추가</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-favi.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="categoryAdd.css" />
+    <script src="categoryAdd.js" type="module" defer></script>
+    <script type="text/javascript" defer>
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="block account-header">
+          <h1 class="subtitle is-4">카테고리 추가</h1>
+        </div>
+        <div class="register-category-form-container">
+          <form class="box register-category-form-box" id="registerCategoryForm">
+            <p class="title is-5">카테고리 추가하기</p>
+            <div class="field">
+              <label class="label" for="titleInput">카테고리 이름</label>
+              <div class="control">
+                <input class="input" id="titleInput" type="text" placeholder="Men Clothes" autocomplete="on" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label" for="descriptionInput">카테고리 설명</label>
+              <div class="control">
+                <input
+                  class="input"
+                  id="descriptionInput"
+                  type="text"
+                  placeholder="센세이셔널한 봄, 여름 코디"
+                  autocomplete="on"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="field is-fullwidth mb-5">
+              <label class="label" for="imageInput">카테고리 사진</label>
+              <div class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input
+                    class="file-input"
+                    id="imageInput"
+                    type="file"
+                    name="image-file"
+                    accept=".png, .jpeg, .jpg"
+                    required
+                  />
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload" aria-hidden="true"></i>
+                    </span>
+                    <span class="file-label"> 사진 업로드 </span>
+                  </span>
+                  <span class="file-name" id="fileNameSpan"> 사진파일 (png, jpg, jpeg) </span>
+                </label>
+              </div>
+            </div>
+            <button class="button is-warning is-fullwidth" id="addCategoryButton">카테고리 추가하기</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
