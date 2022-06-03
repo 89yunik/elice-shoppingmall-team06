@@ -23,7 +23,7 @@ function addAllEvents() {
 function handleKakao(e) {
   e.preventDefault();
   const KAKAO_CLIENT_ID = '06dc428dd314134d1b3b571b4e6da637';
-  const KAKAO_REDIRECT_URI = 'http://localhost:5070/auth/kakao';
+  const KAKAO_REDIRECT_URI = 'http://kdt-sw2-seoul-team06.elicecoding.com:5004/auth/kakao';
 
   window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
 }
@@ -31,7 +31,7 @@ function handleKakao(e) {
 function handleGoogle(e) {
   e.preventDefault();
   const GOOGLE_CLIENT_ID = '988474744821-rr2buu1eg6d35947ldt3aap2j9vs428q.apps.googleusercontent.com';
-  const GOOGLE_REDIRECT_URI = 'http://localhost:5070/auth/google';
+  const GOOGLE_REDIRECT_URI = 'http://kdt-sw2-seoul-team06.elicecoding.com:5004/auth/google';
   window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
 }
 // 로그인 진행
