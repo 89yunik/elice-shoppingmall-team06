@@ -1,0 +1,84 @@
+.div-container {
+  padding: 3rem 1.5rem;
+}
+
+.landing {
+  cursor: pointer;
+  border: 1px solid red;
+  padding: 10px;
+}
+
+.menu-card {
+  align-items: center;
+  border: 1px solid #d5d9d9;
+  border-radius: 6px;
+  display: flex;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+}
+
+.menu-container {
+  grid-gap: 2rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  text-decoration: none;
+}
+
+.subtitle,
+.title {
+  word-break: break-word;
+}
+
+.menu-body {
+  border-radius: 6px;
+  color: #7a7a7a;
+  flex-grow: 1;
+  font-size: 1.25em;
+  padding: 1em;
+}
+
+.menu-icon {
+  font-size: 3.5rem;
+  margin: 0 2rem;
+  padding: 1rem;
+}
+.orders-item {
+  align-items: center;
+  text-align: center;
+}
+.orders-item:not(:last-child) {
+  border-bottom: 1px solid #bbb;
+}
+.orders-top {
+  text-align: center;
+}
+
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  overflow: scroll;
+  height: 600px;
+}
+.table-info {
+  width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .level {
+    display: flex;
+  }
+  .orders-top {
+    display: none !important;
+  }
+  .columns {
+    text-align: right;
+  }
+  .column::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+}

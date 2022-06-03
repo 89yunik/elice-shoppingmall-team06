@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소동이네 | 관리자</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-favi.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="admin.css" />
+    <script src="admin.js" type="module" defer></script>
+    <script type="text/javascript" defer>
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="block account-header">
+          <h1 class="title">웹서비스 관리</h1>
+        </div>
+        <div class="menu-container">
+          <!-- 주문관리 -->
+          <a class="menu-card" href="/admin/orders">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-credit-card"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">주문관리</p>
+              <p class="subtitle is-5">모든 주문 내역을 확인 및 관리할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 회원관리 -->
+          <a class="menu-card" href="/admin/users">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-address-book"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">회원관리</p>
+              <p class="subtitle is-5">모든 회원 정보를 확인 및 관리할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 카테고리 추가하기 -->
+          <a class="menu-card" href="/admin/category/add">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-table-list"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">카테고리 추가</p>
+              <p class="subtitle is-5">제품이 속할 수 있는, 카테고리 정보를 추가할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 카테고리 추가하기 -->
+          <a class="menu-card" href="/admin/category">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-table-list"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">카테고리 관리</p>
+              <p class="subtitle is-5">제품이 속할 수 있는, 카테고리 정보를 관리할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 제품 추가하기 -->
+          <a class="menu-card" href="/admin/product/add">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-gift"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">제품 추가</p>
+              <p class="subtitle is-5">제품 정보를 추가할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 제품 관리하기 -->
+          <a class="menu-card" href="/admin/product">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-gift"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">제품 관리</p>
+              <p class="subtitle is-5">제품 정보를 관리할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

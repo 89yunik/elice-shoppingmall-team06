@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소동이네 | 계정관리</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-favi.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="account.css" />
+    <script src="account.js" type="module" defer></script>
+    <script type="text/javascript" defer>
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="block account-header">
+          <h1 class="title">계정관리</h1>
+        </div>
+        <div class="menu-container">
+          <!-- 주문조회 -->
+          <a class="menu-card" href="/account/orders">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-credit-card"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">주문조회</p>
+              <p class="subtitle is-5">지난 주문 내역을 확인, 취소할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 회원정보 관리 -->
+          <a class="menu-card" href="/account/security">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-user-gear"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">회원정보 관리</p>
+              <p class="subtitle is-5">회원 정보를 확인, 수정할 수 있습니다.</p>
+            </div>
+          </a>
+
+          <!-- 회원 탈퇴하기 -->
+          <a class="menu-card" href="/account/signout">
+            <div class="menu-icon">
+              <span class="icon has-text-info">
+                <i class="fa-solid fa-user-slash"></i>
+              </span>
+            </div>
+            <div class="menu-body">
+              <p class="title is-3">회원 탈퇴</p>
+              <p class="subtitle is-5">모든 정보를 안전하게 삭제한 후 탈퇴할 수 있습니다.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

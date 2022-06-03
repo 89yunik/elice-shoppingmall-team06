@@ -1,0 +1,10 @@
+.register-product-form-container {
+  display: flex;
+  justify-content: center;
+}
+.register-product-form-box .title {
+  text-align: center;
+}
+.register-product-form-box {
+  width: 40rem;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>소동이네 | 제품관리</title>
+    <!-- 아이콘 -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/logo-favi.png" />
+    <!-- bulma css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
+    <!-- 커스텀 css, js -->
+    <link rel="stylesheet" href="product.css" />
+    <script src="product.js" type="module" defer></script>
+    <script type="text/javascript" defer>
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
+        });
+    </script>
+  </head>
+  <body>
+    <!-- 헤더 -->
+    <div id="header"></div>
+
+    <section class="section">
+      <div class="container">
+        <div class="block account-header">
+          <h1 class="subtitle is-4">제품 관리</h1>
+        </div>
+        <div class="container orders-container" id="ordersContainer">
+          <div class="columns notification is-warning is-light is-mobile orders-top">
+            <div class="column is-2">이름</div>
+            <div class="column is-2">설명</div>
+            <div class="column is-2">재고 수</div>
+            <div class="column is-2">가격</div>
+            <div class="column is-2">수정</div>
+            <div class="column is-1">삭제</div>
+          </div>
+          <div class="table-wrap">
+            <div class="table-info"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
