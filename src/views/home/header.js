@@ -39,6 +39,10 @@ function logoutBtnEvent(e) {
   location.href = '/';
 }
 
+const getCart = sessionStorage.getItem('cart');
+const parseCart = JSON.parse(getCart);
+let parseCartNum = Number(parseCart.length);
+
 async function initPage() {
   const navbar = document.getElementById('navbar');
   const navbarM = document.getElementById('navbar-m');
@@ -61,6 +65,7 @@ async function initPage() {
                 <i class="fas fa-cart-shopping"></i>
               </span>
               <span>카트</span>
+              <span class="cart-quantity">${parseCartNum}</span>
             </a>
           </li>
         `;
@@ -73,6 +78,7 @@ async function initPage() {
                 <i class="fas fa-cart-shopping"></i>
               </span>
               <span>카트</span>
+              <span class="cart-quantity">${parseCartNum}</span>
             </a>
           </li>
         `;
@@ -98,6 +104,7 @@ async function initPage() {
                   <i class="fas fa-cart-shopping"></i>
                 </span>
                 <span>카트</span>
+                <span class="cart-quantity">${parseCartNum}</span>
               </a>
             </li>
           `;
@@ -110,6 +117,7 @@ async function initPage() {
                   <i class="fas fa-cart-shopping"></i>
                 </span>
                 <span>카트</span>
+                <span class="cart-quantity">${parseCartNum}</span>
               </a>
             </li>
           `;
@@ -124,6 +132,7 @@ async function initPage() {
                   <i class="fas fa-cart-shopping"></i>
                 </span>
                 <span>카트</span>
+                <span class="cart-quantity">${parseCartNum}</span>
               </a>
             </li>
           `;
@@ -137,6 +146,7 @@ async function initPage() {
                   <i class="fas fa-cart-shopping"></i>
                 </span>
                 <span>카트</span>
+                <span class="cart-quantity">${parseCartNum}</span>
               </a>
             </li>
           `;
@@ -161,3 +171,16 @@ topBtn.addEventListener('click', (e) => {
   e.preventDefault();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+
+// 장바구니 수량
+// let cartQuantity = document.querySelectorAll('#navbar .cart-quantity');
+// let cartQuantityM = document.querySelectorAll('#navbar-m .cart-quantity');
+// const getCart = sessionStorage.getItem('cart');
+// const parseCart = JSON.parse(getCart);
+// let parseCartNum = Number(parseCart.length);
+// cartQuantity.forEach((i) => {
+//   i.innerText = parseCartNum;
+// });
+// cartQuantityM.forEach((i) => {
+//   i.innerText = parseCartNum;
+// });
