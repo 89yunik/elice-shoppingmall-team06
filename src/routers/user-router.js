@@ -101,7 +101,7 @@ userRouter.post('/passwordAuth', async (req, res, next) => {
     if (req.body.authNumber === redisGet) {
       const mailAuth = await passwordMailer(req.body.email);
       const passwordNumber = mailAuth.generatedAuthNumber;
-
+      const passwordCheck = await userService.tempPassword(req.body.email, passwordNumber);
       res.status(200).json({ success: '번호인증성공' });
     } else {
       res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
