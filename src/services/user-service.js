@@ -20,7 +20,7 @@ class UserService {
 
       const user = await this.userModel.passwordUpdate({
         email,
-        update: hashedPassword,
+        update: { password: hashedPassword },
       });
 
       return user;
