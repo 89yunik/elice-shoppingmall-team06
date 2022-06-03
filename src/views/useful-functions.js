@@ -38,5 +38,5 @@ export const logout = () => {
   sessionStorage.removeItem('token');
 };
 
-// export const SERVICE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
-export const SERVICE_URL = 'http://localhost:5004';
+export const SERVICE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
+// export const SERVICE_URL = 'http://localhost:5004';
