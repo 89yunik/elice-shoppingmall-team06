@@ -13,6 +13,7 @@ const keywordContainer = document.getElementById('keywordContainer');
 const addKeywordButton = document.getElementById('addKeywordButton');
 const submitButton = document.getElementById('submitButton');
 const registerProductForm = document.getElementById('registerProductForm');
+const fileNameSpan = document.getElementById('fileNameSpan');
 
 const searchKeywordArr = [];
 addAllElements();
@@ -39,6 +40,11 @@ function addAllEvents() {
   registerProductForm.onsubmit = submitButtonEvent;
   addKeywordButton.addEventListener('click', addKeywordButtonEvent);
   searchKeywordInput.addEventListener('keyup', searchKeywordInputEvent);
+  imageInput.addEventListener('change', changeEvent);
+}
+
+function changeEvent(e) {
+  fileNameSpan.innerHTML = e.target.value;
 }
 
 function searchKeywordInputEvent(e) {
