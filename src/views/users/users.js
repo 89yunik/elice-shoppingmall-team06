@@ -53,7 +53,7 @@ function tableTemplate(data) {
       break;
   }
   return `
-  <div class="columns orders-item">
+  <div class="columns is-mobile orders-item">
     <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
     <div class="column is-2">${data.email}</div>
     <div class="column is-2">

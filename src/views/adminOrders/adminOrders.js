@@ -38,13 +38,16 @@ function levelTemplate(data) {
 }
 
 function tableTemplate(data) {
+  console.log(data);
   const arr = data.orderInfo.product;
   const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
   return `
     <div class="columns orders-item" data-id="${data._id}">
-      <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
-      <div class="column is-4 order-summary">${orderInfo.join('<br>')}</div>
-      <div class="column is-2">${data.orderInfo.total}</div>
+      <div class="column is-1">${data.createdAt.slice(0, 10)}</div>
+      <div class="column is-2 order-summary">${data.orderInfo.name} / ${data.orderInfo.phoneNumber}</div>
+      <div class="column is-2 order-summary">${data.orderInfo.address1} ${data.orderInfo.address2}</div>
+      <div class="column is-2 order-summary">${orderInfo.join('<br>')}</div>
+      <div class="column is-1">${data.orderInfo.total}</div>
       <div class="column is-2">
         <div class="select">
           <select
@@ -65,7 +68,7 @@ function tableTemplate(data) {
           </select>
         </div>
       </div>
-      <div class="column is-2">
+      <div class="column is-1">
         <button class="button order-cancel" data-id="${data._id}">주문 취소</button>
       </div>
     </div>

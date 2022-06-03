@@ -43,3 +43,17 @@
   margin: 0 2rem;
   padding: 1rem;
 }
+.container .table-info {
+  min-width: 768px;
+}
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  overflow: scroll;
+  height: 600px;
+}
+.table-info {
+  width: 100%;
+}
