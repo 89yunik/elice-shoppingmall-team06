@@ -51,7 +51,7 @@ authRouter.get('/kakao', async (req, res) => {
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: userData._id, role: userData.role }, secretKey);
       res.cookie('token', suctoken);
-      res.redirect('http://localhost:5070/auth');
+      res.redirect('/auth');
     } else {
       const hashedPassword = await bcrypt.hash('kakao', 10);
       const userInfo = {
@@ -67,7 +67,7 @@ authRouter.get('/kakao', async (req, res) => {
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: newUser._id, role: newUser.role }, secretKey);
       res.cookie('token', suctoken);
-      res.redirect('http://localhost:5070/auth');
+      res.redirect('/auth');
     }
   } catch (err) {
     res.status(401).json({ error: `${err.message}` });
@@ -105,7 +105,7 @@ authRouter.get('/google', async (req, res) => {
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: userData._id, role: userData.role }, secretKey);
       res.cookie('token', suctoken);
-      res.redirect('http://localhost:5070/auth');
+      res.redirect('/auth');
     } else {
       const hashedPassword = await bcrypt.hash('google', 10);
       const userInfo = {
@@ -120,7 +120,7 @@ authRouter.get('/google', async (req, res) => {
       // 2개 프로퍼티를 jwt 토큰에 담음
       const suctoken = jwt.sign({ userId: newUser._id, role: newUser.role }, secretKey);
       res.cookie('token', suctoken);
-      res.redirect('http://localhost:5070/auth');
+      res.redirect('/auth');
     }
   } catch (err) {
     console.log(err.message);
