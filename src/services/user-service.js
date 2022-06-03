@@ -18,7 +18,7 @@ class UserService {
     if (emailCheck) {
       const hashedPassword = await bcrypt.hash(passwordNumber, 10);
 
-      const user = await this.userModel.update({
+      const user = await this.userModel.passwordUpdate({
         email,
         update: hashedPassword,
       });
