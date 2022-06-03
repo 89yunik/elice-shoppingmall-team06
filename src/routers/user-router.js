@@ -3,7 +3,7 @@ import is from '@sindresorhus/is';
 import { redisClient } from '../app';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
-import { userService, mailer } from '../services';
+import { userService, mailer, passwordMailer } from '../services';
 import jwt from 'jsonwebtoken';
 
 const userRouter = Router();
@@ -86,6 +86,22 @@ userRouter.post('/authNumber', async (req, res, next) => {
   try {
     const redisGet = await redisClient.get(req.body.email, (err, reply) => {});
     if (req.body.authNumber === redisGet) {
+      res.status(200).json({ success: '임시비밀번호 변경성공' });
+    } else {
+      res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
+    }
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
+  }
+});
+//임시 password 발급
+userRouter.post('/passwordAuth', async (req, res, next) => {
+  try {
+    const redisGet = await redisClient.get(req.body.email, (err, reply) => {});
+    if (req.body.authNumber === redisGet) {
+      const mailAuth = await passwordMailer(req.body.email);
+      const passwordNumber = mailAuth.generatedAuthNumber;
+
       res.status(200).json({ success: '번호인증성공' });
     } else {
       res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
