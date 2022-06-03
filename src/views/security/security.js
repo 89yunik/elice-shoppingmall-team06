@@ -23,6 +23,7 @@ const saveButton = document.getElementById('saveButton');
 const modal = document.getElementById('modal');
 const modalCloseButton = document.getElementById('modalCloseButton');
 const saveCompleteButton = document.getElementById('saveCompleteButton');
+let userData = {};
 
 addAllElements();
 addAllEvents();
@@ -44,7 +45,6 @@ function addAllEvents() {
   searchAddressButton.addEventListener('click', findAddress);
 }
 
-let userData = {};
 async function getUserData() {
   userData = await Api.get('/api/user');
 

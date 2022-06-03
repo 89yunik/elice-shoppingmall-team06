@@ -5,7 +5,7 @@ const descriptionInput = document.getElementById('descriptionInput');
 const imageInput = document.getElementById('imageInput');
 const addCategoryButton = document.getElementById('addCategoryButton');
 const registerCategoryForm = document.getElementById('registerCategoryForm');
-
+const fileNameSpan = document.getElementById('fileNameSpan');
 addAllElements();
 addAllEvents();
 
@@ -14,6 +14,10 @@ async function addAllElements() {}
 function addAllEvents() {
   // addCategoryButton.addEventListener('click', submitButtonEvent);
   registerCategoryForm.onsubmit = submitButtonEvent;
+  imageInput.addEventListener('change', changeEvent);
+}
+function changeEvent(e) {
+  fileNameSpan.innerHTML = e.target.value;
 }
 
 async function submitButtonEvent(e) {
