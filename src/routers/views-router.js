@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'path';
-
 const viewsRouter = express.Router();
 
 // 페이지별로 html, css, js 파일들을 라우팅함
@@ -15,15 +14,17 @@ viewsRouter.use('/order', serveStatic('order'));
 viewsRouter.use('/order/complete', serveStatic('complete'));
 viewsRouter.use('/account/orders', serveStatic('orders'));
 viewsRouter.use('/account/security', serveStatic('security'));
-viewsRouter.use('/product/add', serveStatic('add'));
+viewsRouter.use('/admin/product/add', serveStatic('add'));
+viewsRouter.use('/admin/product', serveStatic('product'));
 viewsRouter.use('/account/signout', serveStatic('signout'));
-viewsRouter.use('/product/list/:name', serveStatic('list'));
-viewsRouter.use('/product/detail/:productId', serveStatic('detail'));
+viewsRouter.use('/product/list/:id', serveStatic('list'));
+viewsRouter.use('/product/detail/:id', serveStatic('detail'));
 viewsRouter.use('/admin', serveStatic('admin'));
 viewsRouter.use('/admin/orders', serveStatic('adminOrders'));
 viewsRouter.use('/admin/users', serveStatic('users'));
-viewsRouter.use('/category/add', serveStatic('categoryAdd'));
-
+viewsRouter.use('/admin/category/add', serveStatic('categoryAdd'));
+viewsRouter.use('/admin/category', serveStatic('category'));
+viewsRouter.use('/auth', serveStatic('auth'));
 // views 폴더의 최상단 파일인 rabbit.png, api.js 등을 쓸 수 있게 함
 viewsRouter.use('/', serveStatic(''));
 

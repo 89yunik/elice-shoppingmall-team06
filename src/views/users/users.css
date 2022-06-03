@@ -1,6 +1,6 @@
 .orders-container {
   margin: 5rem auto 2rem;
-  max-width: 1000px !important;
+  max-width: 1000px;
 }
 .account-header {
   border-bottom: 1px solid #ddd;
@@ -18,4 +18,10 @@
 }
 .orders-item:not(:last-child) {
   border-bottom: 1px solid #bbb;
+}
+.columns {
+  border-bottom: 1px solid #aaa;
+  /* bulma padding */
+  padding: 0 !important;
+  text-align: center;
 }

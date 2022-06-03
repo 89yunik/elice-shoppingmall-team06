@@ -12,6 +12,7 @@ orderRouter.get('/order', loginRequired, async (req, res, next) => {
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
     const jwtDecoded = jwt.verify(userToken, secretKey);
     const userId = jwtDecoded.userId;
+    console.log(userId);
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
     const orderdata = await orderService.getOrder(userId);
     res.status(200).json(orderdata);
@@ -21,6 +22,7 @@ orderRouter.get('/order', loginRequired, async (req, res, next) => {
     res.status(403).json({
       result: 'forbidden-approach',
       reason: '정상적인 토큰이 아닙니다.',
+      error: error,
     });
   }
 });
@@ -69,7 +71,7 @@ orderRouter.get('/orderlist', loginRequired, async function (req, res, next) {
 
 // 오더 수정 api
 // (예를 들어 /api/orders/abc12345 로 요청하면 req.params.categoryId는 'abc12345' 문자열로 됨)
-orderRouter.patch('/order/:orderId', loginRequired, async function (req, res, next) {
+orderRouter.patch('/order/:_id', loginRequired, async function (req, res, next) {
   try {
     const userToken = req.headers['authorization']?.split(' ')[1];
     const secretKey = process.env.JWT_SECRET_KEY || 'secret-key';
@@ -83,7 +85,7 @@ orderRouter.patch('/order/:orderId', loginRequired, async function (req, res, ne
     }
     if (role === 'admin') {
       // params로부터 id를 가져옴
-      const orderId = req.params.orderId;
+      const { _id } = req.params;
 
       // body data 로부터 업데이트할 오더 정보를 추출함.
       // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
@@ -91,7 +93,7 @@ orderRouter.patch('/order/:orderId', loginRequired, async function (req, res, ne
       const toUpdate = req.body || {};
 
       // 제품 정보를 업데이트함.
-      const updatedOrderInfo = await orderService.setOrder(orderId, toUpdate);
+      const updatedOrderInfo = await orderService.setOrder(_id, toUpdate);
 
       // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
       res.status(200).json(updatedOrderInfo);
@@ -104,11 +106,11 @@ orderRouter.patch('/order/:orderId', loginRequired, async function (req, res, ne
 });
 
 // 오더 삭제 api
-orderRouter.delete('/order/:orderId', loginRequired, async function (req, res, next) {
+orderRouter.delete('/order/:_id', loginRequired, async function (req, res, next) {
   try {
-    const { orderId } = req.params;
+    const { _id } = req.params;
     // 삭제할 카테고리 id를 얻음
-    const order = await orderService.deleteOrder(orderId);
+    const order = await orderService.deleteOrder(_id);
     // 오더 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(order);
   } catch (error) {
