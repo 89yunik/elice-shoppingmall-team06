@@ -31,7 +31,7 @@ async function mailer(email) {
     <div style="margin: 0 auto; width: 680px; color: #000">
         <h2 style="margin-bottom: 15px">
             <img
-                src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ba0f48e5-4712-45eb-bda3-1431830b2627/%EC%86%8C%EB%8F%99%EC%9D%B4%EB%84%A4%EB%A1%9C%EA%B3%A0_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220601%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220601T054439Z&X-Amz-Expires=86400&X-Amz-Signature=22f5da23ddad679a37db9004effd517996958cfd7d174e135d51d66a4c27aa90&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%2586%258C%25EB%258F%2599%25EC%259D%25B4%25EB%2584%25A4%25EB%25A1%259C%25EA%25B3%25A0%2520%281%29.png%22&x-id=GetObject"
+                src="https://shopping-mall-racer.s3.ap-northeast-2.amazonaws.com/logo.png"
             />
         </h2>
         <div
@@ -103,7 +103,7 @@ async function passwordMailer(email) {
       <div style="margin: 0 auto; width: 680px; color: #000">
           <h2 style="margin-bottom: 15px">
               <img
-                  src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ba0f48e5-4712-45eb-bda3-1431830b2627/%EC%86%8C%EB%8F%99%EC%9D%B4%EB%84%A4%EB%A1%9C%EA%B3%A0_%281%29.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220601%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220601T054439Z&X-Amz-Expires=86400&X-Amz-Signature=22f5da23ddad679a37db9004effd517996958cfd7d174e135d51d66a4c27aa90&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22%25EC%2586%258C%25EB%258F%2599%25EC%259D%25B4%25EB%2584%25A4%25EB%25A1%259C%25EA%25B3%25A0%2520%281%29.png%22&x-id=GetObject"
+                  src="https://shopping-mall-racer.s3.ap-northeast-2.amazonaws.com/logo.png"
               />
           </h2>
           <div
