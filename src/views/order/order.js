@@ -9,9 +9,10 @@ document.querySelector('#subtitleCart').addEventListener('click', () => {
 document.querySelector('#requestSelectBox').addEventListener('change', displayEtc);
 
 function displayEtc(event) {
-  console.log(event.target.value);
   if (event.target.value === '6') {
     document.querySelector('.custom-request').style.display = 'block';
+  } else {
+    document.querySelector('.custom-request').style.display = 'none';
   }
 }
 
@@ -71,16 +72,21 @@ function loadName(fullName) {
 
 function clearSessionStorage() {
   const Ids = getUrlParameters();
-  console.log(Ids);
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
-
+  let nameStorage = JSON.parse(sessionStorage.getItem('name'));
   if (cartStorage !== null) {
     for (let i = 0; i < Ids.id.length; i++) {
       cartStorage = cartStorage.filter((element) => element._id !== Ids.id[i]);
     }
-    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+    if (cartStorage.length === 0) {
+      sessionStorage.removeItem('cart');
+    } else {
+      sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+    }
   }
 
+  let nameArr = nameStorage.filter((x) => !Ids.id.includes(x));
+  sessionStorage.setItem('name', JSON.stringify(nameArr));
   sessionStorage.removeItem('order');
 }
 
@@ -136,7 +142,6 @@ async function makeApiOderRegisterData() {
 
   const Ids = getUrlParameters();
   const itemsApi = await checkItemsInApi(Ids);
-  console.log(itemsApi);
 
   for (let i = 0; i < itemsApi.length; i++) {
     const product = {
@@ -160,7 +165,6 @@ async function makeApiOderRegisterData() {
     },
     orderState: '상품 준비중',
   };
-  console.log(data);
   try {
     const res = await Api.post('/api/orderregister', data);
   } catch (error) {
@@ -179,13 +183,10 @@ function getUrlParameters() {
 async function checkItemsInApi(orderItems) {
   let productApi = [];
 
-  console.log(orderItems);
   for (let i = 0; i < orderItems.id.length; i++) {
-    console.log(orderItems.id[i]);
     const apiResult = await Api.get(`${SERVICE_URL}/api/product/${orderItems.id[i]}`);
     productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
   }
-  console.log(productApi);
   return productApi;
 }
 
