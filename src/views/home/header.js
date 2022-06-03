@@ -40,8 +40,11 @@ function logoutBtnEvent(e) {
 }
 
 const getCart = sessionStorage.getItem('cart');
-const parseCart = JSON.parse(getCart);
-let parseCartNum = Number(parseCart.length);
+let parseCartNum = 0;
+if (getCart) {
+  const parseCart = JSON.parse(getCart);
+  let parseCartNum = Number(parseCart.length);
+}
 
 async function initPage() {
   const navbar = document.getElementById('navbar');
