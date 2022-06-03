@@ -14,14 +14,15 @@
     <link rel="stylesheet" href="security.css" />
     <!-- Daum 주소 API 사용하기 위한 파일 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#header').load('/header.html');
-      });
-    </script>
     <script src="security.js" type="module" defer></script>
+    <script type="text/javascript">
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+        });
+    </script>
+    <script src="/header.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -30,7 +31,7 @@
     <section class="section">
       <div class="container">
         <div class="block account-header">
-          <h1 class="subtitle is-4" id="securityTitle"></h1>
+          <h1 class="subtitle is-4">회원 정보 관리 <span id="securityTitle"></span></h1>
         </div>
         <div class="menu-container">
           <div class="form-container">

@@ -10,15 +10,22 @@ class CategoryService {
   async addCategory(categoryInfo) {
     // 객체 destructuring
     const { name } = categoryInfo;
-    console.log(categoryInfo);
+
     // 카테고리명 중복 확인
     const category = await this.categoryModel.findByName(name);
     if (category) {
       throw new Error('이 카테고리는 현재 사용중입니다. 다른 카테고리를 입력해 주세요.');
     }
+
     // db에 저장
     const createdNewCategory = await this.categoryModel.create(categoryInfo);
-    console.log(createdNewCategory);
+
+    // 정상적으로 저장됐는지 체크
+    const newCategoryCheck = await this.categoryModel.findById(createdNewCategory._id);
+    if (!newCategoryCheck) {
+      throw new Error('카테고리가 정상적으로 저장되지 않았습니다.');
+    }
+
     return createdNewCategory;
   }
 
@@ -34,9 +41,9 @@ class CategoryService {
   }
 
   // 카테고리 수정(관리자만 가능)
-  async setCategory(categoryId, toUpdate) {
+  async setCategory(_id, update) {
     // 우선 해당 id의 유저가 db에 있는지 확인
-    let category = await this.categoryModel.findById(categoryId);
+    let category = await this.categoryModel.findById(_id);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!category) {
@@ -44,17 +51,14 @@ class CategoryService {
     }
 
     // 업데이트 진행
-    category = await this.categoryModel.update({
-      categoryId,
-      update: toUpdate,
-    });
+    category = await this.categoryModel.update({ _id, update });
 
     return category;
   }
 
   //카테고리 삭제(관리자만 가능)
-  async deleteCategory(categoryId) {
-    const category = await this.categoryModel.delete(categoryId);
+  async deleteCategory(_id) {
+    const category = await this.categoryModel.delete(_id);
     return category;
   }
 }

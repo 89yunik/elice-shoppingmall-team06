@@ -12,13 +12,15 @@
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="categoryAdd.css" />
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#header').load('/header.html');
-      });
-    </script>
     <script src="categoryAdd.js" type="module" defer></script>
+    <script type="text/javascript">
+      fetch('/header.html')
+        .then((res) => res.text())
+        .then((text) => {
+          document.querySelector('#header').innerHTML = text;
+        });
+    </script>
+    <script src="/header.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -35,7 +37,7 @@
             <div class="field">
               <label class="label" for="titleInput">카테고리 이름</label>
               <div class="control">
-                <input class="input" id="titleInput" type="text" placeholder="Men Clothes" autocomplete="on" />
+                <input class="input" id="titleInput" type="text" placeholder="Men Clothes" autocomplete="on" required />
               </div>
             </div>
 
@@ -48,6 +50,7 @@
                   type="text"
                   placeholder="센세이셔널한 봄, 여름 코디"
                   autocomplete="on"
+                  required
                 />
               </div>
             </div>
@@ -56,7 +59,14 @@
               <label class="label" for="imageInput">카테고리 사진</label>
               <div class="file has-name is-fullwidth">
                 <label class="file-label">
-                  <input class="file-input" id="imageInput" type="file" name="image-file" accept=".png, .jpeg, .jpg" />
+                  <input
+                    class="file-input"
+                    id="imageInput"
+                    type="file"
+                    name="image-file"
+                    accept=".png, .jpeg, .jpg"
+                    required
+                  />
                   <span class="file-cta">
                     <span class="file-icon">
                       <i class="fas fa-upload" aria-hidden="true"></i>

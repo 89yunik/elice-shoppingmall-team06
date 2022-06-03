@@ -1,19 +1,63 @@
 import * as Api from '/api.js';
 
 const tableInfo = document.querySelector('.table-info');
-
+const level = document.querySelector('.level');
 render();
 addAllEvents();
 
 function addAllEvents() {}
 
-function template(data) {
+function levelTemplate(data) {
+  return `
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">총회원수</p>
+        <p class="title" id="usersCount">${data.length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">회원</p>
+        <p class="title" id="adminCount">${data.filter((item) => item.role === 'basic-user').length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">관리자</p>
+        <p class="title" id="adminCount">${data.filter((item) => item.role === 'admin').length}</p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">OAuth가입자수</p>
+        <p class="title" id="OAuthCount">${data.filter((item) => item.userType !== 'normal').length}</p>
+      </div>
+    </div>
+  `;
+}
+
+function tableTemplate(data) {
+  let userType = '';
+  switch (data.userType) {
+    case 'normal':
+      userType = '일반';
+      break;
+    case 'kakao':
+      userType = '카카오';
+      break;
+    case 'google':
+      userType = '구글';
+      break;
+    default:
+      userType = '일반';
+      break;
+  }
   return `
   <div class="columns orders-item">
     <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
     <div class="column is-2">${data.email}</div>
     <div class="column is-2">
-      <span class="tag">${data.type !== 'normal' ? '일반' : '소셜'}</span>
+      <span class="tag">${userType}</span>
     </div>
     <div class="column is-2">${data.fullName}</div>
     <div class="column is-2">
@@ -43,20 +87,22 @@ function render() {
 
 async function getData() {
   const userData = await Api.get('/api/userlist');
-
-  tableInfo.innerHTML = userData.map((item) => template(item)).join('');
+  level.innerHTML = levelTemplate(userData);
+  tableInfo.innerHTML = userData.map((item) => tableTemplate(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
-  document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
+  tableInfo.addEventListener('change', onChangeEvent);
 }
 
 async function onChangeEvent(e) {
-  if (e.target.closest('.statusSelectBox')) {
-    const role = e.target.closest('.statusSelectBox').value;
-    const id = e.target.closest('.statusSelectBox').dataset.id;
+  const selectBox = e.target.closest('.statusSelectBox');
+  if (selectBox) {
+    const role = selectBox.value;
+    const id = selectBox.dataset.id;
 
     const data = {
       role,
     };
+
     const res = await Api.patch('/api/admin', `${id}/${role}`);
 
     render();

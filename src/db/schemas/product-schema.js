@@ -11,7 +11,7 @@ const ProductSchema = new Schema(
       ref: 'categories',
       required: true,
     },
-    company: {
+    brand: {
       type: String,
       required: true,
     },
@@ -23,16 +23,16 @@ const ProductSchema = new Schema(
       type: String,
       required: true,
     },
-    imageUrl: {
-      type: String,
-      required: false,
-    },
     stock: {
       type: Number,
       required: true,
     },
     price: {
       type: Number,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
       required: true,
     },
     keywords: {

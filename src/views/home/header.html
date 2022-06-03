@@ -9,13 +9,14 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="/elice-rabbit-favicon.png"
+      href="images/logo.png"
     />
     <!-- bulma css -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
+    <link rel="stylesheet" href="/home.css" />
     <!-- 폰트 어썸: 아이콘 -->
     <script
       defer
@@ -23,17 +24,23 @@
       crossorigin="anonymous"
     ></script>
     <script src="home.js" type="module" defer></script>
+    
   </head>
   <body>
     <!-- 헤더 -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
+      <div class="container">
         <div class="navbar-brand">
           <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
+            <img src="/images/logo.png" width="50" height="50" style="max-height: 50px;"/>
+            <span class="logo-text">소동이네</span>
           </a>
-          
+          <div class="navbar-end-m breadcrumb my-auto" aria-label="breadcrumbs">
+            <div class="navber-m-bg"></div>
+            <ul id="navbar-m" class="navbar-m">
+              
+            </ul>
+          </div>
           <a
           role="button"
           class="navbar-burger"
@@ -41,10 +48,11 @@
           aria-expanded="false"
           data-target="navbarBasicExample"
           >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
+        
       </div>
       
       <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
@@ -55,100 +63,5 @@
     </div>
   </div>
 </nav>
-
-<script>
-  async function get(endpoint, params = '') {
-    const apiUrl = `${endpoint}/${params}`;
-    console.log(`%cGET 요청: ${apiUrl} `, 'color: #a25cd1;');
-
-    const res = await fetch(apiUrl, {
-      // JWT 토큰을 헤더에 담아 백엔드 서버에 보냄.
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('token')}`,
-      },
-    });
-
-    // 응답 코드가 4XX 계열일 때 (400, 403 등)
-    if (!res.ok) {
-      const errorContent = await res.json();
-      const { reason } = errorContent;
-
-      throw new Error(reason);
-    }
-
-    const result = await res.json();
-
-    return result;
-  }
-
-  
-
-  function logoutBtnEvent(e) {
-    e.preventDefault();
-    sessionStorage.removeItem('token');
-    alert('성공적으로 로그아웃 됐습니다.');
-    location.href = '/';
-  }
-  
-  async function initPage(){
-    const navbar = document.getElementById('navbar');
-    try {
-      if(!sessionStorage.getItem('token')) {
-        navbar.innerHTML = `
-          <li class="login-btn"><a href="/login">로그인</a></li>
-          <li><a href="/register">회원가입</a></li>
-          <li>
-            <a href="/cart" aria-current="page">
-              <span class="icon">
-                <i class="fas fa-cart-shopping"></i>
-              </span>
-              <span>카트</span>
-            </a>
-          </li>
-        `
-        return;
-      };
-
-      const userData = await get('/api/user');
-      
-      if(userData){
-        if(userData.role === 'basic-user'){
-          navbar.innerHTML = `
-            <li class="account-management"><a href="/account">계정관리</a></li>
-            <li class="logout-btn"><a  href="#">로그아웃</a></li>
-            <li>
-              <a href="/cart" aria-current="page">
-                <span class="icon">
-                  <i class="fas fa-cart-shopping"></i>
-                </span>
-                <span>카트</span>
-              </a>
-            </li>
-          `
-        }else if(userData.role === 'admin'){
-          navbar.innerHTML = `
-            <li class="admin"><a href="/admin">관리자</a></li>
-            <li class="account-management"><a href="/account">계정관리</a></li>
-            <li class="logout-btn"><a  href="#">로그아웃</a></li>
-            <li>
-              <a href="/cart" aria-current="page">
-                <span class="icon">
-                  <i class="fas fa-cart-shopping"></i>
-                </span>
-                <span>카트</span>
-              </a>
-            </li>
-          `  
-
-        }
-        const logoutBtn = document.querySelector('.logout-btn');
-        logoutBtn.addEventListener('click', logoutBtnEvent);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  initPage();
-</script>
 </body>
 </html>

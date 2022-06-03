@@ -1,4 +1,7 @@
 import * as Api from '/api.js';
+import { deleteNameStorageItem, addCommas } from './../useful-functions.js';
+
+const MAIN_PAGE_URL = 'http://localhost:5070';
 
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
 document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton);
@@ -61,11 +64,19 @@ function loadName(fullName) {
 }
 
 function clearSessionStorage() {
-  const iBought = checkWhatIBuy();
+  const orderStorage = JSON.parse(sessionStorage.getItem('order'));
+  let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
-  sessionStorage.removeItem('order');
-  // const check = checkWhatIBuy();
-  // console.log((check));
+  if (orderStorage !== null) {
+    orderStorage.forEach((item) => {
+      cartStorage = cartStorage.filter((element) => element._id !== item);
+      deleteNameStorageItem(item);
+    });
+    console.log(orderStorage);
+    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
+
+    sessionStorage.removeItem('order');
+  } else return;
 }
 
 async function handleCheckoutButton() {
@@ -81,14 +92,13 @@ async function handleCheckoutButton() {
     return alert('상세주소를 입력해주세요.');
   }
 
+  if (!document.querySelector('#address2').value) {
+    return alert('상세주소를 입력해주세요.');
+  }
+
   await makeApiOderRegisterData();
 
-    if(!(document.querySelector('#address2').value)) {
-        return alert('상세주소를 입력해주세요.');
-    }
-    makeApiOderRegisterData();    
-
-    clearSessionStorage();
+  clearSessionStorage();
 
   window.location.href = '/order/complete';
 }
@@ -99,86 +109,98 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-
-  for (let i = 0; i < cartItems.length; i++) {
-    checkedId.forEach((item) => {
-      if (cartItems[i]._id === item) {
-        // productsTitle.push(`${cartItems[i].name} / ${cartItems[i].quantity}개`);
-        // productsTotal += cartItems[i].price * cartItems[i].quantity;
-        result.push(cartItems[i]);
-      }
-    });
-  }
+  // if (sessionStorage.getItem('quick') === null) {
+  //   for (let i = 0; i < cartItems.length; i++) {
+  //     checkedId.forEach((item) => {
+  //       if (cartItems[i]._id === item) {
+  //         result.push(cartItems[i]);
+  //       }
+  //     });
+  //   }
+  // } else {
+  //   result.push(JSON.parse(sessionStorage.getItem('quick')));
+  // }
   return result;
 }
-checkWhatIBuy();
 
-function makeListOfProductTitle() {
-  const whatIBuy = checkWhatIBuy();
-  let totalPrice = 0;
+let totalPrice = 0;
 
-  document.querySelector('#productsTitle').innerHTML = '';
-  whatIBuy.forEach((item) => {
-    document.querySelector('#productsTitle').innerHTML += `${item.name} </br>`;
-    totalPrice += item.price * item.quantity;
+function makeListOfProductTitle(orderList) {
+  orderList.forEach((product) => {
+    product.quantity = parseInt(product.quantity);
+    document.querySelector('#productsTitle').innerHTML += `${product.item.name} / ${product.quantity} </br>`;
+    totalPrice += product.item.price * product.quantity;
   });
 
-  document.querySelector('#productsTotal').innerHTML = `${totalPrice}원`;
-  document.querySelector('#orderTotal').innerHTML = totalPrice + 3000;
+  document.querySelector('#productsTotal').innerHTML = `${addCommas(totalPrice)}원`;
+  document.querySelector('#orderTotal').innerHTML = addCommas(parseInt(totalPrice) + 3000) + '원';
 }
-
-let userID;
-
-function callUserApi() {
-  let userApi = Api.get('http://localhost:5070/api/user').then((result) => {
-    userID = result.email;
-  });
-}
-
-
-
-
 
 async function makeApiOderRegisterData() {
-    const whatIBuy = checkWhatIBuy();
-    const productList = []
-    whatIBuy.forEach(item => {
-        const product = {
-            name: item.name,
-            quantity: item.quantity
-        }
-        productList.push(product);
-    })
-    console.log(productList);
-    const userId = Api.get('http://localhost:5070/api/user')
-    
-    let userApi = await Api.get('http://localhost:5070/api/user').then(result => {
-        userID = result._id;
-    })
-    const data =  {
-        userId : userID,
-        orderInfo: { 
-            product: productList,
-            name: document.querySelector('#receiverName').value,
-            phoneNumber: document.querySelector('#receiverPhoneNumber').value,
-            address1: document.querySelector('#address1').value,
-            address2: document.querySelector('#address2').value,
-            requests: document.querySelector('#requestSelectBox').value,
-        },
-        orderState: "상품 준비중" 
-    }
-    console.log(data);
-    try {
-        const res = await Api.post('/api/orderregister', data);
-    } catch(error) {
-        console.log(error);
-    }
+  const productList = [];
+
+  const Ids = getUrlParameters();
+  const itemsApi = await checkItemsInApi(Ids);
+  console.log(itemsApi);
+
+  for (let i = 0; i < itemsApi.length; i++) {
+    const product = {
+      name: itemsApi[i].item.name,
+      quantity: itemsApi[i].quantity,
+    };
+    productList.push(product);
+  }
+  const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+
+  const data = {
+    userId: userApi._id,
+    orderInfo: {
+      product: productList,
+      name: userApi.fullName,
+      phoneNumber: document.querySelector('#receiverPhoneNumber').value,
+      address1: document.querySelector('#address1').value,
+      address2: document.querySelector('#address2').value,
+      requests: document.querySelector('#requestSelectBox').value,
+      total: totalPrice,
+    },
+    orderState: '상품 준비중',
+  };
+  console.log(data);
+  try {
+    const res = await Api.post('/api/orderregister', data);
+  } catch (error) {
+    console.log(error);
+  }
 }
 
-window.onload = () => {
-    Api.get('http://localhost:5070/api/user').then(result => {
-        loadName(result.fullName);
-    
-    })
-    makeListOfProductTitle();
+function getUrlParameters() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const id = urlParams.getAll('id');
+  const quantity = urlParams.getAll('quantity');
+  return { id, quantity };
 }
+
+async function checkItemsInApi(orderItems) {
+  let productApi = [];
+
+  console.log(orderItems);
+  for (let i = 0; i < orderItems.id.length; i++) {
+    console.log(orderItems.id[i]);
+    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+    productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
+  }
+  console.log(productApi);
+  return productApi;
+}
+
+async function App() {
+  const Ids = getUrlParameters();
+  console.log(Ids);
+  const itemsApi = await checkItemsInApi(Ids);
+  makeListOfProductTitle(itemsApi);
+  const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  loadName(memberInfo.fullName);
+}
+
+App();
