@@ -101,7 +101,7 @@ import { validateEmail } from '/useful-functions.js';
       requestEmailButton.innerHTML = '인증번호 전송중';
       requestEmailButton.disabled = true;
       verifyButton.disabled = false;
-      const res = await Api.post('/api/mailAuth', data);
+      const res = await Api.post('/api/passwordUser', data);
       requestEmailButton.innerHTML = '재전송';
       requestEmailButton.disabled = false;
 
