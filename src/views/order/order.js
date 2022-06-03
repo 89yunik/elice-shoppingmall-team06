@@ -84,9 +84,10 @@ function clearSessionStorage() {
       sessionStorage.setItem('cart', JSON.stringify(cartStorage));
     }
   }
-
-  let nameArr = nameStorage.filter((x) => !Ids.id.includes(x));
-  sessionStorage.setItem('name', JSON.stringify(nameArr));
+  if (nameStorage !== null) {
+    let nameArr = nameStorage.filter((x) => !Ids.id.includes(x));
+    sessionStorage.setItem('name', JSON.stringify(nameArr));
+  }
   sessionStorage.removeItem('order');
 }
 
