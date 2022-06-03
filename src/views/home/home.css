@@ -42,6 +42,9 @@ div.navbar-brand,
   font-weight: bold;
   font-family: 'UhBeeSe_hyun';
 }
+.breadcrumb a {
+  color: black;
+}
 
 .div-container {
   display: flex;
@@ -231,6 +234,9 @@ footer .footer-wrap > div {
 footer .footer-wrap > div .wrap {
   max-width: 1200px;
   margin: 0 auto;
+}
+a {
+  text-decoration: none;
 }
 
 footer .customer-center {
