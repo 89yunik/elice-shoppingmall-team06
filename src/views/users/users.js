@@ -53,14 +53,14 @@ function tableTemplate(data) {
       break;
   }
   return `
-  <div class="columns is-mobile orders-item">
-    <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
-    <div class="column is-2">${data.email}</div>
-    <div class="column is-2">
+  <div class="columns orders-item">
+    <div class="column is-2" data-label="가입날짜">${data.createdAt.slice(0, 10)}</div>
+    <div class="column is-2" data-label="이메일">${data.email}</div>
+    <div class="column is-2" data-label="가입유형">
       <span class="tag">${userType}</span>
     </div>
-    <div class="column is-2">${data.fullName}</div>
-    <div class="column is-2">
+    <div class="column is-2" data-label="이름">${data.fullName}</div>
+    <div class="column is-2" data-label="권한">
       <div class="select">
         <select data-id="${data._id}" class="statusSelectBox  ">
           <option class=" " ${data.role === 'basic-user' ? 'selected=""' : ''} value="basic-user">
@@ -72,7 +72,7 @@ function tableTemplate(data) {
         </select>
       </div>
     </div>
-    <div class="column is-2">
+    <div class="column is-2" data-label="관리">
       <button class="button" data-id="${data._id}">회원정보 삭제</button>
     </div>
   </div>

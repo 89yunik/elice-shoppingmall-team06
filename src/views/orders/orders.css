@@ -65,3 +65,20 @@
 .table-info {
   width: 100%;
 }
+
+@media screen and (max-width: 768px) {
+  .level {
+    display: flex;
+  }
+  .orders-top {
+    display: none !important;
+  }
+  .columns {
+    text-align: right;
+  }
+  .column::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+}

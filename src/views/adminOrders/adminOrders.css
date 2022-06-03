@@ -14,11 +14,6 @@
   padding: 0 !important;
   text-align: center;
 }
-@media (max-width: 800px) {
-  .level {
-    display: flex;
-  }
-}
 .orders-item {
   align-items: center;
   text-align: center;
@@ -34,4 +29,21 @@
   padding: 10px;
   overflow: scroll;
   height: 600px;
+}
+
+@media screen and (max-width: 768px) {
+  .level {
+    display: flex;
+  }
+  .orders-top {
+    display: none !important;
+  }
+  .columns {
+    text-align: right;
+  }
+  .column::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
 }

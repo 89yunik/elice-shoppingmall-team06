@@ -43,12 +43,16 @@ function tableTemplate(data) {
   const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
   return `
     <div class="columns orders-item" data-id="${data._id}">
-      <div class="column is-1">${data.createdAt.slice(0, 10)}</div>
-      <div class="column is-2 order-summary">${data.orderInfo.name} / ${data.orderInfo.phoneNumber}</div>
-      <div class="column is-2 order-summary">${data.orderInfo.address1} ${data.orderInfo.address2}</div>
-      <div class="column is-2 order-summary">${orderInfo.join('<br>')}</div>
-      <div class="column is-1">${data.orderInfo.total}</div>
-      <div class="column is-2">
+      <div class="column is-1" data-label="날짜">${data.createdAt.slice(0, 10)}</div>
+      <div class="column is-2 order-summary" data-label="수령자 이름 / 연락처">${data.orderInfo.name} / ${
+    data.orderInfo.phoneNumber
+  }</div>
+      <div class="column is-2 order-summary"  data-label="배송지 정보">${data.orderInfo.address1} ${
+    data.orderInfo.address2
+  }</div>
+      <div class="column is-2 order-summary"  data-label="주문내용">${orderInfo.join('<br>')}</div>
+      <div class="column is-1"  data-label="주문총액">${data.orderInfo.total}</div>
+      <div class="column is-2"  data-label="상태관리">
         <div class="select">
           <select
             class="statusSelectBox"
@@ -68,7 +72,7 @@ function tableTemplate(data) {
           </select>
         </div>
       </div>
-      <div class="column is-1">
+      <div class="column is-1"  data-label="취소">
         <button class="button order-cancel" data-id="${data._id}">주문 취소</button>
       </div>
     </div>

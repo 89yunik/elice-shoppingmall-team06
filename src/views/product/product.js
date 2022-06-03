@@ -5,29 +5,29 @@ const tableInfo = document.querySelector('.table-info');
 function template(data) {
   return `
     <div class="columns orders-item">
-      <div class="column is-2">
+      <div class="column is-2" data-label="이름">
         <div data-show>${data.name}</div>
-        <input name="name" data-modify class="input display-none" type="text" value="${data.name}">
+        <input name="name"  data-modify class="input display-none" type="text" value="${data.name}">
       </div>
-      <div class="column is-2 order-summary">
-        <div data-show>${data.descriptionSummary}</div>
+      <div class="column is-2 order-summary" data-label="설명">
+        <div data-show >${data.descriptionSummary}</div>
         <input name="descriptionSummary" data-modify class="input display-none" type="text" value="${data.descriptionSummary}">
       </div>
-      <div class="column is-2 order-summary">
-        <div data-show>${data.stock}</div>
+      <div class="column is-2 order-summary" data-label="재고 수" >
+        <div data-show >${data.stock}</div>
         <input name="stock" data-modify class="input display-none" type="text" value="${data.stock}">
       </div>
-      <div class="column is-2 order-summary">
-        <div data-show>${data.price}</div>
-        <input name="price" data-modify class="input display-none" type="text" value="${data.price}">
+      <div class="column is-2 order-summary" data-label="가격">
+        <div data-show >${data.price}</div>
+        <input name="price"  data-modify class="input display-none" type="text" value="${data.price}">
       </div>
-      <div class="column is-2">
+      <div class="column is-2" data-label="수정">
         <button class="button btn-modify" data-show data-id="${data._id}">수정</button>
-        <button class="button btn-confirm display-none" data-modify data-id="${data._id}">완료</button>
-        <button class="button btn-cancel display-none" data-modify data-id="${data._id}">취소</button>
+        <button class="button btn-confirm display-none"  data-modify data-id="${data._id}">완료</button>
+        <button class="button btn-cancel display-none"  data-modify data-id="${data._id}">취소</button>
       </div>
-      <div class="column is-1">
-        <button class="button btn-delete" data-id="${data._id}">삭제</button>
+      <div class="column is-1" data-label="삭제">
+        <button class="button btn-delete"  data-id="${data._id}">삭제</button>
       </div>
     </div>
   `;
