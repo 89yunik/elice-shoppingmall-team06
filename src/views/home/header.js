@@ -153,3 +153,11 @@ async function initPage() {
   }
 }
 initPage();
+
+// top버튼
+let topBtn = document.querySelector('.top-btn');
+
+topBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});

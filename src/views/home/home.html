@@ -19,13 +19,6 @@
         .then((text) => {
           document.querySelector('#header').innerHTML = text;
         });
-      fetch('/header.js')
-        .then((response) => response.text())
-        .then((txt) => {
-          var script = document.createElement('script');
-          script.innerHTML = txt;
-          document.body.appendChild(script);
-        });
       fetch('/footer.html')
         .then((res) => res.text())
         .then((text) => {
@@ -59,4 +52,13 @@
     <!-- footer -->
     <div id="footer"></div>
   </body>
+  <script type="text/javascript">
+    fetch('/header.js')
+      .then((response) => response.text())
+      .then((txt) => {
+        var script = document.createElement('script');
+        script.innerHTML = txt;
+        document.body.appendChild(script);
+      });
+  </script>
 </html>

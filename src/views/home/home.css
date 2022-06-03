@@ -17,6 +17,24 @@ div.navbar-brand,
   display: none;
 }
 
+.top-btn {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  text-align: center;
+  line-height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  z-index: 99;
+  transition: 0.2s;
+}
+.top-btn:hover {
+  background-color: #ff7800;
+  color: white;
+}
+
 .logo-text {
   font-size: 1.2rem;
   line-height: 1.2rem;
@@ -424,6 +442,11 @@ footer .about-us .wrap .logo {
 }
 
 @media screen and (max-width: 600px) {
+  .top-btn {
+    right: 10px;
+    bottom: 10px;
+  }
+
   .list {
     padding: 0 5%;
   }
