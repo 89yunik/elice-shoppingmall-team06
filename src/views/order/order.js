@@ -1,7 +1,8 @@
 import * as Api from '/api.js';
 import { deleteNameStorageItem, addCommas } from './../useful-functions.js';
 
-const MAIN_PAGE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
+// const MAIN_PAGE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
+const MAIN_PAGE_URL = 'http://localhost:5004';
 
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
 document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton);
