@@ -150,3 +150,27 @@
   height: 100%;
   width: 100%;
 }
+
+@media screen and (max-width: 800px) {
+  .container {
+    max-width: 100%;
+  }
+  .cart-products {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .delivery-info .field-label {
+    height: 1.5rem;
+  }
+
+  .search {
+    display: flex;
+    justify-content: space-between;
+  }
+  /* 
+  .search .input {
+    min-width: 100%;
+  } */
+}
