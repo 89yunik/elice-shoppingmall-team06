@@ -157,20 +157,25 @@
   }
   .cart-products {
     display: flex;
-    width: 90%;
+    width: 100%;
     flex-direction: column;
   }
 
   .delivery-info .field-label {
     height: 1.5rem;
   }
+  .delivery-info .no-label {
+    display: none;
+  }
 
   .search {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    /* justify-content: space-between; */
   }
-  /* 
-  .search .input {
-    min-width: 100%;
-  } */
+
+  .search .field {
+    width: 75%;
+  }
 }
