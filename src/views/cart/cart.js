@@ -44,7 +44,7 @@ function makeCartLists(data) {
       <input type="checkbox" id="checkbox-${id}" checked class="check-item" />
     </label>
     <figure class="image is-96x96">
-    <a href="${SERVICE_URL}/product/detail/${id}">
+    <a href="/product/detail/${id}">
       <img
         id="image-${id}"
         src="${data.imageUrl}"
@@ -53,7 +53,7 @@ function makeCartLists(data) {
     </a>
     </figure>
     <div class="content">
-    <a href="${SERVICE_URL}/product/detail/${id}">
+    <a href="/product/detail/${id}">
       <p id="title-${id}">${data.name}</p>  
     </a>
       <div class="quantity">
