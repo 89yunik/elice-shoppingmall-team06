@@ -12,6 +12,21 @@ class UserService {
   async duplicationUser(email) {
     return await this.userModel.findByEmail(email);
   }
+  //임시비밀번호 발급
+  async tempPassword(email, passwordNumber) {
+    const emailCheck = await this.userModel.findByEmail(email);
+    if (emailCheck) {
+      const hashedPassword = await bcrypt.hash(passwordNumber, 10);
+
+      const user = await this.userModel.update({
+        email,
+        update: hashedPassword,
+      });
+
+      return user;
+    }
+  }
+
   // kakao 회원가입
   async addKakaoUser(userInfo) {
     // db에 저장
