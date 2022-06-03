@@ -55,7 +55,6 @@ async function initPage() {
       navbar.innerHTML = `
           <li class="login-btn"><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
-          <li><a href="/resetPassword">비밀번호 찾기</a></li>
           <li>
           <a href="/cart" aria-current="page">
           <span class="icon">
@@ -68,7 +67,6 @@ async function initPage() {
       navbarM.innerHTML = `
           <li class="login-btn"><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
-          <li><a href="/resetPassword">비밀번호 찾기</a></li>
           <li>
             <a href="/cart" aria-current="page">
               <span class="icon">
