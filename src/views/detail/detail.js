@@ -87,10 +87,24 @@ function parseToHTML(item) {
 // 바로 구매하기
 let quickBtn = document.querySelector('.quick-buy');
 
+function loginCheck() {
+  if (!sessionStorage.getItem('token')) {
+    alert('로그인이 필요합니다');
+    sessionStorage.setItem('lastUrl', window.location.href);
+    return '/login';
+  }
+  return '/order/order.html';
+}
+
 async function quickBuy(e) {
   e.preventDefault();
   let item = await Api.get(`/api/product/${urlId}`);
-  location.href = `/order/order.html` + `?id=${item._id}&quantity=1`;
+  const myUrl = loginCheck();
+  if (myUrl === 'login') {
+    location.href = `${myUrl}`;
+  } else {
+    location.href = `${myUrl}` + `?id=${item._id}&quantity=1`;
+  }
 }
 
 quickBtn.addEventListener('click', quickBuy);
