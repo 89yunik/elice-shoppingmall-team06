@@ -19,13 +19,13 @@
         .then((res) => res.text())
         .then((text) => {
           document.querySelector('#header').innerHTML = text;
-        });
-      fetch('/header.js')
-        .then((response) => response.text())
-        .then((txt) => {
-          var script = document.createElement('script');
-          script.innerHTML = txt;
-          document.body.appendChild(script);
+          fetch('/header.js')
+            .then((response) => response.text())
+            .then((txt) => {
+              var script = document.createElement('script');
+              script.innerHTML = txt;
+              document.body.appendChild(script);
+            });
         });
     </script>
   </head>
