@@ -6,6 +6,7 @@ const emailInput = document.querySelector('#emailInput');
 const passwordInput = document.querySelector('#passwordInput');
 const submitButton = document.querySelector('#submitButton');
 const kakaoButton = document.querySelector('#kakaoButton');
+const googleButton = document.querySelector('#googleButton');
 addAllElements();
 addAllEvents();
 
@@ -16,6 +17,7 @@ async function addAllElements() {}
 function addAllEvents() {
   submitButton.addEventListener('click', handleSubmit);
   kakaoButton.addEventListener('click', handleKakao);
+  googleButton.addEventListener('click', handleGoogle);
 }
 // 카카오 로그인 진행
 function handleKakao(e) {
@@ -24,6 +26,13 @@ function handleKakao(e) {
   const KAKAO_REDIRECT_URI = 'http://localhost:5070/auth/kakao';
 
   window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${KAKAO_REDIRECT_URI}&response_type=code`;
+}
+// google 로그인 진행
+function handleGoogle(e) {
+  e.preventDefault();
+  const GOOGLE_CLIENT_ID = '988474744821-rr2buu1eg6d35947ldt3aap2j9vs428q.apps.googleusercontent.com';
+  const GOOGLE_REDIRECT_URI = 'http://localhost:5070/auth/google';
+  window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
 }
 // 로그인 진행
 async function handleSubmit(e) {
