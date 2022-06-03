@@ -23,6 +23,9 @@ export class UserModel {
   async update({ _id, update }) {
     return await User.findOneAndUpdate({ _id, returnOriginal: false }, update);
   }
+  async passwordUpdate({ email, update }) {
+    return await User.findOneAndUpdate({ email }, update);
+  }
   async delete({ _id }) {
     return await User.deleteOne({ _id, returnOriginal: false });
   }

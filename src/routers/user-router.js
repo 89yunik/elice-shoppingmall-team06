@@ -3,7 +3,7 @@ import is from '@sindresorhus/is';
 import { redisClient } from '../app';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
 import { loginRequired } from '../middlewares';
-import { userService, mailer } from '../services';
+import { userService, mailer, passwordMailer } from '../services';
 import jwt from 'jsonwebtoken';
 
 const userRouter = Router();
@@ -86,10 +86,49 @@ userRouter.post('/authNumber', async (req, res, next) => {
   try {
     const redisGet = await redisClient.get(req.body.email, (err, reply) => {});
     if (req.body.authNumber === redisGet) {
+      res.status(200).json({ success: '임시비밀번호 변경성공' });
+    } else {
+      res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
+    }
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
+  }
+});
+//임시 password 발급
+userRouter.post('/passwordAuth', async (req, res, next) => {
+  try {
+    const redisGet = await redisClient.get(req.body.email, (err, reply) => {});
+    if (req.body.authNumber === redisGet) {
+      const mailAuth = await passwordMailer(req.body.email);
+      const passwordNumber = mailAuth.generatedAuthNumber;
+      const passwordCheck = await userService.tempPassword(req.body.email, passwordNumber);
       res.status(200).json({ success: '번호인증성공' });
     } else {
       res.status(401).json({ error: '유효기간이지났거나 인증번호가 다릅니다.' });
     }
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
+  }
+});
+//임시 비밀번호 확인
+userRouter.post('/passwordUser', async (req, res, next) => {
+  try {
+    //이메일 중복확인
+    const mailcheck = await userService.duplicationUser(req.body.email);
+
+    if (!mailcheck) {
+      return res.status(401).json({ error: '가입된 이메일이 없습니다.' });
+    }
+    const mailAuth = await mailer(req.body.email);
+    const redisSave = await redisClient.setEx(
+      req.body.email,
+      process.env.DEFAULT_EXPIRATION,
+      mailAuth.generatedAuthNumber,
+    );
+    if (!redisSave) {
+      res.status(401).json({ error: 'redis 생성 실패하였습니다.' });
+    }
+    res.status(200).json({ success: '메일발송성공' });
   } catch (err) {
     res.status(401).json({ error: `${err.message}` });
   }

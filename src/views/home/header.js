@@ -68,7 +68,7 @@ async function initPage() {
               <span class="cart-quantity">${parseCartNum}</span>
             </a>
           </li>
-        `;
+          `;
       navbarM.innerHTML = `
           <li class="login-btn"><a href="/login">로그인</a></li>
           <li><a href="/register">회원가입</a></li>
