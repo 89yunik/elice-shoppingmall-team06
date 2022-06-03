@@ -1,6 +1,3 @@
-.orders-container {
-  margin: 5rem auto 2rem;
-}
 .account-header {
   border-bottom: 1px solid #ddd;
   display: block;
@@ -19,7 +16,11 @@
 .orders-item:not(:last-child) {
   border-bottom: 1px solid #bbb;
 }
-
+@media (max-width: 800px) {
+  .level {
+    display: flex;
+  }
+}
 .columns {
   border-bottom: 1px solid #aaa;
   /* bulma padding */
