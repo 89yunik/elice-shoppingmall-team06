@@ -1,9 +1,3 @@
-export const deleteNameStorageItem = (item) => {
-  let nameStorage = JSON.parse(sessionStorage.getItem('name'));
-  nameStorage = nameStorage.filter((element) => element != item);
-  sessionStorage.setItem('name', JSON.stringify(nameStorage));
-};
-
 // 문자열+숫자로 이루어진 랜덤 5글자 반환
 export const randomId = () => {
   return Math.random().toString(36).substring(2, 7);

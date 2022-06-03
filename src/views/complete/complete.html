@@ -14,14 +14,12 @@
       <!-- 커스텀 css, js -->
       <link rel="stylesheet" href="complete.css" />
       <script src="complete.js" type="module" defer></script>
+      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
       <script type="text/javascript">
-        fetch('/header.html')
-          .then((res) => res.text())
-          .then((text) => {
-            document.querySelector('#header').innerHTML = text;
-          });
+        $(document).ready(function () {
+          $('#header').load('/header.html');
+        });
       </script>
-      <script src="/header.js" type="module" defer></script>
     </head>
   </head>
   <body>
@@ -50,12 +48,8 @@
                 <span>주문이 완료되었습니다!</span>
               </div>
               <div class="buttons-container">
-                <a href="/account/orders/">
-                  <button class="button is-medium is-fullwidth" id="orderDetailButton">주문내역 보기</button>
-                </a>
-                <a href="/">
-                  <button class="button is-primary is-medium is-fullwidth" id="shoppingButton">쇼핑 계속하기</button>
-                </a>
+                <button class="button is-medium is-fullwidth" id="orderDetailButton">주문내역 보기</button>
+                <button class="button is-primary is-medium is-fullwidth" id="shoppingButton">쇼핑 계속하기</button>
               </div>
             </div>
           </div>

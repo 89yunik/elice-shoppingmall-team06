@@ -5,28 +5,36 @@ const Category = model('categories', CategorySchema);
 
 export class CategoryModel {
   async create(categoryInfo) {
-    return await Category.create(categoryInfo);
+    const createdNewCategory = await Category.create(categoryInfo);
+    return createdNewCategory;
   }
 
   async findByName(name) {
-    return await Category.findOne({ name });
+    const category = await Category.findOne({ name });
+    return category;
   }
 
-  async findById(_id) {
-    return await Category.findOne({ _id });
+  async findById(categoryId) {
+    const category = await Category.findOne({ _id: categoryId });
+    return category;
   }
 
   async findAll() {
-    console.log(Category);
-    return await Category.find({});
+    const categories = await Category.find({});
+    return categories;
   }
 
-  async update({ _id, update }) {
-    return await Category.findOneAndUpdate({ _id, returnOriginal: false }, update);
+  async update({ categoryId, update }) {
+    const filter = { _id: categoryId };
+    const option = { returnOriginal: false };
+
+    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
+    return updatedCategory;
   }
 
-  async delete(_id) {
-    return await Category.findOneAndDelete({ _id, returnOriginal: false });
+  async delete(categoryId) {
+    const category = await Category.deleteOne({ _id: categoryId });
+    return category;
   }
 }
 

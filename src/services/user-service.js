@@ -8,15 +8,7 @@ class UserService {
   constructor(userModel) {
     this.userModel = userModel;
   }
-  //이메일 중복검사
-  async duplicationUser(email) {
-    return await this.userModel.findByEmail(email);
-  }
-  // kakao 회원가입
-  async addKakaoUser(userInfo) {
-    // db에 저장
-    return await this.userModel.create(userInfo);
-  }
+
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
@@ -43,10 +35,10 @@ class UserService {
   // 회원탈퇴, 현재 비밀번호가 있어야 수정 가능함.
   async delUser(userInfoRequired) {
     // 객체 destructuring
-    const { _id, currentPassword } = userInfoRequired;
+    const { userId, currentPassword } = userInfoRequired;
 
     // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findById(_id);
+    let user = await this.userModel.findById(userId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
@@ -65,7 +57,7 @@ class UserService {
     //이제 회원탈퇴를 진행 해줌.
     try {
       user = await this.userModel.delete({
-        _id,
+        userId,
       });
     } catch (error) {
       throw new Error('회원탈퇴에 문제가 생겼습니다.');
@@ -105,19 +97,21 @@ class UserService {
 
   // 사용자 목록을 받음.
   async getUsers() {
-    return await this.userModel.findAll();
+    const users = await this.userModel.findAll();
+    return users;
   }
   // 해당하는 사용자 아이디를 토대로 사용자 정보를 받음
-  async getUser(_id) {
-    return await this.userModel.findById(_id);
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
+    return user;
   }
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
-    const { _id, currentPassword } = userInfoRequired;
+    const { userId, currentPassword } = userInfoRequired;
 
     // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findById(_id);
+    let user = await this.userModel.findById(userId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
@@ -146,16 +140,16 @@ class UserService {
 
     // 업데이트 진행
     user = await this.userModel.update({
-      _id,
+      userId,
       update: toUpdate,
     });
 
     return user;
   }
 
-  async setUserRoleByAdmin(_id, toUpdate) {
+  async setUserRoleByAdmin(userId, toUpdate) {
     // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findById(_id);
+    let user = await this.userModel.findById(userId);
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!user) {
@@ -164,14 +158,15 @@ class UserService {
 
     // 업데이트 진행
     user = await this.userModel.update({
-      _id,
+      userId,
       update: toUpdate,
     });
 
     return user;
   }
-  async delUserByAdmin(_id) {
-    return await this.userModel.delete({ _id });
+  async delUserByAdmin(userId) {
+    const user = await this.userModel.delete({ userId });
+    return user;
   }
 }
 

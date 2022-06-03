@@ -2,44 +2,16 @@ import * as Api from '/api.js';
 
 const ordersContainer = document.getElementById('ordersContainer');
 const tableInfo = document.querySelector('.table-info');
-const level = document.querySelector('.level');
+
 render();
 addAllEvents();
 
 function addAllEvents() {}
 
-function levelTemplate(data) {
-  return `
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">총 주문수</p>
-        <p class="title" id="ordersCount">${data.length}</p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">상품 준비중</p>
-        <p class="title" id="prepareCount">${data.filter((item) => item.orderState === '상품 준비중').length}</p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">상품 배송중</p>
-        <p class="title" id="deliveryCount">${data.filter((item) => item.orderState === '상품 배송중').length}</p>
-      </div>
-    </div>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">배송완료</p>
-        <p class="title" id="completeCount">${data.filter((item) => item.orderState === '배송완료').length}</p>
-      </div>
-    </div>
-  `;
-}
-
-function tableTemplate(data) {
+function template(data) {
   const arr = data.orderInfo.product;
   const orderInfo = arr.map((item) => `${item.name} / ${item.quantity}개`);
+  console.log(data);
   return `
     <div class="columns orders-item" data-id="${data._id}">
       <div class="column is-2">${data.createdAt.slice(0, 10)}</div>
@@ -79,21 +51,21 @@ function render() {
 async function getOrderData() {
   //todo: fetch data
   const res = await Api.get('/api/orderlist');
-  level.innerHTML = levelTemplate(res);
-  tableInfo.innerHTML = res.map((item) => tableTemplate(item)).join('');
+
+  tableInfo.innerHTML = res.map((item) => template(item)).join('');
   tableInfo.addEventListener('click', orderClickEvent);
-  tableInfo.addEventListener('change', onChangeEvent);
+  if (document.querySelector('.statusSelectBox')) {
+    document.querySelector('.statusSelectBox').addEventListener('change', onChangeEvent);
+  }
 }
 
 async function onChangeEvent(e) {
-  const selectBox = e.target.closest('.statusSelectBox');
-  if (selectBox) {
+  if (e.target.closest('.statusSelectBox')) {
     const data = {
-      orderState: selectBox.value,
+      orderState: e.target.closest('.statusSelectBox').value,
     };
-    const orderId = selectBox.dataset.id;
+    const orderId = e.target.closest('.statusSelectBox').dataset.id;
     const res = await Api.patch('/api/order', orderId, data);
-    render();
   }
 }
 

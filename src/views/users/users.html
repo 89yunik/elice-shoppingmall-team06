@@ -12,15 +12,13 @@
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="users.css" />
-    <script src="users.js" type="module" defer></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
-      fetch('/header.html')
-        .then((res) => res.text())
-        .then((text) => {
-          document.querySelector('#header').innerHTML = text;
-        });
+      $(document).ready(function () {
+        $('#header').load('/header.html');
+      });
     </script>
-    <script src="/header.js" type="module" defer></script>
+    <script src="users.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -34,7 +32,26 @@
         </div>
 
         <!-- 총 요약 -->
-        <nav class="level"></nav>
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">총회원수</p>
+              <p class="title" id="usersCount">124</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">관리자수</p>
+              <p class="title" id="adminCount">5</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">OAuth가입자수</p>
+              <p class="title" id="OAuthCount">8</p>
+            </div>
+          </div>
+        </nav>
 
         <!-- 회원 목록 -->
         <div class="container orders-container" id="usersContainer">

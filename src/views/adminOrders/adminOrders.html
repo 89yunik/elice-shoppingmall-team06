@@ -12,15 +12,13 @@
     <script defer src="https://kit.fontawesome.com/7630448495.js" crossorigin="anonymous"></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="adminOrders.css" />
-    <script src="adminOrders.js" type="module" defer></script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
-      fetch('/header.html')
-        .then((res) => res.text())
-        .then((text) => {
-          document.querySelector('#header').innerHTML = text;
-        });
+      $(document).ready(function () {
+        $('#header').load('/header.html');
+      });
     </script>
-    <script src="/header.js" type="module" defer></script>
+    <script src="adminOrders.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
@@ -34,7 +32,32 @@
         </div>
 
         <!-- 총 요약 -->
-        <nav class="level"></nav>
+        <nav class="level">
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">총주문수</p>
+              <p class="title" id="ordersCount">102</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">상품준비중</p>
+              <p class="title" id="prepareCount">98</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">상품배송중</p>
+              <p class="title" id="deliveryCount">2</p>
+            </div>
+          </div>
+          <div class="level-item has-text-centered">
+            <div>
+              <p class="heading">배송완료</p>
+              <p class="title" id="completeCount">2</p>
+            </div>
+          </div>
+        </nav>
 
         <div class="container orders-container" id="ordersContainer">
           <div class="columns notification is-info is-light is-mobile orders-top">

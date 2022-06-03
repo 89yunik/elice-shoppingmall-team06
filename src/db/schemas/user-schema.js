@@ -23,10 +23,6 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
-    Oauth_refresh_token: {
-      type: String,
-      required: false,
-    },
     address: {
       type: new Schema(
         {

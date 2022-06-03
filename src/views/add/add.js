@@ -12,7 +12,6 @@ const searchKeywordInput = document.getElementById('searchKeywordInput');
 const keywordContainer = document.getElementById('keywordContainer');
 const addKeywordButton = document.getElementById('addKeywordButton');
 const submitButton = document.getElementById('submitButton');
-const registerProductForm = document.getElementById('registerProductForm');
 
 const searchKeywordArr = [];
 addAllElements();
@@ -36,7 +35,7 @@ async function getCategoryData() {
 }
 
 function addAllEvents() {
-  registerProductForm.onsubmit = submitButtonEvent;
+  submitButton.addEventListener('click', submitButtonEvent);
   addKeywordButton.addEventListener('click', addKeywordButtonEvent);
   searchKeywordInput.addEventListener('keyup', searchKeywordInputEvent);
 }
@@ -114,23 +113,22 @@ async function submitButtonEvent(e) {
     return;
   }
 
-  const image = imageInput.files[0];
-
-  const formData = new FormData();
-  formData.append('image', image);
-  formData.append('name', titleInput.value);
-  formData.append('brand', manufacturerInput.value);
-  formData.append('category', categorySelectBox.value);
-  formData.append('descriptionSummary', shortDescriptionInput.value);
-  formData.append('descriptionDetail', detailDescriptionInput.value);
-  formData.append('stock', inventoryInput.value);
-  formData.append('price', priceInput.value);
-  formData.append('keywords', searchKeywordArr);
+  const data = {
+    name: titleInput.value,
+    company: manufacturerInput.value,
+    category: categorySelectBox.value,
+    descriptionSummary: shortDescriptionInput.value,
+    descriptionDetail: detailDescriptionInput.value,
+    imageUrl: 'https://test.com/', // 수정예정
+    stock: inventoryInput.value,
+    price: priceInput.value,
+    keywords: searchKeywordArr,
+  };
 
   try {
-    const res = await Api.postForm('/api/productregister', formData);
+    const res = await Api.post('/api/productregister', data);
     alert('성공적으로 등록되었습니다.');
-    location.href = '/admin/product/add/';
+    location.href = '/account/add/';
   } catch (error) {
     console.log(error);
   }

@@ -16,11 +16,3 @@
 .login-form-box .button {
   font-weight: bold;
 }
-
-#submitButton:hover {
-  background-color: #ff7800;
-  transition: background 0.5s;
-}
-#title {
-  color: #ff7800;
-}
