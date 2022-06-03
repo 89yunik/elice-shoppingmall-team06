@@ -48,6 +48,7 @@ function parseToHTML(item) {
 
   async function addToCart(e) {
     e.preventDefault();
+
     const sessionArr = JSON.parse(localStorage.getItem('cart')) || [];
     const getCart = sessionStorage.getItem('cart');
     const parseCart = JSON.parse(getCart);
@@ -75,6 +76,16 @@ function parseToHTML(item) {
       sessionArr.push(productInfo);
       nameArr.push(productInfo._id);
       orderArr.push(productInfo._id);
+      let parseCartNum = Number(parseCart.length);
+      parseCartNum++;
+      let cartQuantity = document.querySelectorAll('#navbar .cart-quantity');
+      let cartQuantityM = document.querySelectorAll('#navbar-m .cart-quantity');
+      cartQuantity.forEach((i) => {
+        i.innerText = parseCartNum;
+      });
+      cartQuantityM.forEach((i) => {
+        i.innerText = parseCartNum;
+      });
       alert('장바구니에 추가되었습니다.');
     }
     sessionStorage.setItem('cart', JSON.stringify(sessionArr));

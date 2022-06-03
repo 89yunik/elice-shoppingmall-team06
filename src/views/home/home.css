@@ -5,6 +5,17 @@
   font-style: normal;
 }
 
+.cart-quantity {
+  width: 17px;
+  line-height: 17px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 100%;
+  font-size: 0.7rem;
+  margin-left: 5px;
+}
+
 nav.navbar > .container,
 div.navbar-brand,
 .navbar-tabs {
