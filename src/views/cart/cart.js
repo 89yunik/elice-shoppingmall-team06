@@ -71,7 +71,6 @@ function makeCartLists(data) {
           id="quantityInput-${id}"
           type="number"
           min="1"
-          max="99"
           value="${quantity}"
           data-id='${id}'
         />
@@ -199,16 +198,16 @@ function clickHandleQuantityButton(event) {
   const quantityInputValue = Number(quantityInput.value);
   const newQuantityInput = isPlus ? quantityInputValue + 1 : quantityInputValue - 1;
 
-  if (newQuantityInput > 0) {
+  if (newQuantityInput > 1) {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = false;
     quantityInput.value = newQuantityInput;
     quantity.innerHTML = newQuantityInput;
     total.innerHTML = newQuantityInput * priceValue;
   } else {
     cartProductItem.querySelector(`#minus-${targetId}`).disabled = true;
-    quantityInput.value = 0;
-    quantity.innerHTML = 0;
-    total.innerHTML = 0 * priceValue;
+    quantityInput.value = 1;
+    quantity.innerHTML = 1;
+    total.innerHTML = 1 * priceValue;
   }
 
   sessionStorage.setItem(
