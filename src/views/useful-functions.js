@@ -37,3 +37,5 @@ export const wait = (ms) => {
 export const logout = () => {
   sessionStorage.removeItem('token');
 };
+
+export const SERVICE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';

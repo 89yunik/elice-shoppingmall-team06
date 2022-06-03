@@ -1,7 +1,5 @@
 import * as Api from '/api.js';
-import { deleteNameStorageItem, addCommas } from './../useful-functions.js';
-
-const MAIN_PAGE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
+import { deleteNameStorageItem, addCommas, SERVICE_URL } from './../useful-functions.js';
 
 document.querySelector('#searchAddressButton').addEventListener('click', findAddress);
 document.querySelector('#checkoutButton').addEventListener('click', handleCheckoutButton);
@@ -147,7 +145,7 @@ async function makeApiOderRegisterData() {
     };
     productList.push(product);
   }
-  const userApi = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  const userApi = await Api.get(`${SERVICE_URL}/api/user`);
 
   const data = {
     userId: userApi._id,
@@ -184,7 +182,7 @@ async function checkItemsInApi(orderItems) {
   console.log(orderItems);
   for (let i = 0; i < orderItems.id.length; i++) {
     console.log(orderItems.id[i]);
-    const apiResult = await Api.get(`${MAIN_PAGE_URL}/api/product/${orderItems.id[i]}`);
+    const apiResult = await Api.get(`${SERVICE_URL}/api/product/${orderItems.id[i]}`);
     productApi.push({ item: { ...apiResult }, quantity: `${orderItems.quantity[i]}` });
   }
   console.log(productApi);
@@ -195,7 +193,7 @@ async function App() {
   const Ids = getUrlParameters();
   const itemsApi = await checkItemsInApi(Ids);
   makeListOfProductTitle(itemsApi);
-  const memberInfo = await Api.get(`${MAIN_PAGE_URL}/api/user`);
+  const memberInfo = await Api.get(`${SERVICE_URL}/api/user`);
   loadName(memberInfo.fullName);
 }
 

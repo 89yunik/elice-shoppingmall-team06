@@ -1,8 +1,7 @@
 import { convertToNumber, deleteNameStorageItem } from './../useful-functions.js';
-import { addCommas } from './../useful-functions.js';
+import { addCommas, SERVICE_URL } from './../useful-functions.js';
 
 const DELIVERY_FEE = 3000;
-const SERVICE_URL = 'http://kdt-sw2-seoul-team06.elicecoding.com';
 
 document.querySelector('#allSelectCheckbox').addEventListener('click', clickCheckAllButton);
 document.querySelector('.cart-only-product').addEventListener('click', checkWhatIClick);
