@@ -8,6 +8,14 @@ document.querySelector('#checkoutButton').addEventListener('click', handleChecko
 document.querySelector('#subtitleCart').addEventListener('click', () => {
   window.location.href = '/cart';
 });
+document.querySelector('#requestSelectBox').addEventListener('change', displayEtc);
+
+function displayEtc(event) {
+  console.log(event.target.value);
+  if (event.target.value === '6') {
+    document.querySelector('.custom-request').style.display = 'block';
+  }
+}
 
 function findAddress() {
   new daum.Postcode({
@@ -68,11 +76,12 @@ function clearSessionStorage() {
   console.log(Ids);
   let cartStorage = JSON.parse(sessionStorage.getItem('cart'));
 
-  for (let i = 0; i < Ids.id.length; i++) {
-    cartStorage = cartStorage.filter((element) => element._id !== Ids.id[i]);
+  if (cartStorage !== null) {
+    for (let i = 0; i < Ids.id.length; i++) {
+      cartStorage = cartStorage.filter((element) => element._id !== Ids.id[i]);
+    }
+    sessionStorage.setItem('cart', JSON.stringify(cartStorage));
   }
-
-  sessionStorage.setItem('cart', JSON.stringify(cartStorage));
 
   sessionStorage.removeItem('order');
 }
@@ -107,17 +116,7 @@ function checkWhatIBuy() {
   let productsTitle = [];
   let productsTotal = 0;
   let result = [];
-  // if (sessionStorage.getItem('quick') === null) {
-  //   for (let i = 0; i < cartItems.length; i++) {
-  //     checkedId.forEach((item) => {
-  //       if (cartItems[i]._id === item) {
-  //         result.push(cartItems[i]);
-  //       }
-  //     });
-  //   }
-  // } else {
-  //   result.push(JSON.parse(sessionStorage.getItem('quick')));
-  // }
+
   return result;
 }
 
