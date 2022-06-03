@@ -110,6 +110,29 @@ userRouter.post('/passwordAuth', async (req, res, next) => {
     res.status(401).json({ error: `${err.message}` });
   }
 });
+//임시 비밀번호 확인
+userRouter.post('/passwordUser', async (req, res, next) => {
+  try {
+    //이메일 중복확인
+    const mailcheck = await userService.duplicationUser(req.body.email);
+
+    if (!mailcheck) {
+      return res.status(401).json({ error: '가입된 이메일이 없습니다.' });
+    }
+    const mailAuth = await mailer(req.body.email);
+    const redisSave = await redisClient.setEx(
+      req.body.email,
+      process.env.DEFAULT_EXPIRATION,
+      mailAuth.generatedAuthNumber,
+    );
+    if (!redisSave) {
+      res.status(401).json({ error: 'redis 생성 실패하였습니다.' });
+    }
+    res.status(200).json({ success: '메일발송성공' });
+  } catch (err) {
+    res.status(401).json({ error: `${err.message}` });
+  }
+});
 // 회원가입 api (아래는 /register이지만, 실제로는 /api/register로 요청해야 함.)
 userRouter.post('/register', async (req, res, next) => {
   try {
