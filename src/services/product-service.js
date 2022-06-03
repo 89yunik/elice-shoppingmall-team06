@@ -23,7 +23,7 @@ class ProductService {
     const createdNewProduct = await this.productModel.create(productInfo);
 
     // 정상적으로 저장됐는지 체크
-    const newProductCheck = await this.categoryModel.findById(createdNewProduct._id);
+    const newProductCheck = await this.productModel.findById(createdNewProduct._id);
     if (!newProductCheck) {
       const error = new Error('제품이 정상적으로 저장되지 않았습니다.');
       error.name = 'InternalServerError';
