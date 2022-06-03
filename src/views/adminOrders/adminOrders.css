@@ -1,7 +1,3 @@
-.orders-container {
-  margin: 5rem auto 2rem;
-  max-width: 1000px !important;
-}
 .account-header {
   border-bottom: 1px solid #ddd;
   display: block;
@@ -24,4 +20,17 @@
 }
 .orders-item:not(:last-child) {
   border-bottom: 1px solid #bbb;
+}
+
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  overflow: scroll;
+  height: 600px;
+}
+.table-info {
+  /* margin-left: 20px; */
+  /* width: 1400px; */
 }
