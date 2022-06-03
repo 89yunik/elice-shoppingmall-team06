@@ -24,3 +24,21 @@
 #title {
   color: #ff7800;
 }
+
+#kakaoButton {
+  color: #000000 85%;
+  background-color: #fee500;
+  border: none;
+}
+#kakaoButton img {
+  margin-right: 10px;
+  height: 80%;
+}
+
+#googleButton {
+  background-color: #ffffff;
+}
+#googleButton img {
+  margin-right: 10px;
+  height: 80%;
+}
