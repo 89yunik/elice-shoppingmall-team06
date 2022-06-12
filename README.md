@@ -27,8 +27,7 @@
 <br>(gif)<br>
 
 ## 서비스 구성도
-
-![image](/uploads/8da0647fa860b9636116fa00bb7608e7/image.png)
+![image](https://user-images.githubusercontent.com/78011716/173219153-bf36d2d8-66de-4dc0-9e06-52fca2600a6a.png)
 
 ## 주요 사용 기술
 
